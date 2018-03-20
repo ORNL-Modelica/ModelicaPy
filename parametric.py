@@ -84,8 +84,7 @@ def genExperiments(experimentsRaw):
         
         experiments.append(initSettings())
         experiments[i].update(value)
-        
-        
+                
     return experiments
 
    
