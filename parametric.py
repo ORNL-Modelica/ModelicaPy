@@ -306,13 +306,13 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
                 dymola.close()
     
     # Save experiment dictionary as pickle in cwdMod
-    with open(os.path.join(cwdMod,'{}experiments.pickle'.format(simID)), 'wb') as handle:
+    with open(os.path.join(cwdMod,'{}experiments_{}to{}.pickle'.format(simID,seed,j)), 'wb') as handle:
         pickle.dump(experiments, handle, protocol=pickle.HIGHEST_PROTOCOL)    
     
     
 
     # Save summary off success/fail (true/false) of simulations
-    with open(os.path.join(cwdMod,'{}summary.txt'.format(simID)),'w') as fil:
+    with open(os.path.join(cwdMod,'{}summary_{}to{}.txt'.format(simID,seed,j)),'w') as fil:
         fil.write('Summary of success/fail (true/false) of experiments\n')
         for i, val in enumerate(saveResult):
             fil.write('\t'.join(['Experiment','{}'.format(i),'{}'.format(val)]) + '\n')
