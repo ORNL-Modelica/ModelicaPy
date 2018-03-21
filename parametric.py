@@ -48,15 +48,17 @@ def checkInput(simSettings):
         if type(val) != list and val!=None:
             raise NameError("simSetting['{}'] is '{}' and must be =None or of type 'list'".format(key,type(val)))
  
-    
-    #for key, val in simSettings.items():
-#    print key
-#    print val
-#    if val != None:
-#        print len(val)
-#    if key == 'initialValues':
-#        if len(val) != len(simSettings['initialNames']):
-#            raise NameError('Length of dictionary items "initialNames" and "initialValues" must be equal')
+    # Check that multiple inputs are not specified for constrained settings
+    if 'problem' in simSettings:
+        if len(simSettings['problem']) > 1:
+            raise NameError("len(simSetting['problem']) is > 1 and must be =None or 1")
+    if 'resultFile' in simSettings:
+        if len(simSettings['resultFile']) > 1:
+            raise NameError("len(simSetting['resultFile']) is > 1 and must be =None or 1")
+    if 'autoLoad' in simSettings:
+        if len(simSettings['autoLoad']) > 1:
+            raise NameError("len(simSetting['autoLoad']) is > 1 and must be =None or 1")
+
 
 def genExperimentsRaw(simSettings):
     # Remove None and generate all experiment permutations
@@ -88,13 +90,13 @@ def genExperiments(experimentsRaw):
     return experiments
 
    
-def test(problem=None, startTime=None, stopTime=None,
+def dummytest(problem=None, startTime=None, stopTime=None,
                              numberOfIntervals=None, outputInterval=None,
                              method=None, tolerance=None, fixedstepsize=None,
                              resultFile=None, initialNames=None, initialValues=None,
                              finalNames=None, autoLoad=None):
+    # Simple test for functionality
     print('hi')
-    
     print problem
     print startTime
     print stopTime
@@ -108,15 +110,16 @@ def test(problem=None, startTime=None, stopTime=None,
     print initialValues
     print finalNames
     print autoLoad
-
+    print('bye')
 
 def simulate(simSettings):
     '''
     User Input: Solver Settings
-    All settings, besides `=None`, must be enclosed in brackets []
-    !!! 'initialNames' and 'initialValues' are set different than others
-    Specify each variable indepenently. The script will generate the tests
+    - All settings, besides `=None`, must be enclosed in brackets []
+    - !!! 'initialNames' and 'initialValues' are set different than others
+    - Specify each variable indepenently. The script will generate the tests
     and collapse all 'non-standard' keys.
+    - 'problem', 'resultFile', and 'autoLoad' only support 1 or None entries
     '''
     
     # Check User Input
