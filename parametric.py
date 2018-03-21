@@ -178,7 +178,7 @@ def renameFiles(simID,i,value,cwdMod,result):
     return dslogNew
     
 
-def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
+def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singleTranslate=True):
     '''
     
     simSettings => dictionary of setting parameters (see below for details)
@@ -186,6 +186,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
     closeWindow => =False to prevent auto-closing of the Dymola GUI when done
     simID       => simulation ID to differentiate output files (e.g., simID_dsres0.mat vs. dsres0.mat)
     seed        => starting seed value for output file naming (e.g., seed+0, ..., seed+len(experiments))
+    singleTranslate => =True to only translate the model once
     
     simSettings details:
     - All settings, besides `=None`, must be enclosed in brackets []
@@ -268,7 +269,8 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
         cwdMod = dymola.ExecuteCommand('Modelica.Utilities.System.getWorkDirectory();')
 
         # Translate the model
-        dymola.translateModel(experiments[0]['problem'])
+        if singleTranslate == True:
+            dymola.translateModel(experiments[0]['problem'])
         
         # Run all experiments
         saveResult=[]
@@ -277,10 +279,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
             j = seed + i
             print('i = {}; seed = {}; i+seed = {}'.format(i,seed,j))
             print(value)
-        
-            # Instantiate the Dymola interface and start Dymola
-            # dymola = DymolaInterface(showwindow=showWindow)
-
+                   
             # Simulate the model
             result = dymola.simulateExtendedModel(**value)[0]
             
@@ -344,6 +343,6 @@ if __name__ == "__main__":
     simSettings['steamTurbine.eta_mech']=[1,0.9]   
     
     # Generate parametric simulation
-    simulate(simSettings,showWindow=False,closeWindow=False,simID='Test',seed=4)
+    simulate(simSettings,showWindow=False,closeWindow=False,simID='Test',seed=4,singleTranslate=False)
     
     
