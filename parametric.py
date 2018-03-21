@@ -14,7 +14,9 @@ from shutil import move
 import pickle
     
 def standKeys():
-    # Standard input parameters for dymola.simulateExtendedModel
+    '''
+    Standard input parameters for dymola.simulateExtendedModel
+    '''
     keys = ['problem',
             'startTime',
             'stopTime',
@@ -32,7 +34,9 @@ def standKeys():
 
 
 def initSettings():
-    # Initialize the settings parameters as None
+    '''
+    Initialize the settings parameters as None
+    '''
     simSettings = {}
     for key in standKeys():
             simSettings[key]=None
@@ -40,7 +44,9 @@ def initSettings():
     return simSettings
 
 def initSettingsDefaults():
-    # Initialize the settings parameters with default values
+    '''
+    Initialize the settings parameters with default values
+    '''
     simSettings = {}
     simSettings['problem']=['']
     simSettings['startTime']=[0.0]
@@ -60,7 +66,9 @@ def initSettingsDefaults():
 
 
 def checkInput(simSettings):
-    # Check for incorrect input types
+    '''
+    Check for incorrect input types
+    '''
     if simSettings['initialValues'] != None or simSettings['initialNames'] != None:
         raise NameError('"initialNames" and "initialValues" must not be specified')
 
@@ -82,7 +90,9 @@ def checkInput(simSettings):
 
 
 def genExperimentsRaw(simSettings):
-    # Remove None and generate all experiment permutations
+    '''
+    Remove None and generate all experiment permutations
+    '''
     simSettingsfiltered = {k:v for k,v in simSettings.items() if v is not None}
     keys, values = zip(*simSettingsfiltered.items())
     experimentsRaw = [dict(zip(keys, v)) for v in it.product(*values)]
@@ -91,7 +101,9 @@ def genExperimentsRaw(simSettings):
         
 
 def genExperiments(experimentsRaw):
-    # Filter experiments to generate key/value pairs for 'initialNames' and 'initialValues'
+    '''
+    Filter experiments to generate key/value pairs for 'initialNames' and 'initialValues'
+    '''
     allKeys = standKeys()
     experiments = []
     for i, value in enumerate(experimentsRaw):
@@ -110,10 +122,61 @@ def genExperiments(experimentsRaw):
                 
     return experiments
 
+def renameFiles(i,value,cwdMod,result):
+    '''
+    Rename the result, dslog, dsin, and dsfinal files and returns the new
+    dslog file name for debugging.
+    
+    i => experiment index
+    value => experiment dictionary simSettings
+    cwdMod => current working directory of Modelica
+    result => boolean success/fail (true/false) of model
+    '''
+    # Set the new names
+    resultFileNew = 'dsres{}.mat'.format(i)
+    if value['resultFile'] == None:
+        resultFile = 'dsres.mat'  
+        dsinNew = 'dsin{}.txt'.format(i)
+        dsfinalNew = 'dsfinal{}.txt'.format(i)
+        dslogNew = 'dslog{}.txt'.format(i)
+    else:
+        resultFile = '{}.mat'.format(value['resultFile']) 
+        dsinNew = '{}_dsin{}.txt'.format(value['resultFile'],i)
+        dsfinalNew = '{}_dsfinal{}.txt'.format(value['resultFile'],i)
+        dslogNew = '{}_dslog{}.txt'.format(value['resultFile'],i)
+    
+    # Rename dsin.txt and dslog.txt
+    try:
+        move(os.path.join(cwdMod,'dsin.txt'), os.path.join(cwdMod,dsinNew))
+    except:
+        print('Error: dsin.txt cannot be found. Looking in-> {}'.format(cwdMod))         
+    try:
+        move(os.path.join(cwdMod,'dslog.txt'), os.path.join(cwdMod,dslogNew))
+    except:
+        print('Error: dslog.txt cannot be found. Looking in-> {}'.format(cwdMod))            
+
+    # Rename dsfinal.txt and dsres.txt        
+    if result:
+        try:
+            move(os.path.join(cwdMod,'dsfinal.txt'), os.path.join(cwdMod,dsfinalNew))
+        except:
+            print('Error: dsfinal.txt cannot be found. Looking in-> {}'.format(cwdMod))
+        try:
+            move(os.path.join(cwdMod,resultFile), os.path.join(cwdMod,resultFileNew))                
+        except:
+            print('Error: {} cannot be found. Looking in-> {}'.format(resultFile,cwdMod))
+            
+    return dslogNew
+    
 
 def simulate(simSettings,showWindow=False,closeWindow=True):
     '''
-    User Input: Solver Settings
+    
+    simSettings => dictionary of setting parameters (see below for details)
+    showWindow  => =True to launch Dymola GUI
+    closeWindow => =False to prevent auto-closing of the Dymola GUI when done
+    
+    simSettings details:
     - All settings, besides `=None`, must be enclosed in brackets []
     
     - !!! 'initialNames' and 'initialValues' are set different than others.
@@ -185,7 +248,9 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
         # Translate the model
         dymola.translateModel(experiments[0]['problem'])
         
-        # Run all experiments  
+        # Run all experiments
+
+        saveResult=[]
         for i, value in enumerate(experiments):
     
             print(i)
@@ -193,29 +258,22 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
         
             # Instantiate the Dymola interface and start Dymola
             # dymola = DymolaInterface(showwindow=showWindow)
+
+            # Simulate the model
+            result = dymola.simulateExtendedModel(**value)[0]
             
-            result = dymola.simulateExtendedModel(**value)
-        
-            if not result:
-                print("Simulation failed. Below is the translation log.")
-                log = dymola.getLastErrorLog()
-                print(log)
-                exit(1)
-            else:
-                if value['resultFile'] == None:
-                    resultFile = 'dsres.mat'                    
-                else:
-                    resultFile = '{}.mat'.format(value['resultFile']) 
-                resultFileNew = 'dsres{}.mat'.format(i)
+            # Save the result (success/fail)
+            saveResult.append(result)
+            
+            # Rename the log files and return new log file for debugging ref.
+            dslogNew = renameFiles(i,value,cwdMod,result)     
                 
-                try:
-                    move(os.path.join(cwdMod,resultFile), os.path.join(cwdMod,resultFileNew))
-                    move(os.path.join(cwdMod,'dsin.txt'), os.path.join(cwdMod,'dsin{}.txt'.format(i)))
-                    move(os.path.join(cwdMod,'dsfinal.txt'), os.path.join(cwdMod,'dsfinal{}.txt'.format(i)))
-                    move(os.path.join(cwdMod,'dslog.txt'), os.path.join(cwdMod,'dslog{}.txt'.format(i)))
-                except:
-                    print('Error: Result and log files cannot be found. Looking in-> {}'.format(os.getcwd()))
-    
+            # Print last line of error
+            if not result:
+                print("Simulation failed. Below is the translation log. For more details see: {}".format(dslogNew))
+                log = dymola.getLastErrorLog()
+                print('### Log Start ###\n' + log + '### Log End ###')
+                      
     except DymolaException as ex:
         print(("Error: " + str(ex)))
     finally:
@@ -228,7 +286,15 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
     # Save experiment dictionary as pickle in cwdMod
     with open(os.path.join(cwdMod,'experiments.pickle'), 'wb') as handle:
         pickle.dump(experiments, handle, protocol=pickle.HIGHEST_PROTOCOL)    
-        
+    
+    
+
+    # Save summary off success/fail (true/false) of simulations
+    with open(os.path.join(cwdMod,'summary.txt'),'w') as fil:
+        fil.write('Summary of success/fail (true/false) of experiment\n')
+        for i, val in enumerate(saveResult):
+            fil.write('\t'.join(['Experiment','{}'.format(i),'{}'.format(val)]) + '\n')
+
 if __name__ == "__main__":
     
     # Initialize simulation settings (not required): 2 methods
@@ -256,6 +322,6 @@ if __name__ == "__main__":
     simSettings['steamTurbine.eta_mech']=[1,0.9]   
     
     # Generate parametric simulation
-    simulate(simSettings,showWindow=True,closeWindow=False)
+    simulate(simSettings,showWindow=False,closeWindow=False)
     
     
