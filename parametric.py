@@ -122,7 +122,7 @@ def genExperiments(experimentsRaw):
                 
     return experiments
 
-def renameFiles(i,value,cwdMod,result):
+def renameFiles(simID,i,value,cwdMod,result):
     '''
     Rename the result, dslog, dsin, and dsfinal files and returns the new
     dslog file name for debugging.
@@ -133,17 +133,26 @@ def renameFiles(i,value,cwdMod,result):
     result => boolean success/fail (true/false) of model
     '''
     # Set the new names
-    resultFileNew = 'dsres{}.mat'.format(i)
+
+#    if simID == '':
+#        simID_1 = simID
+#        simID_2 = simID
+#    else:
+#        simID_1 = simID+'_'
+#        simID_2 = '_'+simID
+        
     if value['resultFile'] == None:
-        resultFile = 'dsres.mat'  
-        dsinNew = 'dsin{}.txt'.format(i)
-        dsfinalNew = 'dsfinal{}.txt'.format(i)
-        dslogNew = 'dslog{}.txt'.format(i)
+        resultFile = 'dsres.mat'
+        resultFileNew = '{}dsres_{}.mat'.format(simID,i)
+        dsinNew = '{}dsin_{}.txt'.format(simID,i)
+        dsfinalNew = '{}dsfinal_{}.txt'.format(simID,i)
+        dslogNew = '{}dslog_{}.txt'.format(simID,i)
     else:
         resultFile = '{}.mat'.format(value['resultFile']) 
-        dsinNew = '{}_dsin{}.txt'.format(value['resultFile'],i)
-        dsfinalNew = '{}_dsfinal{}.txt'.format(value['resultFile'],i)
-        dslogNew = '{}_dslog{}.txt'.format(value['resultFile'],i)
+        resultFileNew = '{}_{}.mat'.format(simID,value['resultFile'],i)
+        dsinNew = '{}{}_dsin_{}.txt'.format(simID,value['resultFile'],i)
+        dsfinalNew = '{}{}_dsfinal_{}.txt'.format(simID,value['resultFile'],i)
+        dslogNew = '{}{}_dslog_{}.txt'.format(simID,value['resultFile'],i)
     
     # Rename dsin.txt and dslog.txt
     try:
@@ -169,12 +178,14 @@ def renameFiles(i,value,cwdMod,result):
     return dslogNew
     
 
-def simulate(simSettings,showWindow=False,closeWindow=True):
+def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0):
     '''
     
     simSettings => dictionary of setting parameters (see below for details)
     showWindow  => =True to launch Dymola GUI
     closeWindow => =False to prevent auto-closing of the Dymola GUI when done
+    simID       => simulation ID to differentiate output files (e.g., simID_dsres0.mat vs. dsres0.mat)
+    seed        => starting seed value for output file naming (e.g., seed+0, ..., seed+len(experiments))
     
     simSettings details:
     - All settings, besides `=None`, must be enclosed in brackets []
@@ -228,7 +239,18 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
     
     # Check User Input
     checkInput(simSettings)
+    try:
+        if int(seed) >= 0 and (seed % 2) == 0:
+            seed = int(seed)
+        else:
+            raise NameError("seedNum must be a positive integer")
+    except:
+        raise NameError("seedNum must be a positive integer")
     
+    # Modify simID for naminc conventions
+    if simID != '':
+        simID = simID+'_'
+            
     # Generate all experiment permutations
     experimentsRaw = genExperimentsRaw(simSettings)
     
@@ -249,11 +271,11 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
         dymola.translateModel(experiments[0]['problem'])
         
         # Run all experiments
-
         saveResult=[]
+        j = seed
         for i, value in enumerate(experiments):
-    
-            print(i)
+            j = seed + i
+            print('i = {}; seed = {}; i+seed = {}'.format(i,seed,j))
             print(value)
         
             # Instantiate the Dymola interface and start Dymola
@@ -266,7 +288,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
             saveResult.append(result)
             
             # Rename the log files and return new log file for debugging ref.
-            dslogNew = renameFiles(i,value,cwdMod,result)     
+            dslogNew = renameFiles(simID,j,value,cwdMod,result)     
                 
             # Print last line of error
             if not result:
@@ -284,14 +306,14 @@ def simulate(simSettings,showWindow=False,closeWindow=True):
                 dymola.close()
     
     # Save experiment dictionary as pickle in cwdMod
-    with open(os.path.join(cwdMod,'experiments.pickle'), 'wb') as handle:
+    with open(os.path.join(cwdMod,'{}experiments_{}to{}.pickle'.format(simID,seed,j)), 'wb') as handle:
         pickle.dump(experiments, handle, protocol=pickle.HIGHEST_PROTOCOL)    
     
     
 
     # Save summary off success/fail (true/false) of simulations
-    with open(os.path.join(cwdMod,'summary.txt'),'w') as fil:
-        fil.write('Summary of success/fail (true/false) of experiment\n')
+    with open(os.path.join(cwdMod,'{}summary_{}to{}.txt'.format(simID,seed,j)),'w') as fil:
+        fil.write('Summary of success/fail (true/false) of experiments\n')
         for i, val in enumerate(saveResult):
             fil.write('\t'.join(['Experiment','{}'.format(i),'{}'.format(val)]) + '\n')
 
@@ -303,7 +325,7 @@ if __name__ == "__main__":
     
     # Specify files. Only 1 or None
     simSettings['problem']=['TRANSFORM.Fluid.Examples.RankineCycle']
-    simSettings['resultFile']=None
+    simSettings['resultFile']=['dummy']
     simSettings['autoLoad']=[False]
     
     # Specify simulation settings
@@ -322,6 +344,6 @@ if __name__ == "__main__":
     simSettings['steamTurbine.eta_mech']=[1,0.9]   
     
     # Generate parametric simulation
-    simulate(simSettings,showWindow=False,closeWindow=False)
+    simulate(simSettings,showWindow=False,closeWindow=False,simID='Test',seed=4)
     
     
