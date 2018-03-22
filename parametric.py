@@ -2,7 +2,7 @@
 """
 Created on Tue Mar 20 09:56:18 2018
 
-@author: vmg
+@author: Scott Greenwood
 """
 
 from dymola.dymola_interface import DymolaInterface
