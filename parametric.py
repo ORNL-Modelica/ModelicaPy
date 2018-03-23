@@ -275,9 +275,11 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         # Run all experiments
         saveResult=[]
         j = seed
+        print('Total experiments = {} for simID = "{}"'.format(len(experiments),simID))
+        print('Experiment numbering started at seed = {}'.format(seed))
         for i, value in enumerate(experiments):
             j = seed + i
-            print('i = {}; seed = {}; i+seed = {}'.format(i,seed,j))
+            print('Experiment {} (= {}/{})'.format(j,i,len(experiments)))
             print(value)
                    
             # Simulate the model
