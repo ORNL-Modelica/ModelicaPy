@@ -149,7 +149,7 @@ def renameFiles(simID,i,value,cwdMod,result):
         dslogNew = '{}dslog_{}.txt'.format(simID,i)
     else:
         resultFile = '{}.mat'.format(value['resultFile']) 
-        resultFileNew = '{}_{}.mat'.format(simID,value['resultFile'],i)
+        resultFileNew = '{}{}_{}.mat'.format(simID,value['resultFile'],i)
         dsinNew = '{}{}_dsin_{}.txt'.format(simID,value['resultFile'],i)
         dsfinalNew = '{}{}_dsfinal_{}.txt'.format(simID,value['resultFile'],i)
         dslogNew = '{}{}_dslog_{}.txt'.format(simID,value['resultFile'],i)
