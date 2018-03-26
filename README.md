@@ -5,7 +5,7 @@ A Python library containing a variety of scripts and functions for interaction w
 
 * **Scott Greenwood**
 
-See also the list of [contributors](https://github.com/ORNL-TRANSFORM/ModelicaPy/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ORNL-Modelica/ModelicaPy/contributors) who participated in this project.
 
 ## License
 
@@ -21,6 +21,6 @@ Copyright 2017, UT-Battelle, LLC
 4. gen_dsin.py - Generate new dsin.txt file from dsin.txt or dsfinal.txt with modified simulation and/or variable parameters.
 
 ## To Contribute...
-You may report any issues with using the [Issues](https://github.com/ORNL-TRANSFORM/ModelicaPy/issues) button.
+You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
 
-Contributions in the form of [Pull Requests](https://github.com/ORNL-TRANSFORM/ModelicaPy/pulls) are always welcome.
+Contributions in the form of [Pull Requests](https://github.com/ORNL-Modelica/ModelicaPy/pulls) are always welcome.
