@@ -9,7 +9,7 @@ See also the list of [contributors](https://github.com/ORNL-Modelica/ModelicaPy/
 
 ## License
 
-This project is licensed under the UT-Battelle Open Source [License](LICENSE.pdf) (Permissive) - see the [LICENSE.pdf](LICENSE.pdf) file for details
+This project is licensed under the UT-Battelle Open Source [License](LICENSE.md) (Permissive) - see the [LICENSE.md](LICENSE.md) file for details
 
 Copyright 2017, UT-Battelle, LLC
 
@@ -19,6 +19,7 @@ Copyright 2017, UT-Battelle, LLC
 2. parametric.py - Generate parametric sweeps for simulations.
 3. read_dslog.py - Create a summary of the dslog file (e.g., pass/fail, simulation time, etc.).
 4. gen_dsin.py - Generate new dsin.txt file from dsin.txt or dsfinal.txt with modified simulation and/or variable parameters.
+5. regressiontest.py - Modified regressiontest.py file from BuildingsPy for regression testing on Windows
 
 ## To Contribute...
 You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
