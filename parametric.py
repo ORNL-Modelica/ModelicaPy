@@ -4,6 +4,7 @@ Created on Tue Mar 20 09:56:18 2018
 
 @author: Scott Greenwood
 """
+from __future__ import division
 
 from dymola.dymola_interface import DymolaInterface
 from dymola.dymola_exception import DymolaException
@@ -56,7 +57,7 @@ def initSettingsDefaults():
     simSettings['method']=['dassl']
     simSettings['tolerance']=[0.0001]
     simSettings['fixedstepsize']=[0.0]
-    simSettings['resultFile']=['dsres.mat']
+    simSettings['resultFile']=['dsres']
     simSettings['initialNames']=None
     simSettings['initialValues']=None
     simSettings['finalNames']=None
@@ -163,21 +164,29 @@ def renameFiles(simID,i,value,cwdMod,result):
         move(os.path.join(cwdMod,'dslog.txt'), os.path.join(cwdMod,dslogNew))
     except:
         print('Error: dslog.txt cannot be found. Looking in-> {}'.format(cwdMod))            
-
+    try:
+        move(os.path.join(cwdMod,resultFile), os.path.join(cwdMod,resultFileNew))                
+    except:
+        print('Error: {} cannot be found. Looking in-> {}'.format(resultFile,cwdMod))
+        
     # Rename dsfinal.txt and dsres.txt        
     if result:
         try:
             move(os.path.join(cwdMod,'dsfinal.txt'), os.path.join(cwdMod,dsfinalNew))
         except:
             print('Error: dsfinal.txt cannot be found. Looking in-> {}'.format(cwdMod))
-        try:
-            move(os.path.join(cwdMod,resultFile), os.path.join(cwdMod,resultFileNew))                
-        except:
-            print('Error: {} cannot be found. Looking in-> {}'.format(resultFile,cwdMod))
+#        try:
+#            move(os.path.join(cwdMod,resultFile), os.path.join(cwdMod,resultFileNew))                
+#        except:
+#            print('Error: {} cannot be found. Looking in-> {}'.format(resultFile,cwdMod))
             
     return dslogNew
     
-
+def loadPickle(pickleName='experiments.pickle',picklePath=''):
+    with open(os.path.join(picklePath,pickleName), 'rb') as handle:
+        experiments = pickle.load(handle)
+    return experiments
+        
 def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singleTranslate=True):
     '''
     
@@ -241,7 +250,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
     # Check User Input
     checkInput(simSettings)
     try:
-        if int(seed) >= 0 and (seed % 2) == 0:
+        if int(seed) >= 0:
             seed = int(seed)
         else:
             raise NameError("seedNum must be a positive integer")
@@ -279,7 +288,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         print('Experiment numbering started at seed = {}'.format(seed))
         for i, value in enumerate(experiments):
             j = seed + i
-            print('Experiment {} (= {}/{})'.format(j,i,len(experiments)))
+            print('Experiment {} (= {}/{})'.format(j,i+1,len(experiments)))
             print(value)
                    
             # Simulate the model
@@ -342,7 +351,7 @@ if __name__ == "__main__":
 
     # Specify parameters (instead of 'initialNames' and 'initialValues')
     simSettings['m_flow']=[100,110]
-    simSettings['steamTurbine.eta_mech']=[1,0.9]   
+    simSettings['steamTurbine.eta_mech']=[1,9/10]   
     
     # Generate parametric simulation
     simulate(simSettings,showWindow=False,closeWindow=False,simID='Test',seed=4,singleTranslate=False)
