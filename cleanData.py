@@ -79,7 +79,11 @@ def cleanDataTime(r,varNames,tstart,tstop,nt=None):
     Clean time dependent data by removing duplicates and generating uniformly spaced data for data analysis
     varNames = list of variable names for use in Reader.values('NAME')
     
-    Returns dictionary of varNames with interpolated values including the time
+    Returns dictionary of varNames with interpolated values including the time (data['time'])
+    
+    tstart is start of data to be returned
+    tend is end of data to be returned
+    nt is number of interpolated points to be returned
     '''
     data = {}
     time = r.values(varNames[0])[0]
@@ -111,7 +115,7 @@ if __name__ == "__main__":
     varNames_var = varNames_var_base
     
     params = cleanDataParam(r,varNames_param)
-    data = cleanDataTime(r,varNames_var,100,300,201)
+    data = cleanDataTime(r,varNames_var,0,1,201)
     
     # Normalize data
     data_norm = {}
