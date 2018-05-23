@@ -20,6 +20,7 @@ Copyright 2017, UT-Battelle, LLC
 3. read_dslog.py - Create a summary of the dslog file (e.g., pass/fail, simulation time, etc.).
 4. gen_dsin.py - Generate new dsin.txt file from dsin.txt or dsfinal.txt with modified simulation and/or variable parameters.
 5. regressiontest.py - Modified regressiontest.py file from BuildingsPy for regression testing on Windows
+6. cleanData.py - Returns data using a 'r=Reader' from buildingspy that has been cleaned of repeated values (i.e., due to events) and interpolates between values.
 
 ## To Contribute...
 You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
