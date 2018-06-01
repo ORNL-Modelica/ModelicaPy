@@ -197,6 +197,9 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
     seed        => starting seed value for output file naming (e.g., seed+0, ..., seed+len(experiments))
     singleTranslate => =True to only translate the model once
     
+    - !!! If variables needed to be changed require retranslation then add them to problem name.
+    i.e., simSettings['problem']=['Example.Test(var1=1,var2=5)'] or try to set 'annotation(Evaluate=false)' in the model
+    
     simSettings details:
     - All settings, besides `=None`, must be enclosed in brackets []
     
@@ -245,7 +248,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
                 Sdirk34hw, Cerk23, Cerk34, Cerk34, Cvode
     
      For the current supported solvers and their use see Dymola
-    '''
+     '''
     
     # Check User Input
     checkInput(simSettings)
@@ -269,6 +272,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         
     # Instantiate the Dymola interface and start Dymola
     dymola = None
+    result_tran = False
     try:
         
         # Open Dymola
@@ -278,7 +282,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         cwdMod = dymola.ExecuteCommand('Modelica.Utilities.System.getWorkDirectory();')
 
         # Translate the model
-        if singleTranslate == True:
+        if singleTranslate:
             result_tran = dymola.translateModel(experiments[0]['problem'])
             if not result_tran:
                 raise Exception("Translation failed. Aborting parametric simulation. Investigate model in IDE for details.")
@@ -293,6 +297,14 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
             print('Experiment {} (= {}/{})'.format(j,i+1,len(experiments)))
             print(value)
                    
+           # ModelTranslate = "Dymola.Path.To.Your.Model(Dymola.Path.to.Variable=1000)"
+            if not singleTranslate:
+                result_tran = False
+                result_tran = dymola.translateModel(value['problem'])
+                if not result_tran:
+                    print("Translation failed. Aborting parametric simulation. Investigate model in IDE for details.")
+                    break
+                
             # Simulate the model
             result = dymola.simulateExtendedModel(**value)[0]
             
