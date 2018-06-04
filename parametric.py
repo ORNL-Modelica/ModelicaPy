@@ -197,6 +197,9 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
     seed        => starting seed value for output file naming (e.g., seed+0, ..., seed+len(experiments))
     singleTranslate => =True to only translate the model once
     
+    - !!! If variables needed to be changed require retranslation then add them to problem name.
+    i.e., simSettings['problem']=['Example.Test(var1=1,var2=5)'] or try to set 'annotation(Evaluate=false)' in the model
+    
     simSettings details:
     - All settings, besides `=None`, must be enclosed in brackets []
     
@@ -245,7 +248,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
                 Sdirk34hw, Cerk23, Cerk34, Cerk34, Cvode
     
      For the current supported solvers and their use see Dymola
-    '''
+     '''
     
     # Check User Input
     checkInput(simSettings)
@@ -269,6 +272,7 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         
     # Instantiate the Dymola interface and start Dymola
     dymola = None
+    result_tran = False
     try:
         
         # Open Dymola
@@ -278,9 +282,11 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
         cwdMod = dymola.ExecuteCommand('Modelica.Utilities.System.getWorkDirectory();')
 
         # Translate the model
-        if singleTranslate == True:
-            dymola.translateModel(experiments[0]['problem'])
-        
+        if singleTranslate:
+            result_tran = dymola.translateModel(experiments[0]['problem'])
+            if not result_tran:
+                raise Exception("Translation failed. Aborting parametric simulation. Investigate model in IDE for details.")
+            
         # Run all experiments
         saveResult=[]
         j = seed
@@ -291,6 +297,14 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
             print('Experiment {} (= {}/{})'.format(j,i+1,len(experiments)))
             print(value)
                    
+           # ModelTranslate = "Dymola.Path.To.Your.Model(Dymola.Path.to.Variable=1000)"
+            if not singleTranslate:
+                result_tran = False
+                result_tran = dymola.translateModel(value['problem'])
+                if not result_tran:
+                    print("Translation failed. Aborting parametric simulation. Investigate model in IDE for details.")
+                    break
+                
             # Simulate the model
             result = dymola.simulateExtendedModel(**value)[0]
             
@@ -308,24 +322,25 @@ def simulate(simSettings,showWindow=False,closeWindow=True,simID='',seed=0,singl
                       
     except DymolaException as ex:
         print(("Error: " + str(ex)))
+    except Exception as inst:
+        print('{}'.format(inst.message))
     finally:
         if dymola is not None:
             if showWindow == True and closeWindow == False:
                 pass
             else:
                 dymola.close()
-    
-    # Save experiment dictionary as pickle in cwdMod
-    with open(os.path.join(cwdMod,'{}experiments_{}to{}.pickle'.format(simID,seed,j)), 'wb') as handle:
-        pickle.dump(experiments, handle, protocol=pickle.HIGHEST_PROTOCOL)    
-    
-    
 
-    # Save summary off success/fail (true/false) of simulations
-    with open(os.path.join(cwdMod,'{}summary_{}to{}.txt'.format(simID,seed,j)),'w') as fil:
-        fil.write('Summary of success/fail (true/false) of experiments\n')
-        for i, val in enumerate(saveResult):
-            fil.write('\t'.join(['Experiment','{}'.format(i),'{}'.format(val)]) + '\n')
+    if result_tran:    
+        # Save experiment dictionary as pickle in cwdMod
+        with open(os.path.join(cwdMod,'{}experiments_{}to{}.pickle'.format(simID,seed,j)), 'wb') as handle:
+            pickle.dump(experiments, handle, protocol=pickle.HIGHEST_PROTOCOL)    
+    
+        # Save summary off success/fail (true/false) of simulations
+        with open(os.path.join(cwdMod,'{}summary_{}to{}.txt'.format(simID,seed,j)),'w') as fil:
+            fil.write('Summary of success/fail (true/false) of experiments\n')
+            for i, val in enumerate(saveResult):
+                fil.write('\t'.join(['Experiment','{}'.format(i),'{}'.format(val)]) + '\n')
 
 if __name__ == "__main__":
     
