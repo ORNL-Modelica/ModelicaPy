@@ -6,8 +6,9 @@ Created on Mon May 21 13:01:32 2018
 """
 
 import numpy as np
+from builtins import range
 from buildingspy.io.outputfile import Reader
-
+	
 def removeRepeatRows(data,col=0,col_del=False):
     '''
     Remove repeated rows based on the values in the column 'col' in order
@@ -17,8 +18,9 @@ def removeRepeatRows(data,col=0,col_del=False):
     data => MxN matrix or 1-D array
     col => column to check for repeated row values
     col_del => =true to delete 'col' in dataNew
-    '''
     
+    Future - add flag for axis for basis
+    '''
     try:
         nCol, nRow = np.shape(data)
     except:
@@ -26,19 +28,19 @@ def removeRepeatRows(data,col=0,col_del=False):
         nRow = np.shape(data)
         
     # Turn data into matrix form
-    dataM = np.zeros((nRow,nCol))
-    for i in xrange(nCol):
-        dataM[:,i] = data[i]
+    dataM = np.zeros((nCol,nRow))
+    for i in range(nCol):
+        dataM[i,:] = data[i]
 
     # Find unique rows based on specified column
-    a, i = np.unique(dataM[:,col],return_index=True);
+    a, i = np.unique(dataM[col,:],return_index=True);
 
     # Extract the filtered data
-    dataNew =  dataM[i,:]
+    dataNew =  dataM[:,i]
 
     # Remove sorted row based on input
     if col_del and nCol > 0:
-        dataNew = np.delete(dataNew, col, 1) 
+        dataNew = np.delete(dataNew, col, 0) 
 
     return dataNew
 
