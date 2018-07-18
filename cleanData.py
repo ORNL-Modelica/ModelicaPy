@@ -9,39 +9,51 @@ import numpy as np
 from builtins import range
 from buildingspy.io.outputfile import Reader
 	
-def removeRepeatRows(data,col=0,col_del=False):
+def removeRepeats(data,iCheck=0,deleteCheck=False,axisCheck=0):
     '''
-    Remove repeated rows based on the values in the column 'col' in order
+    Remove repeated rows/columns based on the values in the column 'iCheck' in order
     to use tools such as spline which require a monotonically increasing data
     for the independent variable.
 
     data => MxN matrix or 1-D array
-    col => column to check for repeated row values
-    col_del => =true to delete 'col' in dataNew
-    
-    Future - add flag for axis for basis
+    iCheck => index (row/column number) to check for repeated row values
+    deleteCheck => =true to delete 'iCheck' row/column in dataNew
+    axisCheck => =0 to remove repeated columns =1 for repeated rows
     '''
-    try:
-        nCol, nRow = np.shape(data)
-    except:
-        nCol = 1
-        nRow = np.shape(data)
+    # Cast as matrix to avoid issues if input is a tuple
+    data = np.matrix(data)
+
+    # Transpose data if sorting is done on column (1) instead of row (0)
+    if axisCheck == 0:
+        pass
+    elif axisCheck == 1:
+        data = np.transpose(data)
+    else:
+        raise ValueError('Unsupported axisCheck. Only 0 or 1 accepted')
         
+    # Get matrix dimensions
+    nRow, nCol = np.shape(data)
+
     # Turn data into matrix form
-    dataM = np.zeros((nCol,nRow))
-    for i in range(nCol):
+    dataM = np.zeros((nRow,nCol))
+
+    for i in range(nRow):
         dataM[i,:] = data[i]
 
     # Find unique rows based on specified column
-    a, i = np.unique(dataM[col,:],return_index=True);
+    a, i = np.unique(dataM[iCheck,:],return_index=True);
 
     # Extract the filtered data
-    dataNew =  dataM[:,i]
+    dataNew =  dataM[:,np.sort(i)]
 
     # Remove sorted row based on input
-    if col_del and nCol > 0:
-        dataNew = np.delete(dataNew, col, 0) 
+    if deleteCheck and nRow > 0:
+        dataNew = np.delete(dataNew, iCheck, 0) 
 
+    # Re-transpose the results so input and output data are consistent
+    if axisCheck == 1:
+        dataNew = np.transpose(dataNew)
+        
     return dataNew
 
 def uniformData(x,y,tstart,tstop,nt=None):
@@ -89,10 +101,11 @@ def cleanDataTime(r,varNames,tstart,tstop,nt=None):
     '''
     data = {}
     time = r.values(varNames[0])[0]
-    t = removeRepeatRows([time])
+    t = removeRepeats(time)
+
     for i, val in enumerate(varNames):
         yRaw = r.values(val)[1]
-        y = removeRepeatRows([time,yRaw],0,True)
+        y = removeRepeats((time,yRaw),0,True)
         yint,tint = uniformData(t,y,tstart,tstop,nt)
         data[val] = yint
     data['time'] = tint  
