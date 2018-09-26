@@ -173,6 +173,42 @@ def Cylinder_FD(r,components = ['cylinder'],keyword='solutionMethod', variables 
     return results
 
 
+def Conduction_2D(r,components = ['conduction'],keyword='materials', variables = ['T'],iGet=-1,fileName='returnValues.txt',writeToFile = True):
+    resultsFull = {}
+    results = {}
+    
+    for c in components:
+        resultsFull[c] = dict.fromkeys(variables)
+        results[c] = dict.fromkeys(variables)
+        
+        # Check for component
+        if r.varNames('{}.{}\[1, 1].{}'.format(c,keyword,variables[0])):
+            
+            # Get number of elements per dimension
+            nI = int(r.values('{}.nVs[1]'.format(c))[1][0])
+            nJ = int(r.values('{}.nVs[2]'.format(c))[1][0])
+            
+            # Get length of simulation results
+            nt = len(r.values('{}.{}[1, 1].{}'.format(c,keyword,variables[0]))[0])
+            
+            # Store results in a matrix
+            for v in variables:
+                temp = np.ndarray((nI,nJ,nt))
+                for i in range(nI):
+                    for j in range(nJ):
+                        temp[i,j,:] = r.values('{}.{}[{}, {}].{}'.format(c,keyword,i+1,j+1,v))[1]
+                resultsFull[c][v] = temp
+                results[c][v] = temp[:,:,iGet]
+                
+        else:
+            print('No results found for {}'.format(c))
+    
+    if writeToFile:
+        writeValues(components,results,fileName)
+    
+    return results
+	
+	
 if __name__ == "__main__":
     r = Reader('GenericModule2.mat','dymola')
     
