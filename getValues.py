@@ -62,10 +62,16 @@ Create a file with formatting for Modelica files
                 else:
                     unit = 'Real'
                     
-                # Add notation for array variable
+                # Check for dimensions and provide approriate suffix
                 suffix = ''
-                if '{' in line:
-                    suffix = '[:]'
+                ch_ = '{'
+                str_ = line
+                m = re.match(r'[%s]+' % ch_, str_)
+                nDims = m.end() if m else 0
+                if nDims < 1:
+                    pass
+                else:
+                    suffix = '[' + ','.join((':') for i in range(nDims)) + ']'
                     
                 # Write the file
                 fil.write('parameter {} {}{} = {} annotation(Dialog(tab="Initialization"));\n'.format(unit,newKey,suffix,line))
