@@ -21,6 +21,8 @@ Copyright 2017, UT-Battelle, LLC
 4. gen_dsin.py - Generate new dsin.txt file from dsin.txt or dsfinal.txt with modified simulation and/or variable parameters.
 5. regressiontest.py - Modified regressiontest.py file from BuildingsPy for regression testing on Windows
 6. cleanData.py - Returns data using a 'r=Reader' from buildingspy that has been cleaned of repeated values (i.e., due to events) and interpolates between values.
+7. getValues - Functions to return single values from components. Helpful for getting initial values. Includes Modelica formatted output. For use with TRANSFORM.
+8. createUnitScripts.py - autogenerate .mos files for use with buildingspy regression test.
 
 ## To Contribute...
 You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
