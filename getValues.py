@@ -14,6 +14,40 @@ copying back into the Modelca model.
 import numpy as np
 from buildingspy.io.outputfile import Reader
 
+
+def combineKeyValues(results,additional):
+    '''
+Use to update an existing results dictionary with more results from components
+which already exist in the results without overwriting existing data
+    '''
+    for key in results.keys():
+        if key in additional.keys():
+            results[key].update(additional[key])
+            
+    return results
+
+    
+def getCombineValues(r,compDict):
+    '''
+    *** Do not recommend using, likely to change/be deleted/improved
+Provided a components list this function calls the appropriate functions and
+combines all the results into a single dictionary.
+
+!!! Currently only able to use default settings from the functions
+
+
+    r = Reader('matfile','dymola')
+    compDict = {
+            'GenericPipe':{'core.coolantSubchannel','hotLeg','coldLeg','STHX.tube','STHX.shell'},
+            'SimpleVolume':{'inletPlenum'}
+            }
+    '''   
+    results = {}
+    for key, value in compDict.iteritems():
+        results.update(globals()[key](r,value))
+            
+    return results        
+            
 def writeValues(components,results,fileName='returnValues.txt'):
     '''
 Create a file with minimal/zero formatting
@@ -34,10 +68,14 @@ Create a file with minimal/zero formatting
                 fil.write('{} = {}\n'.format(key,line))
        
         
-def writeValues_MOFormatted(components,results,fileName='returnValues.txt',unitMap={'p':'SI.Pressure','T':'SI.Temperature','h':'SI.SpecificEnthalpy','d':'SI.Density'},fullName=False):
+def writeValues_MOFormatted(components,results,fileName='returnValues.txt',
+        unitMap={'p':'SI.Pressure','T':'SI.Temperature','h':'SI.SpecificEnthalpy','d':'SI.Density','level':'SI.Length'},
+        fullName=False):
     '''
 Create a file with formatting for Modelica files
     '''
+    import re
+    
     with open(fileName,'w') as fil:
         for c in components:
             fil.write('//{}\n'.format(c))
@@ -86,19 +124,19 @@ def GenericPipe(r,components = ['pipe'],keyword='mediums',variables = ['p','T','
         results[c] = dict.fromkeys(variables)
         
         # Check for component
-        if r.varNames('{}.{}\[1].{}'.format(c,keyword,variables[0])):
+        if r.varNames('{}{}\[1].{}'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
             
             # Get number of elements
             nI = int(r.values('{}.geometry.nV'.format(c))[1][0])
             
             # Get length of simulation results
-            nt = len(r.values('{}.{}[1].{}'.format(c,keyword,variables[0]))[0])
+            nt = len(r.values('{}{}[1].{}'.format(c,keyword if not keyword else '.'+keyword,variables[0]))[0])
             
             # Store results in a matrix
             for v in variables:
                 temp = np.ndarray((nI,nt))
                 for i in range(nI):
-                    temp[i,:] = r.values('{}.{}[{}].{}'.format(c,keyword,i+1,v))[1]
+                    temp[i,:] = r.values('{}{}[{}].{}'.format(c,keyword if not keyword else '.'+keyword,i+1,v))[1]
                 resultsFull[c][v] = temp
                 results[c][v] = temp[:,iGet]
                 
@@ -120,11 +158,11 @@ def SimpleVolume(r,components = ['pipe'],keyword='medium',variables = ['p','T','
         results[c] = dict.fromkeys(variables)
                       
         # Check for component    
-        if r.varNames('{}.{}.{}'.format(c,keyword,variables[0])):
+        if r.varNames('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
             
             # Store results in a matrix
             for v in variables:
-                temp = r.values('{}.{}.{}'.format(c,keyword,v))[1]
+                temp = r.values('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,v))[1]
                 resultsFull[c][v] = temp
                 results[c][v] = temp[iGet]
                 
@@ -146,21 +184,21 @@ def Cylinder_FD(r,components = ['cylinder'],keyword='solutionMethod', variables 
         results[c] = dict.fromkeys(variables)
         
         # Check for component
-        if r.varNames('{}.{}.{}\[1, 1]'.format(c,keyword,variables[0])):
+        if r.varNames('{}{}.{}\[1, 1]'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
             
             # Get number of elements per dimension
             nI = int(r.values('{}.nR'.format(c))[1][0])
             nJ = int(r.values('{}.nZ'.format(c))[1][0])
             
             # Get length of simulation results
-            nt = len(r.values('{}.{}.{}[1, 1]'.format(c,keyword,variables[0]))[0])
+            nt = len(r.values('{}{}.{}[1, 1]'.format(c,keyword if not keyword else '.'+keyword,variables[0]))[0])
             
             # Store results in a matrix
             for v in variables:
                 temp = np.ndarray((nI,nJ,nt))
                 for i in range(nI):
                     for j in range(nJ):
-                        temp[i,j,:] = r.values('{}.{}.{}[{}, {}]'.format(c,keyword,v,i+1,j+1))[1]
+                        temp[i,j,:] = r.values('{}{}.{}[{}, {}]'.format(c,keyword if not keyword else '.'+keyword,v,i+1,j+1))[1]
                 resultsFull[c][v] = temp
                 results[c][v] = temp[:,:,iGet]
                 
@@ -182,21 +220,21 @@ def Conduction_2D(r,components = ['conduction'],keyword='materials', variables =
         results[c] = dict.fromkeys(variables)
         
         # Check for component
-        if r.varNames('{}.{}\[1, 1].{}'.format(c,keyword,variables[0])):
+        if r.varNames('{}{}\[1, 1].{}'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
             
             # Get number of elements per dimension
             nI = int(r.values('{}.nVs[1]'.format(c))[1][0])
             nJ = int(r.values('{}.nVs[2]'.format(c))[1][0])
             
             # Get length of simulation results
-            nt = len(r.values('{}.{}[1, 1].{}'.format(c,keyword,variables[0]))[0])
+            nt = len(r.values('{}{}[1, 1].{}'.format(c,keyword if not keyword else '.'+keyword,variables[0]))[0])
             
             # Store results in a matrix
             for v in variables:
                 temp = np.ndarray((nI,nJ,nt))
                 for i in range(nI):
                     for j in range(nJ):
-                        temp[i,j,:] = r.values('{}.{}[{}, {}].{}'.format(c,keyword,i+1,j+1,v))[1]
+                        temp[i,j,:] = r.values('{}{}[{}, {}].{}'.format(c,keyword if not keyword else '.'+keyword,i+1,j+1,v))[1]
                 resultsFull[c][v] = temp
                 results[c][v] = temp[:,:,iGet]
                 
@@ -207,18 +245,80 @@ def Conduction_2D(r,components = ['conduction'],keyword='materials', variables =
         writeValues(components,results,fileName)
     
     return results
-	
-	
+
+
+def ExpansionTank_1Port(r,components = ['tank'],keyword='',variables = ['p','h'],iGet=-1,fileName='returnValues.txt',writeToFile = False):
+    resultsFull = {}
+    results = {}
+
+    for c in components:
+        resultsFull[c] = dict.fromkeys(variables)
+        results[c] = dict.fromkeys(variables)
+                      
+        # Check for component    
+        if r.varNames('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
+            
+            # Store results in a matrix
+            for v in variables:
+                temp = r.values('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,v))[1]
+                resultsFull[c][v] = temp
+                results[c][v] = temp[iGet]
+                
+        else:
+            print('No results found for {}'.format(c))
+    
+    if writeToFile:
+            writeValues(components,results,fileName)
+    
+    return results
+
+
+def TeeJunctionVolume(r,components = ['tee'],keyword='medium',variables = ['p','T','h','d'],iGet=-1,fileName='returnValues.txt',writeToFile = False):
+    resultsFull = {}
+    results = {}
+    
+    for c in components:
+        resultsFull[c] = dict.fromkeys(variables)
+        results[c] = dict.fromkeys(variables)
+                      
+        # Check for component    
+        if r.varNames('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,variables[0])):
+            
+            # Store results in a matrix
+            for v in variables:
+                temp = r.values('{}{}.{}'.format(c,keyword if not keyword else '.'+keyword,v))[1]
+                resultsFull[c][v] = temp
+                results[c][v] = temp[iGet]
+                
+        else:
+            print('No results found for {}'.format(c))
+    
+    if writeToFile:
+            writeValues(components,results,fileName)
+    
+    return results
+
+
 if __name__ == "__main__":
-    r = Reader('GenericModule2.mat','dymola')
+    r = Reader('GenericModule3.mat','dymola')
     
-    components_GenericPipe = ['core.coolantSubchannel','hotLeg','coldLeg']
+    components_GenericPipe = ['core.coolantSubchannel','hotLeg','coldLeg','STHX.tube','STHX.shell']
     components_SimpleVolume = ['inletPlenum','outletPlenum']
-    components = components_GenericPipe + components_SimpleVolume
-    
+    components_Cylinder_FD = ['core.fuelModel.region_1','core.fuelModel.region_2','core.fuelModel.region_3']
+    components_Conduction_2D = ['STHX.tubeWall']
+    components_ExpansionTank_1Port = ['pressurizer']
+    components_TeeJunctionVolume = ['pressurizer_tee']
+   
     results = {}
     results.update(GenericPipe(r,components_GenericPipe))
     results.update( SimpleVolume(r,components_SimpleVolume))
-    
+    results.update( Cylinder_FD(r,components_Cylinder_FD))
+    results.update( Conduction_2D(r,components_Conduction_2D))
+    results.update( ExpansionTank_1Port(r,components_ExpansionTank_1Port))
+    results = combineKeyValues(results,ExpansionTank_1Port(r,components_ExpansionTank_1Port,keyword='',variables=['level']))
+    results.update( TeeJunctionVolume(r,components_TeeJunctionVolume))
+
+    components = components_GenericPipe + components_SimpleVolume + components_Cylinder_FD+components_Conduction_2D + components_ExpansionTank_1Port + components_TeeJunctionVolume
+         
     writeValues(components,results)
-    writeValues_MOFormatted(components,results)
+    writeValues_MOFormatted(components,results,fullName=True)
