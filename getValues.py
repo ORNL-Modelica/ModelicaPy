@@ -70,7 +70,9 @@ Create a file with minimal/zero formatting
         
 def writeValues_MOFormatted(components,results,fileName='returnValues.txt',
         unitMap={'p':'SI.Pressure','T':'SI.Temperature','h':'SI.SpecificEnthalpy','d':'SI.Density','level':'SI.Length'},
-        fullName=False):
+        fullName=False,
+        classMo = 'parameter',
+        annotation='Dialog(tab="Initialization")'):
     '''
 Create a file with formatting for Modelica files
     '''
@@ -112,7 +114,7 @@ Create a file with formatting for Modelica files
                     suffix = '[' + ','.join((':') for i in range(nDims)) + ']'
                     
                 # Write the file
-                fil.write('parameter {} {}{} = {} annotation(Dialog(tab="Initialization"));\n'.format(unit,newKey,suffix,line))
+                fil.write('{}{} {}{} = {}{};\n'.format('' if not classMo else classMo+' ',unit,newKey,suffix,line, '' if not annotation else ' annotation({})'.format(annotation)))
    
              
 def GenericPipe(r,components = ['pipe'],keyword='mediums',variables = ['p','T','h','d'],iGet=-1,fileName='returnValues.txt',writeToFile = False):
@@ -321,4 +323,4 @@ if __name__ == "__main__":
     components = components_GenericPipe + components_SimpleVolume + components_Cylinder_FD+components_Conduction_2D + components_ExpansionTank_1Port + components_TeeJunctionVolume
          
     writeValues(components,results)
-    writeValues_MOFormatted(components,results,fullName=True)
+    writeValues_MOFormatted(components,results,fullName=True,classMo='final parameter',annotation='')
