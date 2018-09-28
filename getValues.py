@@ -323,4 +323,4 @@ if __name__ == "__main__":
     components = components_GenericPipe + components_SimpleVolume + components_Cylinder_FD+components_Conduction_2D + components_ExpansionTank_1Port + components_TeeJunctionVolume
          
     writeValues(components,results)
-    writeValues_MOFormatted(components,results,fullName=True,annotation='')
+    writeValues_MOFormatted(components,results,fullName=True,classMo='final parameter',annotation='')
