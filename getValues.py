@@ -72,15 +72,21 @@ def writeValues_MOFormatted(components,results,fileName='returnValues.txt',
         unitMap={'p':'SI.Pressure','T':'SI.Temperature','h':'SI.SpecificEnthalpy','d':'SI.Density','level':'SI.Length'},
         fullName=False,
         classMo = 'parameter',
-        annotation='Dialog(tab="Initialization")'):
+        annotation='Dialog(tab="Initialization")',
+        useRedefine=False,
+        ignorePrefix=''):
     '''
 Create a file with formatting for Modelica files
+
+useRedefine = True => puts output in format for redefining values of underlying model
     '''
     import re
     
     with open(fileName,'w') as fil:
         for c in components:
-            fil.write('//{}\n'.format(c))
+            if not useRedefine:
+                fil.write('//{}\n'.format(c))
+                
             for key, value in results[c].items():
                 
                 # Condense values, arrays, etc. into single line
@@ -94,6 +100,7 @@ Create a file with formatting for Modelica files
                 if not fullName:
                     c = c.split('.')[0]
                 newKey = key + '_start_{}'.format(c).replace('.','_')
+                newKey = newKey.replace('_'+ignorePrefix,'')
                 
                 # Assign units if foundin the mapped unit dictionary
                 unit = ''
@@ -101,7 +108,7 @@ Create a file with formatting for Modelica files
                     unit = unitMap[key]
                 else:
                     unit = 'Real'
-                    
+                
                 # Check for dimensions and provide approriate suffix
                 suffix = ''
                 ch_ = '{'
@@ -113,9 +120,11 @@ Create a file with formatting for Modelica files
                 else:
                     suffix = '[' + ','.join((':') for i in range(nDims)) + ']'
                     
-                # Write the file
-                fil.write('{}{} {}{} = {}{};\n'.format('' if not classMo else classMo+' ',unit,newKey,suffix,line, '' if not annotation else ' annotation({})'.format(annotation)))
-   
+                if not useRedefine:
+                    # Write the file
+                    fil.write('{}{} {}{} = {}{};\n'.format('' if not classMo else classMo+' ',unit,newKey,suffix,line, '' if not annotation else ' annotation({})'.format(annotation)))
+                else:
+                    fil.write('{} = {},\n'.format(newKey,line))
              
 def GenericPipe(r,components = ['pipe'],keyword='mediums',variables = ['p','T','h','d'],iGet=-1,fileName='returnValues.txt',writeToFile = False):
     resultsFull = {}
@@ -302,7 +311,10 @@ def TeeJunctionVolume(r,components = ['tee'],keyword='medium',variables = ['p','
 
 
 if __name__ == "__main__":
-    r = Reader('GenericModule3.mat','dymola')
+#    r = Reader('GenericModule3.mat','dymola')
+    r = Reader('SouthEast3.mat','dymola')
+    
+    prefix = 'PHS'
     
     components_GenericPipe = ['core.coolantSubchannel','hotLeg','coldLeg','STHX.tube','STHX.shell']
     components_SimpleVolume = ['inletPlenum','outletPlenum']
@@ -311,6 +323,19 @@ if __name__ == "__main__":
     components_ExpansionTank_1Port = ['pressurizer']
     components_TeeJunctionVolume = ['pressurizer_tee']
    
+    for i in xrange(len(components_GenericPipe)):
+        components_GenericPipe[i] = prefix + '.' + components_GenericPipe[i]
+    for i in xrange(len(components_SimpleVolume)):
+        components_SimpleVolume[i] = prefix + '.' + components_SimpleVolume[i]
+    for i in xrange(len(components_Cylinder_FD)):
+        components_Cylinder_FD[i] = prefix + '.' + components_Cylinder_FD[i]
+    for i in xrange(len(components_Conduction_2D)):
+        components_Conduction_2D[i] = prefix + '.' + components_Conduction_2D[i]
+    for i in xrange(len(components_ExpansionTank_1Port)):
+        components_ExpansionTank_1Port[i] = prefix + '.' + components_ExpansionTank_1Port[i]
+    for i in xrange(len(components_TeeJunctionVolume)):
+        components_TeeJunctionVolume[i] = prefix + '.' + components_TeeJunctionVolume[i]
+        
     results = {}
     results.update(GenericPipe(r,components_GenericPipe))
     results.update( SimpleVolume(r,components_SimpleVolume))
@@ -323,4 +348,4 @@ if __name__ == "__main__":
     components = components_GenericPipe + components_SimpleVolume + components_Cylinder_FD+components_Conduction_2D + components_ExpansionTank_1Port + components_TeeJunctionVolume
          
     writeValues(components,results)
-    writeValues_MOFormatted(components,results,fullName=True,classMo='final parameter',annotation='')
+    writeValues_MOFormatted(components,results,fullName=True,classMo='final parameter',annotation='',useRedefine=True,ignorePrefix=prefix)
