@@ -93,19 +93,29 @@ def cleanDataTime(r,varNames,tstart,tstop,nt=None):
     Clean time dependent data by removing duplicates and generating uniformly spaced data for data analysis
     varNames = list of variable names for use in Reader.values('NAME')
     
+    ** Note, if a variable is included that only has a start/stop value, the variable
+    will be filled for all time values with the start value
+    
     Returns dictionary of varNames with interpolated values including the time (data['time'])
     
     tstart is start of data to be returned
     tend is end of data to be returned
     nt is number of interpolated points to be returned
+    allowParam = True attempts to fill values with only a stop/start value with the same value for all time steps
     '''
     data = {}
     time = r.values(varNames[0])[0]
     t = removeRepeats(time)
-
+    
     for i, val in enumerate(varNames):
         yRaw = r.values(val)[1]
+
+        # Account for values with only a start/stop value
+        if np.size(r.values(val)) == 4:
+            yRaw = np.ones(len(time))*yRaw[0]
+
         y = removeRepeats((time,yRaw),0,True)
+            
         yint,tint = uniformData(t,y,tstart,tstop,nt)
         data[val] = yint
     data['time'] = tint  
@@ -116,19 +126,17 @@ if __name__ == "__main__":
     
     r = Reader('dsres.mat','dymola')
     
-    # Get all variables that are not within a model (i.e., do not have a '.')
     varNames_param_base=[]
     varNames_var_base=[]
     for i, val in enumerate(r.varNames()):
-        if not '.' in val:
-            if np.size(r.values(val)) == 4:
-                varNames_param_base.append(val)
-            else:      
-                varNames_var_base.append(val)
+        if np.size(r.values(val)) == 4:
+            varNames_param_base.append(val)
+        else:      
+            varNames_var_base.append(val)
                 
     varNames_param = varNames_param_base
     varNames_var = varNames_var_base
-    
+
     params = cleanDataParam(r,varNames_param)
     data = cleanDataTime(r,varNames_var,0,1,201)
     
