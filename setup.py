@@ -1,14 +1,16 @@
 import os
-from setuptools import setup
-# Python setup file.
-# See http://packages.python.org/an_example_pypi_project/setuptools.html
+import setuptools
 
+# Guides for making this file:
+# http://packages.python.org/an_example_pypi_project/setuptools.html
+# https://marthall.github.io/blog/how-to-package-a-python-app/
+# https://python-packaging.readthedocs.io/en/latest/minimal.html
 
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 
-setup(
+setuptools.setup(
     name="modelicapy",
     version="0.1",
     author="Scott Greenwood",
