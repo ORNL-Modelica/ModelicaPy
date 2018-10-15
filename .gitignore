@@ -3,3 +3,6 @@ Graphviz/DepMaster.gv
 Graphviz/DepMaster.png
 *.pyc
 Graphviz/Dependencies/
+build/
+dist/
+*.egg-info*
