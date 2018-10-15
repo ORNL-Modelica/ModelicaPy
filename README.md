@@ -1,5 +1,5 @@
 # ModelicaPy
-A Python library containing a variety of scripts and functions for interaction with Modelica.
+A Python package containing a variety of scripts and functions for interaction with Modelica and TRANSFORM.
 
 ## Authors
 
@@ -9,10 +9,26 @@ See also the list of [contributors](https://github.com/ORNL-Modelica/ModelicaPy/
 
 ## License
 
-This project is licensed under the UT-Battelle Open Source [License](LICENSE.md) (Permissive) - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the UT-Battelle Open Source [License](LICENSE.md) (Permissive)
 
 Copyright 2017, UT-Battelle, LLC
 
+## Installation and Use
+
+https://pypi.org/project/modelicapy/ - *pip version may be behind GitHub* 
+
+    pip install modelicapy
+
+	from modelicapy import cleanData as cln
+	
+**For updating your pip install to the latest GitHub version:**
+
+    pip install git+git://github.com/ORNL-Modelica/ModelicaPy@master
+	
+or
+
+    pip install --upgrade git+git://github.com/ORNL-Modelica/ModelicaPy@master
+	
 ## Brief Description of Files
 
 1. GraphViz - Generation of dependency graphs of a Modelica library.
