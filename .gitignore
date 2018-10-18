@@ -7,3 +7,4 @@ build/
 dist/
 *.egg-info*
 modelicapy/raven/pyfmi_raven/
+modelicapy/raven/out.log
