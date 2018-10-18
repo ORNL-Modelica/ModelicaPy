@@ -1,0 +1,8 @@
+fmuName = '../../../lorenzSystem.fmu'
+sigma = $RAVEN-sigma$
+beta = $RAVEN-beta$
+rho = $RAVEN-rho$
+time
+lorenzSystem.x
+lorenzSystem.y
+lorenzSystem.z

@@ -39,7 +39,7 @@ or
 6. cleanData.py - Returns data using a 'r=Reader' from buildingspy that has been cleaned of repeated values (i.e., due to events) and interpolates between values.
 7. getValues - Functions to return single values from components. Helpful for getting initial values. Includes Modelica formatted output. For use with TRANSFORM.
 8. createUnitScripts.py - autogenerate .mos files for use with buildingspy regression test.
-
+9. raven folder - contains an example of running FMU (via pyFMI) with [RAVEN](https://github.com/idaholab/raven)
 ## To Contribute...
 You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
 

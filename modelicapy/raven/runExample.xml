@@ -1,0 +1,217 @@
+<?xml version="1.0" ?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>lorenzExample</name>
+		<author>Scott Greenwood</author>
+		<created>2018-10-16</created>
+		<classesTested>PyFMI-RAVEN interface</classesTested>
+		<description>
+		   This file runs a parameter sweep for the Lorenz System Model in TRANSFORM through RAVEN using PyFMI.
+		</description>
+	</TestInfo>
+
+  
+	<RunInfo>
+		<JobName>StatisticalAnalysis</JobName>
+		<WorkingDir>pyfmi_raven</WorkingDir>
+		<Sequence>runSteps,createOutput</Sequence>
+		<batchSize>2</batchSize>
+	</RunInfo>
+
+
+	<Files>
+		<Input name="referenceInput" type="input">../referenceInput.txt</Input>
+	</Files>
+	
+	
+	<Models>
+		<Code name="testModel" subType="GenericCode">
+			<executable>
+			simulatePyFMI.py
+			</executable>
+			<clargs arg="python" type="prepend" />		
+			<clargs arg="" extension=".txt" type="input"/>
+			<clargs arg="" extension=".csv" type="output"/>
+		</Code>
+	</Models>
+  
+  
+	<VariableGroups>
+		<Group name="gInputs" >sigma,rho,beta</Group>
+		<Group name="gOutputs" >time,lorenzSystem.x,lorenzSystem.y,lorenzSystem.z</Group>
+	</VariableGroups>
+	
+	
+	<DataObjects>
+		<PointSet name="pointValues">
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
+		</PointSet>
+		
+		<HistorySet name="history">
+		  <Input>gInputs</Input>
+		  <Output>gOutputs</Output>
+		</HistorySet>
+	</DataObjects>
+	
+
+	<Distributions>
+		<Uniform name="dsigma">
+			<upperBound>20</upperBound>
+			<lowerBound>0</lowerBound>
+		</Uniform>
+
+		<Uniform name="drho">
+			<upperBound>56</upperBound>
+			<lowerBound>0</lowerBound>
+		</Uniform>
+		
+		<Uniform name="dbeta">
+			<upperBound>5.3333</upperBound>
+			<lowerBound>0</lowerBound> 
+		</Uniform>
+	</Distributions>
+
+
+	<Samplers>
+		<MonteCarlo name="monteCarlo">
+			<samplerInit>
+				<limit>27</limit>
+			</samplerInit>
+
+			<variable name="sigma">
+				<distribution>dsigma</distribution>
+			</variable>
+
+			<variable name="rho">
+				<distribution>drho</distribution>
+			</variable>
+			
+			<variable name="beta">
+				<distribution>dbeta</distribution>
+			</variable>
+		</MonteCarlo>
+		
+		<Grid name='simpleGrid'>
+			<variable name='sigma'>
+				<distribution>dsigma</distribution>
+				<grid type='value' construction='equal' steps='3' >0 20</grid>
+			</variable>
+			<variable name='rho'>
+				<distribution>drho</distribution>
+				<grid type='value' construction='equal' steps='3' >0 56</grid>
+			</variable>
+			<variable name='beta'>
+				<distribution>dbeta</distribution>
+				<grid type='value' construction='equal' steps='3' >0 5.3333</grid>
+			</variable>
+		</Grid>
+	</Samplers>
+
+	
+	<Steps>
+		<MultiRun name="runSteps">
+			<Input class="Files" type="input">referenceInput</Input>
+			<Model class="Models" type="Code">testModel</Model>
+			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
+			<!--<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>-->
+			<Output class="DataObjects" type="PointSet">pointValues</Output>
+			<Output class="DataObjects" type="HistorySet">history</Output>
+			<Output class="Databases" type='HDF5'>mc_out</Output>	
+		</MultiRun>
+
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">pointValues</Output>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+			<Output class="OutStreams" type="Plot">sampleSpace</Output>
+			
+		</IOStep>
+	</Steps>
+
+	
+	<Databases>
+		<HDF5 name="mc_out" readMode="overwrite"/>
+	</Databases>
+
+	
+	<OutStreams>
+		<Print name="pointValues">
+			<type>csv</type>
+			<source>pointValues</source>
+		</Print>
+		
+		<Print name="history">
+			<type>csv</type>
+			<source>history</source>
+		</Print>
+		
+		<Plot name="historyPlot" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<gridSpace>2 2</gridSpace>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|lorenzSystem.x</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>x</ylabel>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|lorenzSystem.y</y>
+					<gridLocation>
+						<x>1</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>y</ylabel>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|lorenzSystem.z</y>
+					<gridLocation>
+						<x>0 2</x>
+						<y>1</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>z</ylabel>
+				</plot>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+		
+		<Plot name="sampleSpace" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<plot>
+					<type>scatter</type>
+					<x>pointValues|Input|sigma</x>
+					<y>pointValues|Input|rho</y>
+					<z>pointValues|Input|beta</z>
+					<color>blue</color>
+				</plot>
+				<xlabel>sigma</xlabel>
+				<ylabel>rho</ylabel>
+				<zlabel>beta</zlabel>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+	</OutStreams>
+</Simulation>
