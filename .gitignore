@@ -6,3 +6,4 @@ Graphviz/Dependencies/
 build/
 dist/
 *.egg-info*
+modelicapy/raven/pyfmi_raven/
