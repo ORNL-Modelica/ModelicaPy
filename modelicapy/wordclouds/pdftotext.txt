@@ -1,0 +1,17 @@
+// package containng pdftotext
+sudo apt-get install poppler-utils
+
+//convert file
+pdftotext PDFFILE TXTFILE
+
+// convert multiple files
+find InternationalModelicaConference/ -maxdepth 1 -regex ".*\.txt" InternationalModelicaConference/1 - Copy.txt
+
+//clean non-printable characters
+tr -cd '\11\12\15\40-\176' < FILE > CLEANFILE
+
+// do all in one
+for f in original/*.pdf; do fb=`basename $f .pdf`; pdftotext original/$fb.pdf text/$fb.txt; tr -cd '\11\12\15\40-\176' < text/$fb.txt > textcleaned/$fb.txt; done
+
+//for testing
+for f in original/*.pdf; do fb=`basename $f .pdf`; echo $fb.pdf; done

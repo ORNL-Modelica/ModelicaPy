@@ -1,11 +1,9 @@
 # ModelicaPy
 A Python package containing a variety of scripts and functions for interaction with Modelica and TRANSFORM.
 
-## Authors
+## Contact
 
-* **Scott Greenwood**
-
-See also the list of [contributors](https://github.com/ORNL-Modelica/ModelicaPy/contributors) who participated in this project.
+Scott Greenwood
 
 ## License
 
@@ -23,15 +21,15 @@ https://pypi.org/project/modelicapy/ - *pip version may be behind GitHub*
 	
 **For updating your pip install to the latest GitHub version:**
 
-    pip install git+git://github.com/ORNL-Modelica/ModelicaPy@master
+    pip install git+git://ADDRESS@master
 	
 or
 
-    pip install --upgrade git+git://github.com/ORNL-Modelica/ModelicaPy@master
+    pip install --upgrade git+git://ADDRESS@master
 	
 ## Brief Description of Files
 
-1. GraphViz - Generation of dependency graphs of a Modelica library.
+1. GraphViz folder - Generation of dependency graphs of a Modelica library.
 2. parametric.py - Generate parametric sweeps for simulations.
 3. read_dslog.py - Create a summary of the dslog file (e.g., pass/fail, simulation time, etc.).
 4. gen_dsin.py - Generate new dsin.txt file from dsin.txt or dsfinal.txt with modified simulation and/or variable parameters.
@@ -40,7 +38,10 @@ or
 7. getValues - Functions to return single values from components. Helpful for getting initial values. Includes Modelica formatted output. For use with TRANSFORM.
 8. createUnitScripts.py - autogenerate .mos files for use with buildingspy regression test.
 9. raven folder - contains an example of running FMU (via pyFMI) with [RAVEN](https://github.com/idaholab/raven)
-## To Contribute...
-You may report any issues with using the [Issues](https://github.com/ORNL-Modelica/ModelicaPy/issues) button.
+10. wordclouds folder - example playing with the Modelica conference proceedings and wordcloud
+11. data_to_csv.py - example of extracting variables from .mat files and saving to a csv
 
-Contributions in the form of [Pull Requests](https://github.com/ORNL-Modelica/ModelicaPy/pulls) are always welcome.
+## To Contribute...
+You may report any issues with using the Issues button.
+
+Contributions in the form of Pull Requests are always welcome.
