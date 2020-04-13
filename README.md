@@ -39,7 +39,6 @@ or
 8. createUnitScripts.py - autogenerate .mos files for use with buildingspy regression test.
 9. raven folder - contains an example of running FMU (via pyFMI) with [RAVEN](https://github.com/idaholab/raven)
 10. wordclouds folder - example playing with the Modelica conference proceedings and wordcloud
-11. data_to_csv.py - example of extracting variables from .mat files and saving to a csv
 
 ## To Contribute...
 You may report any issues with using the Issues button.

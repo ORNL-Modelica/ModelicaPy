@@ -1,0 +1,2341 @@
+﻿@inproceedings{Nord,
+author = {Montañés, Rubén M. and Nord, Lars Olof},
+institution = {Department of Energy and Process Engineering, NTNU – Norwegian University of Science and Technology, Trondheim, Norway},
+institution = {Department of Energy and Process Engineering, NTNU – Norwegian University of Science and Technology, Trondheim, Norway},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {111-119},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Dynamic Simulations of the Post-combustion CO2 Capture System of a Combined Cycle Power Plant},
+year = {2017},
+issn = {1650-3740},
+keywords = {transient
+carbon capture
+gas liquid contactors
+operational flexibility
+chemical absorption},
+abstract = {Dynamic process models of the capture unit of a 600 MW combined cycle power plant with post-combustion CO2 capture were developed in the Modelica language. The process models were utilized to understand the transient response of the capture unit when the plant was initially operated at steady-state conditions at different power plant’s loads. Simulations to characterize the open-loop response of main process variables of the process to step-change disturbances in flue gas mass flow rate, solvent circulation mass flow rate and reboiler duty were performed. It was found that the plant was slower when operated at lower loads, i.e., it required longer total stabilization times for the most relevant variables of the process. Simulations revealed that the PCC unit responded significantly faster to an increase in exhaust gas mass flow rate than to a reduction in exhaust gas mas flow rate.}
+}
+@inproceedings{Schichl,
+author = {Baharev, Ali and Neumaier, Arnold and Schichl, Hermann},
+institution = {Faculty of Mathematics, University of Vienna, Oskar-Morgenstern-Platz 1, 1090 Vienna, Austria},
+institution = {Faculty of Mathematics, University of Vienna, Oskar-Morgenstern-Platz 1, 1090 Vienna, Austria},
+institution = {Faculty of Mathematics, University of Vienna, Oskar-Morgenstern-Platz 1, 1090 Vienna, Austria},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {353-362},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Failure Modes of Tearing and a Novel Robust Approach},
+year = {2017},
+issn = {1650-3740},
+keywords = {decomposition methods
+diakoptics
+large-scale systems of equations
+numerical instability
+sparse matrices
+staircase sampling},
+abstract = {State-of-the-art Modelica implementations may fail in various ways when 
+tearing is turned on: Completely incorrect results are returned without 
+a warning, or the software fails with an obscure error message, or it 
+hangs for several minutes although the problem is solvable in 
+milliseconds without tearing. We give three detailed examples and an 
+in-depth discussion why such failures are inherent in tearing and cannot 
+be fixed within the traditional approach.
+
+Without compromising the advantages of tearing, these issues are 
+resolved for the first time with staircase sampling. This is a 
+non-tearing method capable of robustly finding all well-separated 
+solutions of sparse systems of nonlinear equations without any initial 
+guesses. Its robustness is demonstrated on the steady-state simulation 
+of a particularly challenging distillation column. This column has three 
+solutions, one of which is missed by most methods, including 
+problem-specific tearing methods. All three solutions are found with 
+staircase sampling.}
+}
+@inproceedings{Šilar,
+author = {Kofránek, Jirí and Kulhánek, Tomáš and Mateják, MareK and Ježek, Filip and Šilar, Jan},
+institution = {Department of Pathophysiology, 1st Faculty of Medicine, Charles University, Prague, Czech Republic},
+institution = {Department of Pathophysiology, 1st Faculty of Medicine, Charles University, Prague, Czech Republic},
+institution = {Department of Pathophysiology, 1st Faculty of Medicine, Charles University, Prague, Czech Republic},
+institution = {Department of Pathophysiology, 1st Faculty of Medicine, Charles University, Prague, Czech Republic},
+institution = {Department of Pathophysiology, 1st Faculty of Medicine, Charles University, Prague, Czech Republic},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {589-603},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Integrative physiology in Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Simulation
+Physiology
+Integrative models},
+abstract = {The integrative model of human physiology connects individual physiological subsystems into a single unit. They are very large (contain thousands of variables) and represent a formalized description of interconnected physiological regulations. The issue of formalization of physiological systems became part of a series of international projects (e.g. the worldwide program "PHYSIOME", or the European program "VIRTUAL PHYSIOLOGICAL HUMAN"). The development of large-scale models of human physiology was facilitated by a new generation (i.e. equation-based) simulation environment, especially by Modelica language. These models can be used to explain the causal relations of the pathogenesis of many diseases, they can be applied in the evaluation of clinical trials and they can also be used in the core of sophisticated medical simulators.}
+}
+@inproceedings{Ritter,
+author = {Müller, Reiko and Ritter, Markus},
+institution = {DLR, Institute of System Dynamics and Control, Oberpfaffenhofen, Germany},
+institution = {DLR, Institute of Aeroelasticity, Göttingen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {921-928},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Virtual flight testing of a controller for gust load alleviation using FMI for cosimulation},
+year = {2017},
+issn = {1650-3740},
+keywords = {Virtual flight testing
+Flight control design
+Gust load alleviation
+FMI cosimulation
+Fluid-structure coupled simulation},
+abstract = {During aircraft design and certification, one of the most vital development tasks is the calculation of loads and stresses, subsequent structural sizing and iterative mutual adaptation with respect to the aircraft’s systems. In an effort to build up a so called virtual flight testing capability in the DLR-wide project Digital-X (2012 - 2016), a simulation of a flexible aircraft model coupled with CFD based aerodynamics and a flight control system with included Gust Load Alleviation (GLA) was developed and subjected to a certification relevant gust encounter scenario. Due to the diversity of modeling and simulation tools present in the DLR, the Functional Mockup Interface (FMI) 2.0 model interfacing standard has been successfully employed to cosimulate the control system inside the enclosing simulation framework.}
+}
+@inproceedings{Reichl,
+author = {Emhofer, Johann and Zitzenbacher, Raimund and Reichl, Christoph},
+institution = {Center for Energy, AIT Austrian Institute of Technology, Giefinggass 2, 1210 Wien, Austria},
+institution = {Center for Energy, AIT Austrian Institute of Technology, Giefinggass 2, 1210 Wien, Austria},
+institution = {Center for Energy, AIT Austrian Institute of Technology, Giefinggass 2, 1210 Wien, Austria},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {605-612},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Sound Source Extension Library for Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {sound
+noise
+noise reduction
+acoustics
+heat pump},
+abstract = {Transient thermodynamic models in Modelica are widely
+used for energetic simulations of machines and systems
+which are located nearby people. Nevertheless, so far no
+libraries exist which consider the noise of such machines
+in the simulations. The Sound Source Extension library
+(SSElib) proposed in this work, should close this gap.
+With the aid of the SSElib, acoustic characteristics can be
+added to existing Modelica models (e.g. to a compressor
+model). The acoustic characteristic added to the existing
+model is frequency dependent in the one-octave band and
+could be further depend on an input parameter like the
+rotational speed of a compressor. With the inclusion of
+sound sources into energetic models, the sound behavior
+of machines can be considered and control strategies can
+be optimized to lower the noise of machines.}
+}
+@inproceedings{Abel,
+author = {Gesenhues, Jonas and Hein, Marc and Ketelhut, Maike and Albin, Thivaharan and Abel, Dirk},
+institution = {Institute of Automatic Control, RWTH Aachen University, Germany},
+institution = {Department of Anesthesiology, RWTH Aachen University Hospital, Germany},
+institution = {Institute of Automatic Control, RWTH Aachen University, Germany},
+institution = {Institute of Automatic Control, RWTH Aachen University, Germany},
+institution = {Institute of Automatic Control, RWTH Aachen University, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {613-621},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Towards Medical Cyber-Physical Systems: Modelica and FMI based Online Parameter Identification of the Cardiovascular System},
+year = {2017},
+issn = {1650-3740},
+keywords = {Parameter Identification
+Moving Horizon
+FMI Standard
+ModeliChart
+JModelica.org
+CasADi
+Cardiovascular
+Medical},
+abstract = {This paper presents a concept for online parameter identification intended to be used within cardiovascular research labs and hospitals of the future featuring a data network of medical sensors. It is based on iterative nonlinear optimization using a moving horizon scheme and object-oriented Modelica models. Special FMUs have been developed to interface the optimization module and the sensor hardware. The concept is demonstrated on an exemplary application of identifying the parameters of a model for the systemic circulation. Unlike classical online parameter identification methods, this concept allows for quickly implementing changes of the underlying model.}
+}
+@inproceedings{Grether,
+author = {Heckmann, Andreas and Grether, Gustav},
+institution = {Institute of System Dynamics and Control, German Aerospace Center (DLR), Germany},
+institution = {Institute of System Dynamics and Control, German Aerospace Center (DLR), Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {623-631},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {The DLR RailwayDynamics Library: the Crosswind Stability Problem},
+year = {2017},
+issn = {1650-3740},
+keywords = {vehicle dynamics
+aerodynamics
+railway vehicles
+crosswind stability
+aerodynmaicc admittance
+stochastic analysis},
+abstract = {High crosswinds affect the stability of railway vehicles, in particular if they run on very high speed to reduce traveling time, if they are configured as double-deck cars to increase the number of passenger seats and if they use light-weight design in order to reduce life-cycle costs. This is why crosswind stability is an active field of research within the project Next Generation Train. However, this field relies on the cooperation of two different domains, namely aerodynamics and vehicle dynamics. With this background a crosswind stability tool was implemented in Modelica as a part of the DLR RailwayDynamics Library. This tool gathers data from scaled wind tunnel measurements and multibody data on the railway vehicle in order to rapidly analyze and assess the risk of overturning due to high crosswinds. To a large extent the tool is oriented towards the associated homologation rules and standards. However, the tool is as well supposed to support future advancements of these standards by providing capabilities for the stochastic analysis of the crosswind stability problem.}
+}
+@inproceedings{Thomas,
+author = {Leimeister, Mareike and Thomas, Philipp},
+institution = {Fraunhofer Institute for Wind Energy and Energy System Technology IWES Northwest, Germany},
+institution = {Fraunhofer Institute for Wind Energy and Energy System Technology IWES Northwest, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {633-642},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {The OneWind Modelica Library for Floating Offshore Wind Turbine Simulations with Flexible Structures},
+year = {2017},
+issn = {1650-3740},
+keywords = {offshore wind energy
+floating platforms
+Euler-Bernoulli beam elements
+fully coupled aero-hydroservo-elastic simulation
+OneWind Modelica Library
+MultiBody},
+abstract = {Floating offshore wind turbines are getting more and more into the focus of interest, as industries aim for larger turbines and deeper water areas. Fully coupled analyses of those highly complex systems are challenging. In this paper, the hierarchical programming structure in Modelica is used to model a fully flexible floating wind turbine system. The single components, as well as special difficulties that have to be dealt with during modeling are addressed. On basis of a reference floating offshore wind turbine, the implemented fully flexible model is compared with its rigid equivalent, as well as results from code-to-code comparisons of free-decay simulations. In addition, further applications of the created model are shown.}
+}
+@inproceedings{Aoyama,
+author = {Trentelman, Thom and Sutherland, Joshua and Oizumi, Kazuya and Aoyama, Kazuhiro},
+institution = {Maritime Engineering, Delft University of Technology, The Netherlands},
+institution = {Systems Innovation, University of Tokyo, Japan},
+institution = {Systems Innovation, University of Tokyo, Japan},
+institution = {Systems Innovation, University of Tokyo, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {643-652},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelica Based Naval Architecture Library for Small Autonomous Boat Design},
+year = {2017},
+issn = {1650-3740},
+keywords = {early stage ship design
+model based design
+object-orientated
+innovative naval architecture},
+abstract = {This paper describes a method for early stage boat design by creating and utilizing a library of naval architecture based boat components in Modelica. The method involves the construction of stand-alone boat components which can be assembled into a simulation model. Structuring the model into multiple system levels provides a clear overview. Utilizing the partial-complete methodology ensures that all system levels are replaceable within the simulation. This allows the user to construct many different boat models and experiment with unconventional or innovative designs. By comparing the performance and behaviour of different assemblies of components the most ideal design for a given purpose can be found and used as a starting point for the in-depth design process. By organizing the components in a library they can be re-used in future projects as well. It is noted that when additional libraries are utilized the effectiveness of this design method increases significantly. As the availability of component models increases, users can save time on the physical design and modelling of the individual components and instead focus on assembling working simulation models right from the beginning. To illustrate this, the construction of a few simple boat components is described in this paper. These components are then combined to simulate multiple concept designs.}
+}
+@inproceedings{Härdin,
+author = {Lacoursière, Claude and Härdin, Tomas},
+institution = {HPC2N/UMIT, Umeå University, SE-901 87, Umeå, Sweden},
+institution = {HPC2N/UMIT, Umeå University, SE-901 87, Umeå, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {653-662},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {FMI Go! A simulation runtime environment with a client server   architecture over multiple protocols},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+co-simulation
+model exchange
+cosimulation
+runtime environment
+numerical time integration
+client server architecture
+parallel computing},
+abstract = {We present a software infrastructure to perform distributed simulations
+  with Functional Mockup Interface (FMI) compatible components.
+  Distribution is achieved done by mapping the FMI API to a communication
+  protocol with current support for both TCP/IP and MPI.  This is a
+  client-server architecture where the client is the global simulation
+  stepper and the servers are the simulation modules.  The client contains
+  several time stepping algorithms, root finding for cases involving loops,
+  and support for asynchronous data exchange with ``monitors&#8217;&#8217; and
+  ``observers&#8217;&#8217; which only consume data.  The servers provide support for
+  numerical directional derivatives, filtering, and interpolation.
+  Extensive support is provided for the System Specification and
+  Parameterization (SSP), an emerging standard aimed at supporting the FMI.
+
+  The software is open source with a permissive license and designed to be
+  used inside simulation environments and platforms with user interfaces.
+  The focus being strictly on the mathematical and runtime aspect of FMI
+  based simulations.}
+}
+@inproceedings{Kremers,
+author = {Galtier, Virginie and Ianotto, Michel and Caujolle, Mathieu and Corniglion, Rémi and Tavella, Jean-Philippe and Évora Gómez, José and Hernández Cabrera, José Juan and Reinbold, Vincent and Kremers, Enrique},
+institution = {CentraleSupélec, France},
+institution = {CentraleSupélec, France},
+institution = {EDF R&D, France},
+institution = {EDF R&D, France},
+institution = {EDF R&D, France},
+institution = {SIANI, Spain},
+institution = {SIANI, Spain},
+institution = {University of Leuven, Belgium},
+institution = {EIFER, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {663-671},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Building Parallel FMUs (or Matryoshka Co-Simulations)},
+year = {2017},
+issn = {1650-3740},
+keywords = {co-simulation tool
+multi-threaded execution
+master algorithm
+FMU
+FMI standard},
+abstract = {The development of complex multi-domain and multi-physic systems, such as Smart Electric Grids, have given rise to new challenges in the simulation domain. These challenges concern the capability to  couple multiple domain specific simulators, and the FMI standard is an answer to this. But they also concern the scalability and the accuracy of the simulation within an heterogenous system. We propose and implement here the concept of a Matryoshka FMU, i.e.~a first of its kind FMU that encapsulates DACCOSIM -- our distributed and parallel master architecture -- and several FMUs it controls. The Matryoshka automatically adapts its internal time steps to ensure the required accuracy while it is controlled by an external FMU-compliant simulator. We present the JavaFMI tools and the DACCOSIM middleware used in the automatic building process of such Matryoshka FMUs.~This approach is then applied on a real-life Distributed Energy System scenario. In regards of the Modelica system simulated  in Dymola, improvements up to 250% in terms of computational performance are achieved while preserving the simulation accuracy and enhancing its integration capability.}
+}
+@inproceedings{Reinbold,
+author = {Vialle, Stephane and Tavella, Jean-Philippe and Dad, Cherifa and Corniglion, Remi and Caujolle, Mathieu and Reinbold, Vincent},
+institution = {UMI 2958 - GT-CNRS, CentraleSupelec, Université Paris-Saclay, 57070 Metz, France / LRI - UMR 8623, 91190 Gif-sur-Yvette, France},
+institution = {EDF Lab Saclay, 91120 Palaiseau, France},
+institution = {UMI 2958 - GT-CNRS, CentraleSupelec, Université Paris-Saclay, 57070 Metz, France},
+institution = {EDF Lab Saclay, 91120 Palaiseau, France},
+institution = {EDF Lab Saclay, 91120 Palaiseau, France},
+institution = {University of Leuven, Department of Civil Engineering, 3001 Leuven, Belgium},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {673-682},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Scaling FMI-CS Based Multi-Simulation Beyond Thousand FMUs on Infiniband Cluster},
+year = {2017},
+issn = {1650-3740},
+keywords = {Multi-Simulation
+FMI
+Scaling
+Multi-core
+PC Cluster},
+abstract = {In recent years, co-simulation has become an increasingly industrial tool to simulate Cyber Physical Systems including multi-physics and control, like smart electric grids, since it allows to involve different modeling tools within the same temporal simulation. The challenge now is to integrate in a single calculation scheme very numerous and intensely inter-connected models, and to do it without any loss in model accuracy. This will avoid neglecting fine phenomena or moving away from the basic principle of equation-based modeling.
+
+Offering both a large number of computing cores and a large amount of distributed memory, multi-core PC clusters can address this key issue in order to achieve huge multi-simulations in acceptable time. This paper introduces all our efforts to parallelize and distribute our co-simulation environment based on the FMI for Co-Simulation standard (FMI-CS). At the end of 2016 we succeeded to scale beyond 1000 FMUs and 1000 computing cores on different PC-clusters, including the most recent HPC Infiniband-cluster available at EDF.}
+}
+@inproceedings{Schmitz,
+author = {Marx-Schubach, Thomas and Schmitz, Gerhard},
+institution = {Institute of Engineering Thermodynamics, Hamburg University of Technology, Germany},
+institution = {Institute of Engineering Thermodynamics, Hamburg University of Technology, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {121-130},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Optimizing the start-up process of post-combustion capture plants by varying the solvent flow rate},
+year = {2017},
+issn = {1650-3740},
+keywords = {optimization
+start-up
+absorption process
+carbon capture
+process engineering
+energy systems},
+abstract = {This paper presents an optimization of the start-up process of a post-combustion carbon capture plant (PCC-plant) by varying the solvent flow rate. In a first optimization run the start-up time is minimized. In a second optimization run the overall carbon capture rate during the start-up process is maximized. The results show the great potential of the optimization, as the start-up time can be reduced from t=4650 seconds in the reference case to t=2840 seconds in the optimized scenario.}
+}
+@inproceedings{Velut,
+author = {Schweiger, Gerald and Runvik, Håkan and Magnusson, Fredrik and Larsson, Per-Ola and Velut, Stéphane},
+institution = {AEE INTEC, 8200 Gleisdorf, Austria},
+institution = {Modelon AB, SE-223 70 Lund, Sweden},
+institution = {Lund University, SE-221 00 Lund, Sweden / Modelon AB, SE-223 70 Lund, Sweden},
+institution = {Modelon AB, SE-223 70 Lund, Sweden},
+institution = {Modelon AB, SE-223 70 Lund, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {131-139},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Framework for dynamic optimization of district heating systems using Optimica Compiler Toolkit},
+year = {2017},
+issn = {1650-3740},
+keywords = {district heating
+dynamic optimization
+symbolic elimination},
+abstract = {Recent studies show that district heating infrastructures should play an important role in future sustainable energy systems. Tools for dynamic optimization are required to increase the efficiency of existing systems and design new ones. This paper presents a novel framework to represent, simplify, simulate and optimize district heating systems. The framework is implemented in Python and is based on Optimica Compiler Toolkit as well as Modelon&#8217;s Thermal Power Library. The high-level description of optimization problems using Optimica allows flexible optimization formulations including constraints on physically relevant variables such as supply temperature, flow rate and pressures. The benefit of new algorithms for symbolic elimination in Optimica Compiler Toolkit is also investigated. The framework is applied on a test case, which is based on a planned city district located in Graz, Austria. The results demonstrate the generality of the representation as well as the accuracy of the simplification for dynamic optimization of temperature supply and pressure control.}
+}
+@inproceedings{Vallée,
+author = {Giraud, Loïc and Merabet, Massinissa and Baviere, Roland and Vallée, Mathieu},
+institution = {Univ. Grenoble Alpes, INES, F-73375 Le Bourget du Lac, France},
+institution = {Univ. Grenoble Alpes, INES, F-73375 Le Bourget du Lac, France},
+institution = {CEA, LITEN, 17, Rue des Martyrs, F-38054 Grenoble, France},
+institution = {Univ. Grenoble Alpes, INES, F-73375 Le Bourget du Lac, France},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {141-150},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Optimal Control of District Heating Systems using Dynamic Simulation and Mixed Integer Linear Programming},
+year = {2017},
+issn = {1650-3740},
+keywords = {District Heating
+Model Predictive Control
+Dynamic Simulation
+Mixed Integer Linear Programming},
+abstract = {This paper presents the development of a new advanced control method suitable for variable temperature District Heating Systems (DHS). The proposed controller determines optimal planning for the on/off status and power of the heat generators as well as for the supply temperature and differential pressure at the production plant level. Compared to existing methods, the original features of the developed solution are to fully exploit the thermal storage capacity of the network and to determine the best compromise between pumping costs and heat losses. A numerical case study based on a representative DHS is used to evaluate the method over a heating season (5 months). Results show that our method reduces production costs up to 8.3 % when compared to a more classical controller. Moreover, the observed computational costs are compatible with the requirements of the receding time horizon principle, ensuring that the method is tractable on real DHS.}
+}
+@inproceedings{Zimmer,
+author = {Pollok, Alexander and Bender, Daniel and Kerling, Ines and Zimmer, Dirk},
+institution = {nstitute of System Dynamics and Control, DLR German Aerospace Center, Wessling, Germany / Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milan, Italy},
+institution = {nstitute of System Dynamics and Control, DLR German Aerospace Center, Wessling, Germany},
+institution = {nstitute of System Dynamics and Control, DLR German Aerospace Center, Wessling, Germany},
+institution = {nstitute of System Dynamics and Control, DLR German Aerospace Center, Wessling, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {151-159},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Rapid development of an aircraft cabin temperature regulation concept},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+energy
+exergy
+control
+modelling},
+abstract = {The air in aircraft cabins is controlled for pressure, temperature and humidity. The number of temperature zones is generally kept low, for reasons of necessary ducting space. We devise a new ducting concept, which enables a large number of temperature zones. Controllability of the system is however predicted to be a potential obstacle.
+For a quick resolution of this question, a Modelica model is created.
+Model creation is focused on a short development time as well as usefulness for controller synthesis. A workflow is presented that enables a quick iteration time between controller synthesis in Matlab and controller testing in a Modelica environment. Finally, the impact of this new concept on the energy consumption of the air generation unit is discussed.}
+}
+@inproceedings{Nytsch-Geusen,
+author = {Majetta, Kristin and Clauss, Christoph and Nytsch-Geusen, Christoph},
+institution = {Fraunhofer IIS EAS, Dresden, Germany},
+institution = {Fraunhofer IIS EAS, Dresden, Germany},
+institution = {Fachgebiet für Versorgungsplanung und Versorgungstechnik, Berlin University of the Arts, Berlin, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {161-169},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Investigation of the Influence of Controller Approaches on Room Thermal Behaviour  A Simulation Study},
+year = {2017},
+issn = {1650-3740},
+keywords = {Building Simulation
+Controller
+Room Thermal Behavior
+Optimization},
+abstract = {To control the room temperature normally special developed and adapted controllers are used. This development is both time-consuming and expensive. Therefore, this paper shows the first steps to achieve the goal of developing a methodology to provide rules and guidelines for typical use cases of those controllers with regard to given rooms and their installed HVAC technology. Thereby it should be possible to choose suitable controllers for a wide range of rooms without the necessity of an expensive development process. To achieve this goal a simulation study will be performed. This paper presents first steps of this investigation. This includes the choice development of four different, representative room models as well as five controller models of important controller types. Simulations of well defined scenarios analyze the eligibility of the controller models regarding net energy consumption and comfort. First optimization results to improve the quality of the controllers are shown and further steps are explained.}
+}
+@inproceedings{Batteh,
+author = {Stellato, Massimo and Bergianti, Luca and Batteh, John},
+institution = {Dallara Engineering, Italy},
+institution = {Dallara Engineering, Italy},
+institution = {Modelon Inc., Ann Arbor, Michigan USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {171-180},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Powertrain and Thermal System Simulation Models of a High Performance Electric Road Vehicle},
+year = {2017},
+issn = {1650-3740},
+keywords = {electric vehicle
+thermal system
+powertrain
+battery
+range
+derating},
+abstract = {Performance and range optimization of electric vehicles are challenging targets in the design of contemporary automobiles. This paper illustrates that key factors in achieving these targets are the thermal system and the development of the related control logic. Both subjects benefit from the support of modeling and simulation. The paper describes our approach applied to a real case study.
+The activity is the result of cooperation between Dallara, responsible for the case study, and Modelon, developers of the libraries used to build the simulation model.}
+}
+@inproceedings{Dempsey,
+author = {Gallarotti, Maura and Picarelli, Alessandro and Dempsey, Mike},
+institution = {Claytex Services Ltd., Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+institution = {Claytex Services Ltd., Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+institution = {Claytex Services Ltd., Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {181-187},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Investigating the Effect of a Sonic Restrictor in the Intake of an Engine},
+year = {2017},
+issn = {1650-3740},
+keywords = {sonic restrictor
+choked flow
+engine
+MVEM
+intake manifold},
+abstract = {The air induction system is one of the engine subsystems that most influences fuel efficiency and power generation, especially in restricted race engine applications.
+In this paper, the quasi-1D model of a sonic restrictor is presented, together with its integration in an engine model, in order to investigate the behaviour of the engine power and torque when the choked condition is reached. 
+The study shows how power and torque curves are affected when a sonic restrictor is installed within the intake system and outlines the need of detailed simulations in a restricted engine development process, to avoid steep engine power reductions at high speeds.}
+}
+@inproceedings{Avila,
+author = {Galindo, Eduardo and Soler, Rodolfo and Picarelli, Alessandro and Avila, Victor},
+institution = {AVL IBERICA SA - VALLADOLID, Spain},
+institution = {AVL IBERICA SA - VALLADOLID, Spain},
+institution = {Claytex Services Ltd. - Leamington Spa, UK},
+institution = {Claytex Services Ltd. - Leamington Spa, UK},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {189-197},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Engine thermal shock testing prediction through coolant and lubricant cycling in Dymola},
+year = {2017},
+issn = {1650-3740},
+keywords = {Engine testing
+thermal-shock
+control system development},
+abstract = {In this work, an acausal multi-domain physical system model is used to study the interaction between an internal combustion engine operation and a range of cooling and lubrication system thermal cycling scenarios. Although the model can be used for modelling a wide range of scenarios, this paper concentrates on the application of engine thermal shock test dynamics prediction through coolant and lubricant cycling. An internal combustion engine is load-controlled on a dynamometer. Coolant and lubricant temperature transients are imposed on the engine system. Using freely available and commercial Modelica Libraries within the Dymola environment, the systems integration of the coolant rigs, lubricant rigs and engine is achieved. The rigs and the controllers are validated against test data to create predictive models of such systems for test virtualisation. This allows the user to develop and define control strategies for the tests from desktop, prior to engaging in laboratory tests.}
+}
+@inproceedings{Bachmann,
+author = {Braun, Willi and Kulshreshtha, Kshitij and Franke, Rüdiger and Walther, Andrea and Bachmann, Bernhard},
+institution = {FH Bielefeld University of Applied Science, Germany},
+institution = {Universität Paderborn, Germany},
+institution = {ABB AG, Mannheim, Germany},
+institution = {Universität Paderborn, Germany},
+institution = {FH Bielefeld University of Applied Science, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {363-366},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Towards Adjoint and Directional Derivatives in FMI utilizing ADOL-C within OpenModelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {OpenModelica
+ADOL-C
+Derivatives
+Jacobian},
+abstract = {Algorithmic differentiation has proven to be an efficient method for
+evaluating derivative information for implementations of mathematical
+functions. In the context of the Functional Mockup Interface (FMI)
+the reverse mode of algorithmic differentiation shows immense promise.
+
+FMI is increasingly used for model-based applications, such as parameter
+estimation or optimal control. The paper motivates the exploitation of
+algorithmic differentiation and proposes an extension of FMI for the
+evaluation of adjoint directional derivatives.
+
+Attempts to interface algorithmic differentiation libraries with Modelica
+tools have been made. Instead of generating code for the target language
+which is instrumented with algorithmic differentiation library API and then
+compiled, in this new approach the intermediate representation used by the
+library is generated directly. This avoids compilation of the target language that often
+takes a large fraction of the overall simulation time.
+It also avoids model execution in order to create such an internal
+representation at runtime. The initial results are presented here.}
+}
+@inproceedings{Kofránek,
+author = {Šilar, Jan and Ježek, Filip and Kofránek, Jirí},
+institution = {Institute of Pathological physiology, First Faculty of Medicine, Charles University, Prague, Czech republic},
+institution = {Department of Cybernetics, Faculty of Electrical Engineering, Czech Technical University in Prague, Czech Republic},
+institution = {Institute of Pathological physiology, First Faculty of Medicine, Charles University, Prague, Czech republic},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {367-372},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {PDEModelica and Breathing in an Avalanche},
+year = {2017},
+issn = {1650-3740},
+keywords = {PDEModelica
+PDE
+avalanche survival},
+abstract = {This paper presents a Modelica language extension for partial differential equations (PDE) called PDEModelica. Support for this extension is implemented in OpenModelica. This support is limited to 1-dimensional problems and the first and second partial derivatives. PDEModelica is introduced by a string equation model and later by a real life model of respiration during a snow burial. This model describes CO2 advection and diffusion in snow described by advection-diffusion PDE.}
+}
+@inproceedings{Tahirovic,
+author = {Kuric, Muhamed and Osmic, Nedim and Tahirovic, Adnan},
+institution = {Department of Automatic Control and Electronics, Faculty of Electrical Engineering, University of Sarajevo, Zmaja od Bosne bb, 71000 Sarajevo, Bosnia and Herzegovina},
+institution = {Department of Automatic Control and Electronics, Faculty of Electrical Engineering, University of Sarajevo, Zmaja od Bosne bb, 71000 Sarajevo, Bosnia and Herzegovina},
+institution = {Department of Automatic Control and Electronics, Faculty of Electrical Engineering, University of Sarajevo, Zmaja od Bosne bb, 71000 Sarajevo, Bosnia and Herzegovina},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {373-380},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Multirotor Aerial Vehicle modeling in Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Multirotor Aerial Vehicle
+Modeling
+Modelica},
+abstract = {This paper presents a generalized multirotor aerial vehicle (MAV) modeling framework which includes rigid body dynamics, gyroscopic effects and motor dynamics. We illustrate how this model can be used to derive any MAV platform constructed with an arbitrary number of rotors by using the quadrotor case as an example. Based on this result, we design the first Modelica-based MAV simulator. We validate the proposed design by using a simple altitude and attitude stabilization control system through a Modelica simulation setup.}
+}
+@inproceedings{Kawai,
+author = {Ishibashi, Tatsuro and Han, Bing and Kawai, Tadao},
+institution = {Meidensha Corporation, Japan},
+institution = {Department of Mechanical & Physical Engineering, Osaka City University, Japan},
+institution = {Department of Mechanical & Physical Engineering, Osaka City University, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {381-387},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Rotating Machinery Library for Diagnosis},
+year = {2017},
+issn = {1650-3740},
+keywords = {Rotating Machinery
+Vibration
+Diagnosis},
+abstract = {This paper presents our new rotating machinery library. Diagnosing the complex system accurately based on stochastic method requires an enormous amount of data, both with and without faults. Acquiring operation data with all kinds of faults for each components is very hard and costly. To generate data for rotating machinery diagnosis, we developed rotating machinery library using Modelica. It provides the basic components such as rotor, shaft, bearing, coupling, housing and support. Its component models are implemented on basis of rotor dynamics theory. This library makes it possible accessing rotating machinery operation data with various faults such as unbalanced rotor, shaft bending and ball bearing faults. To validate our models, we compared both Modelica simulation and experiment with a rotor kit as a test case.}
+}
+@inproceedings{Köckeis,
+author = {Schneider, Michael and Haumer, Anton and Köckeis, Rupert},
+institution = {Faculty of Electrical Engineering and Information Technology , OTH Regensburg, 93053 Regensburg, Germany},
+institution = {Faculty of Electrical Engineering and Information Technology , OTH Regensburg, 93053 Regensburg, Germany},
+institution = {Department of Electrical Engineering, MAX STREICHER GmbH & Co. KG aA , 94469 Deggendorf, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {389-395},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelling and Simulation of the passive Structure of a 5-Axis-Milling Machine with rigid and flexible bodies for evaluating the static and dynamic behaviour},
+year = {2017},
+issn = {1650-3740},
+keywords = {milling machine
+flexible body
+multibody system
+clay modelling},
+abstract = {Most of the mechanical simulations for industrial usage are done by finite element (FE-) analysis. Milling machines are mechatronic systems, combining electrical, mechanical and control components for machining certain materials. Modelica provides a powerful and strong tool to simulate different physical ares in one model. For this usage a mechanical model of a 5-Axis-Milling Machine is implemented with rigid and flexible bodies. Specific attention will be paid to which components can be modelled rigid without significant deviation in accordance to the real behaviour of the machine. Two classes of implementing flexible bodies in multi body systems are given by the flexible bodies Library, advantages and disadvantages of both classes will be evaluated. At the end a comparision of the static and dynamic behaviour of the passive structure of the model in contrast to a FE-analysis is given.}
+}
+@inproceedings{Qi,
+author = {Lefeng, Sun and Jian, Jin and Liping, Chen and Wei, Liu and Lei, Huang and Fanli, Zhou and Qi, Liu},
+institution = {China Academy of Space Technology, Beijing, China},
+institution = {China Academy of Space Technology, Beijing, China},
+institution = {Suzhou Tongyuan Software & Control Technology Co., Suzhou, China},
+institution = {Suzhou Tongyuan Software & Control Technology Co., Suzhou, China},
+institution = {Suzhou Tongyuan Software & Control Technology Co., Suzhou, China},
+institution = {Suzhou Tongyuan Software & Control Technology Co., Suzhou, China},
+institution = {Suzhou Tongyuan Software & Control Technology Co., Suzhou, China},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {397-405},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling and Simulation on Environmental and Thermal Control System of Manned Spacecraft},
+year = {2017},
+issn = {1650-3740},
+keywords = {manned spacecraft
+Modelica
+MWorks
+tempera-ture/humidity control
+carbon dioxide removal
+oxygen pressure control},
+abstract = {In order to support crew resides, key air environ-ment parameters of manned spacecraft should be controlled within index range by environmental and thermal control system. In this paper a model of manned spacecraft environmental and thermal control system in Modelica language is developed. Using this simulation model, we analyze air envi-ronment parameters varying trend as the crew metabolic level variation. The results show that crew metabolic level could influence air envi-ronment parameters dramatically. Furthermore, air environment parameters should be analyzed comprehensively due to important affection of air temperature to oxygen partial pressure, carbon dioxide partial pressure and relative humidity. The work in this paper is helpful to provide a new method for analysis of environmental and thermal control system of manned spacecraft.}
+}
+@inproceedings{Bouskela,
+author = {Hefni Baligh, El and Bouskela, Daniel},
+institution = {EDF R&D STEP, Electricité de France, France},
+institution = {EDF R&D STEP, Electricité de France, France},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {407-414},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling and simulation of complex ThermoSysPro model with OpenModelica - Dynamic Modeling of a combined cycle power plant},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+OpenModelica
+ThermoSysPro
+Thermal-hydraulics
+Combined cycle power plant
+Dynamic modeling
+Inverse problems},
+abstract = {ThermoSysPro (TSP) is a generic library for the modeling and simulation of power plants and other kinds of energy systems. TSP library is developed by EDF and released under open source license. The library features multi-domain modeling such as thermal-hydraulics, neutronics, combustion, solar radiation, instrumentation and control. 
+Numerous organizations and individuals worldwide now use TSP. Until recently, the TSP library could be used only under Dymola for the modeling and simulation of complex power plants. But now, with the latest version of OpenModelica (OM), we can simulate complex models of power plants with complex scenarios.
+To be able to use TSP under OM, some adaptations have been applied in our models, essentially the method used to make inverse computation. 
+The objective of this work is to evaluate the potentiality, capability and efficiency of using OpenModelica tools to perform dynamic studies of power plants. A combined cycle power plant has been chosen as a representative test case of the complexity of this type of study.
+The paper describes the dynamic model of a combined cycle power plant, whose objective is to study a step variation load from 100% to 50% and a full gas turbine trip, using OM software. Also, the structure of the model, the parameterization data, the results of simulation runs, the difficulties encountered using OM and the comparing between Dymola and OM are presented.}
+}
+@inproceedings{Elci,
+author = {Dahash, Abdulrahman and Steingrube, Annette and Elci, Mehmet},
+institution = {Fraunhofer-Institute for Solar Energy Systems, Heidenhofstraße 2, 79110 Freiburg im Breisgau, Germany},
+institution = {Fraunhofer-Institute for Solar Energy Systems, Heidenhofstraße 2, 79110 Freiburg im Breisgau, Germany},
+institution = {Fraunhofer-Institute for Solar Energy Systems, Heidenhofstraße 2, 79110 Freiburg im Breisgau, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {415-424},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Power-Based Model of a Heating Station for District Heating (DH) System Applications},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+Dymola
+Dynamic Modeling
+Heating Station
+District Heating System
+Power Based Model
+Optimization},
+abstract = {District Heating (DH) systems are often seen as a good practical approach to meet the local heat demand of the districts due to its ability to provide affordable and low carbon energy to the consumers. Yet, under today’s regulations to renovate the buildings into more energy-efficient ones, the local heat demand is decreasing. Therefore, the operation of DH systems is also affected by the changing heat demand profile, which might lead to less profits for the operators of DH systems. Thus, the operators of DH systems strive for an optimal operation at which the heat demand is met and the profits are maximized. Due to the fact that these systems are complex-physical systems, therefore it is difficult to conduct any experimental investigation on them in order to examine the optimal operation. Accordingly, it is crucial to create fundamental models to investigate the optimal operation of such systems. In this paper, a power-based model is built to represent the heating station as part of a DH system. Then, the model is validated using real data from an existing heating station in Freiburg, Germany. The validation results reveal that the goodness-of-fit for the model is held to be good enough to test it for operational optimization cases.}
+}
+@inproceedings{Reiner,
+author = {Briese, Lâle Evrim and Klöckner, Andreas and Reiner, Matthias},
+institution = {Institute of System Dynamics and Control, DLR German Aerospace Center, Oberpfaffenhofen, Germany},
+institution = {Institute of System Dynamics and Control, DLR German Aerospace Center, Oberpfaffenhofen, Germany},
+institution = {Institute of System Dynamics and Control, DLR German Aerospace Center, Oberpfaffenhofen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {929-938},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {The DLR Environment Library for Multi-Disciplinary Aerospace Applications},
+year = {2017},
+issn = {1650-3740},
+keywords = {environment modeling
+gravitational models
+planet models
+atmosphere models
+kinematic state models
+space mission simulation
+multi-disciplinary modeling},
+abstract = {Environment models are vital elements for any type of vehicle dynamics simulations, such as aircraft or satellites. Recently, applications have been developed, where these previously unrelated regimes of operation need to be integrated, for example in end-to-end simulations of launch vehicles. This paper therefore introduces the new DLR Environment Library, which implements common models of planets, geospheres, currents, kinematics, and physical effects for such applications. It provides a set of environment models with minimal dependencies, complete compatibility to the Modelica Standard Library, and convenient drag & drop usage. The DLR Environment Library is expected to immensely aid developing end-to-end simulation models integrating components from DLR&#8217;s SpaceSystems and FlightDynamics Libraries. In particular, it will importantly decrease modeling errors due to its consistent environment models.}
+}
+@inproceedings{Bardow,
+author = {Gertig, Christoph Udo and Tillmanns, Dominik and Schilling, Johannes and Bau, Uwe and Lanzerath, Franz and Gross, Joachim and Bardow, André},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+institution = {Institute of Technical Thermodynamics and Thermal Process Engineering, Stuttgart University, Stuttgart, Germany},
+institution = {Institute of Technical Thermodynamics, RWTH Aachen University, Aachen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {101-110},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Integrated Process and Molecular Design with Modelica Using Continuous-Molecular Targeting},
+year = {2017},
+issn = {1650-3740},
+keywords = {GenOpt
+optimization
+integrated fluid and process design
+computer-aided molecular design
+PC-SAFT},
+abstract = {The performance of many chemical and energy con-version processes depends on the choice of the mole-cules used, e.g. as solvents or working fluids. To cap-ture the complex relations between the properties of the molecules used and the process conditions, the selection of suitable molecules should be directly integrated into process design. Solving the resulting challenging integrated design problem is enabled by the Continous-Molecular Targeting – Computer-Aided Molecular Design (CoMT-CAMD) approach. Here, the combinatorial complexity of the molecular decisions is avoided by relaxing molecular parameters in a physically-based thermodynamic model. So far, implementations of CoMT-CAMD were based on procedural programming languages. This impedes reusability and the investigation of process variants as well as the design of complex processes. In order to overcome these shortcomings, we implement the CoMT-CAMD approach based on object-oriented process modeling and thus enable the integrated process and molecular design with Modelica. The resulting approach is demonstrated for the design of a process and the working fluid for a geothermal Organic Rankine Cycle application.}
+}
+@inproceedings{Ribas Tugores,
+author = {Nytsch-Geusen, Christoph and Inderfurth, Alexander and Kaul, Werne and Mucha, Katharina and Rädler, Jörg and Thorade, Matthis and Ribas Tugores, Carles},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+institution = {Institut für Architektur und Städtebau, Berlin University of the Arts, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {199-207},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Template based code generation of  Modelica building energy simulation models},
+year = {2017},
+issn = {1650-3740},
+keywords = {Building energy simulation
+Adapted model level of detail
+Modelica code generation},
+abstract = {This contribution describes an approach for a template based code generation for different detailed Modelica models for building energy simulation (BES). 
+The information from several data sources, which describe the building geometry, the building construction, the building location and the building itself, is used to fill a building data model. This intermediate data structure is still independent of a certain building simulation tool. 
+A new developed tool for template based code generation (CoTeTo) uses the building data model and combines it with a set of different code generators, which are able to generate Modelica building models with a different level of detail: Strong simplified low-order building models for district energy simulation with a large population of buildings, more advanced multi-zone building models for building energy simulation and 3D space resolved room models for a detailed indoor climate analysis.
+Three case studies for the mentioned building model types demonstrate the code generation approach.}
+}
+@inproceedings{Brembeck,
+author = {Tobolár, Jakub and Baumgartner, Daniel and Hirano, Yutaka and Bünte, Tilman and Fleps-Dezasse, Michael and Brembeck, Jonathan},
+institution = {German Aerospace Center (DLR), Institute of System Dynamics and Control, Wessling, Germany},
+institution = {German Aerospace Center (DLR), Institute of System Dynamics and Control, Wessling, Germany},
+institution = {Toyota Motor Corporation, Future Project Division, Shizuoka, Japan},
+institution = {German Aerospace Center (DLR), Institute of System Dynamics and Control, Wessling, Germany},
+institution = {German Aerospace Center (DLR), Institute of System Dynamics and Control, Wessling, Germany},
+institution = {German Aerospace Center (DLR), Institute of System Dynamics and Control, Wessling, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {425-432},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Model Based Design of a Split Carrier Wheel Suspension for Light-weight Vehicles},
+year = {2017},
+issn = {1650-3740},
+keywords = {split wheel carrier
+vehicle Suspension
+unsprung mass
+small electric vehicle
+three mass system},
+abstract = {Applying light-weight construction methods to the design of future electric vehicles results in weight reduction of both the vehicle body and the chassis. However, the potential for percental reduction of the sprung mass is larger compared to that of the un¬sprung mass. Consequently, unfavorable consequences on the compromise, which always needs to be found between road contact and road holding, can arise. This requires additional arrangements in order to reach the performance of a state-of-the-art conventional vehicle. This paper presents a possible design solution. The wheel carrier is split into two parts, thus enabling to tune the frequency response correspondingly to reference vehicles. Besides the technical solution the Modelica modeling of the proposed suspension system as well as a vehicle dynamics and ride comfort assessment are presented.}
+}
+@inproceedings{Berenguel,
+author = {Bonilla, Javier and Carballo, Jose Antonio and Roca, Lidia and Berenguel, Manuel},
+institution = {CIEMAT-PSA, Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas - Plataforma Solar de Almería, Spain / CIESOL, Solar Energy Research Center, Joint Institute University of Almería - CIEMAT, Almería, Spain},
+institution = {CIEMAT-PSA, Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas - Plataforma Solar de Almería, Spain / CIESOL, Solar Energy Research Center, Joint Institute University of Almería - CIEMAT, Almería, Spain},
+institution = {CIEMAT-PSA, Centro de Investigaciones Energéticas, Medioambientales y Tecnológicas - Plataforma Solar de Almería, Spain / CIESOL, Solar Energy Research Center, Joint Institute University of Almería - CIEMAT, Almería, Spain},
+institution = {Department of Informatics, University of Almería, Almería, Spain / CIESOL, Solar Energy Research Center, Joint Institute University of Almería - CIEMAT, Almería, Spain},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {683-692},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Development of an open source multi-platform software tool for parameter estimation studies in FMI models},
+year = {2017},
+issn = {1650-3740},
+keywords = {parameter estimation
+parameter optimization
+model calibration
+FMI
+open source software tool},
+abstract = {This paper presents the current development of an open source multi-platform software tool intended for estimating or optimizing parameters of FMI compliant models. Parameter estimation and optimization is a powerful tool in many engineering and science fields. Nevertheless, the effort and time that must be devoted to coupling and integrating complex modeling languages and tools together with analysis and optimization methods and algorithms sometimes is high. As a consequence of that, commonly the most convenient and easy-to-use optimization mechanisms are applied. Therefore, the focus on the development of this tool is in facilitating such coupling while being customizable. The main toolkit and libraries used in the development of the tool are presented, all of them are open source. Two application examples are also presented, one of them is a parameter optimization study considering a steady state model, while the other is a parameter estimation study of a dynamic model against experimental data. Finally, current tool limitations are presented, ongoing work and ideas for future features are also commented.}
+}
+@inproceedings{Steiger,
+author = {Schneider, Georg Ferdinand and Peßler, Georg Ambrosius and Steiger, Simone},
+institution = {Group Technical Building Systems, Fraunhofer Institute for Building Physics IBP, Nürnberg, Germany},
+institution = {Group Technical Building Systems, Fraunhofer Institute for Building Physics IBP, Nürnberg, Germany},
+institution = {Group Technical Building Systems, Fraunhofer Institute for Building Physics IBP, Nürnberg, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {209-218},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelling and Simulation of Standardised Control Functions from Building Automation},
+year = {2017},
+issn = {1650-3740},
+keywords = {building automation
+control function
+VDI 3813
+VDI 3814
+ISO 16484},
+abstract = {Despite the accepted fact that control logic deployed in
+future and existing buildings through building automation
+systems constitutes a key factor for increasing their energy
+efficiency, the support for modelling and simulation
+of these in current state-of-the-art simulation tools and libraries
+is rather limited. In particular a gap exists for modelling
+and simulation of standardised control functions. In
+this work we present an approach for modelling standardised
+control logic using Modelica. We evaluated the interoperability
+of the modelling approach by simulating a test
+case of an automation solution controlling the sunshade of
+a room and by reimplementing a state-based control for an
+air handling unit reusing models from two Annex60 compliant
+libraries.}
+}
+@inproceedings{Wetter,
+author = {Cimmino, Massimo and Wetter, Michael},
+institution = {Department of Mechanical Engineering, Polytechnique Montreal, Montreal QC, Canada,},
+institution = {Lawrence Berkeley National Laboratory, Energy Technologies Area, Building Technology and Urban Systems Division, Simulation Research Group, Berkeley CA, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {219-226},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelling of Heat Pumps with Calibrated Parameters Based on Manufacturer Data},
+year = {2017},
+issn = {1650-3740},
+keywords = {Heat pump
+Vapor compression cycle
+Model calibration},
+abstract = {A Modelica model for the simulation of heat pumps is presented. The model uses a simplified vapor compression cycle with only five refrigerant states. Parameters to the model are evaluated using an optimization procedure to minimize the differences between the model predicted heating capacities and power input and those provided in the manufacturer technical data. The optimization process is done from a Python implementation of the heat pump model.
+The model is first tested by verifying that calibration from performance data generated by the heat pump model results in the same parameters as the ones used in the generation of the performance data. In the presented example, calibrated parameters were found close to the original parameters used to generate the data, except for the evaporator heat transfer coefficient for which the model was found not to be very sensitive. In a second example, the model is calibrated against manufacturer data. The heating capacities and power input calculated from the calibrated model are within 2.7% and 4.7% of the manufacturer data, respectively. Finally, the computational performance of the model is tested in a system simulation of a hydronic heating system. The simulation using the presented heat pump model was executed in 152 seconds, compared to 140 seconds for the same system using a simple boiler model.}
+}
+@inproceedings{Bartolini,
+author = {Casella, Francesco and Leva, Alberto and Bartolini, Andrea},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Italy},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Italy},
+institution = {Dynamica s.r.l., Italy},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {227-233},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Simulation of Large Grids in OpenModelica: reflections and perspectives},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+Grid Modelling and Simulation
+Large-Scale Grids
+Efficient Simulation},
+abstract = {This paper belongs to a long-term research activity on modelling and simulation of large grids in Modelica, and specifically with the OpenModelica translator. We describe the present state of the research, its evolution over the last year, the conclusions we could reach in this period in comparison with the initial hypotheses, and some results. As a consequence, we outline the future of the presented activity.}
+}
+@inproceedings{Heyberger,
+author = {Viruez, Raul and Machado, Silvia and Zamarreño, Luis María and León, Gladys and Beaude, François and Petitrenaud, Sébastien and Heyberger, Jean-Baptiste},
+institution = {Aplicaciones en Informática Avanzada S.L., Sant Cugat del Vallès, Spain},
+institution = {Aplicaciones en Informática Avanzada S.L., Sant Cugat del Vallès, Spain},
+institution = {Aplicaciones en Informática Avanzada S.L., Sant Cugat del Vallès, Spain},
+institution = {Aplicaciones en Informática Avanzada S.L., Sant Cugat del Vallès, Spain},
+institution = {Réseau de Transport d’Électricité , Paris, France},
+institution = {Réseau de Transport d’Électricité , Paris, France},
+institution = {Réseau de Transport d’Électricité , Paris, France},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {235-239},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Modelica-based Tool for Power System Dynamic Simulations},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+open source software
+power system modelling
+power system dynamics
+CIM CGMES},
+abstract = {Developments made during the EU FP7 funded project iTesla towards automatic ways of transforming powers systems from proprietary format to Modelica, served as a proof of concept for the adoption of Modelica as a common and standardized language for power system modelling and simulation. This work is a continuation of the progresses made during the iTesla. This paper presents a Modelica-based tool developed with the main purpose of providing users with an easy way to generate power system networks in Modelica and perform time-domain simulations. The tool is validated by generating Modelica systems for IEEE cases and comparing simulation outputs with a reference tool (Eurostag).}
+}
+@inproceedings{Vanfretti,
+author = {Ahsan Adib Murad, Mohammed and Vanfretti, Luigi},
+institution = {School of Electrical Engineering, University College Dublin, Ireland},
+institution = {School of Electrical Engineering, KTH Royal Institute of Technology, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {241-248},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Modelica VSC-HVDC Average Value Model Implementation and its Software-to-Software Validation using an EMT Power System Domain Specific Simulator},
+year = {2017},
+issn = {1650-3740},
+keywords = {power systems
+VSC
+HVDC
+software-to-software validation
+power electronics
+electro-magnetic transients},
+abstract = {This paper reports the implementation of a three-phase VSC-HVDC model using the Modelica language. The model is suitable for power system simulation where the power electronic circuitry can be represented using equivalent voltage and current sources to model the high frequency switching process. Differently from the authors previous work, this model is built using as much components as possible from the MSL (Modelica Standard Library) to represent the three phase electrical circuit, while implementing the de facto control system models used within typical power system simulation tools. To show the applicability of Modelica for modeling an VSC-HVDC, a software-to-software validation is performed using the EMTP-RV power system simulator.}
+}
+@inproceedings{Tegethoff,
+author = {Gräber, Manuel and Fritzsche, Jörg and Tegethoff, Wilhelm},
+institution = {LK Energy GmbH, Germany},
+institution = {olkswagen AG, Germany},
+institution = {Institut für Thermodynamik, TU Braunschweig, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {249-254},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {From system model to optimal control - A tool chain for the efficient solution of optimal control problems},
+year = {2017},
+issn = {1650-3740},
+keywords = {Optimal control
+Functional mock-up interface
+Thermal management
+Cooling system},
+abstract = {Based on a specific application example - the thermal management system of an internal combustion engine - a toolchain is presented for formulating and solving of nonlinear optimal control problems. Starting from graphical modeling of the thermal management system with the Modelica library TIL, the model is exported to the standardized model exchange format Functional Mock-up Interface (FMI). Furthermore, it is imported to the optimal control software package MUSCOD-II. Python is used as scripting language for the problem formulation, the numerical solution and the processing of results. By using FMI as an interface, models from any simulation and modeling tools can be used if there is an FMI model export and the models fulfill certain mathematical requirements (smoothness).}
+}
+@inproceedings{Gauterin,
+author = {Fischer, Torben and Kraus, Tom and Kirches, Christian and Gauterin, Frank},
+institution = {Fraunhofer Institute for Chemical Technology (ICT), Project Group New Drive Systems, Germany},
+institution = {Interdisciplinary Center for Scientific Computing (IWR), Heidelberg University, Germany},
+institution = {Interdisciplinary Center for Scientific Computing (IWR), Heidelberg University, Germany},
+institution = {Institute of Vehicle System Technology, Karlsruhe Institute of Technology (KIT), Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {255-264},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Nonlinear Model Predictive Control of a Thermal Management System for Electrified Vehicles using FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {e-mobility
+thermal management system
+nonlinear model predictive control
+Functional Mock-up Interface},
+abstract = {Energy-efficient thermal management systems for Emobility
+help to decrease energy consumption and increase
+range. Due to transient external conditions and the
+increasing system complexity, optimization-based control
+approaches are required in order to harness the full potential
+of such systems. In (Fischer et al., 11th Int. Modelica
+Conf, 2015), we have presented a model-based development
+cycle for a thermal management system in Emobility
+to this end. In this article, we build upon this
+work to describe the use of this model within a nonlinear
+model predictive control (NMPC) approach. The main
+benefits of using an advanced optimization-based control
+system in this application are a) the ability to control
+the battery temperature and the cabin temperature simultaneously,
+b) the increased energy efficiency achieved
+by exploiting the predictive character of the optimizationbased
+control approach, c) the possibility to include operational
+limits as constraints in the optimization problems
+and d) the fast reaction to disturbances or model parameter
+changes. We evaluate the merit of the proposed advanced
+control system by way of a comparison to conventional
+PID controller.}
+}
+@inproceedings{Zawadzki,
+author = {Pytlak, Radoslaw and Suski, Damian and Tarnawski, Tomasz and Zawadzki, Tomasz},
+institution = {Faculty of Mathematics and Information Science, Warsaw University of Technology, Poland},
+institution = {Institute of Automatic Control and Robotics, Warsaw University of Technology, Poland},
+institution = {Department of Quantitative Methods and Information Technology, Kozminski University, Poland},
+institution = {Research and Academic Computer Network (NASK), Poland},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {265-273},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Defining and Solving Hybrid Optimal Control Problems with Higher Index DAEs},
+year = {2017},
+issn = {1650-3740},
+keywords = {hybrid systems
+optimal control problems
+higher index DAEs},
+abstract = {The paper deals with optimal control problems defined
+for hybrid systems described by higher index DAEs. We
+present a prototype solution that supports the whole process
+from defining such problem to solving it and presenting
+results. Problem’s definition is done with Dynamic
+Optimization Modeling Language (DOML) which
+is based directly on Modelica. The proposed numerical
+procedure for solving the problems of interest has the following
+features: 1) it is based on the appropriately defined
+adjoint equations formulated for the discretized equations
+being the result of the numerical integration of system
+equations by an implicit Runge–Kutta method; 2) initialization
+for higher index DAEs is performed with the help
+of Pantelides’ algorithm; 3) it does not require the system
+to be transformed to ODEs (through differentiation of
+some algebraic equations).
+The paper presents numerical examples related to hybrid
+systems described by index three DAEs, showing the
+validity of the proposed approach. All software components
+needed to carry out the computations, i.e. the code
+editor, compiler, numerical libraries and GUI for presenting
+results are prepared as parts of a combined platform:
+Interactive Dynamic Optimization Server (IDOS).}
+}
+@inproceedings{Müller,
+author = {Constantin, Ana and Löwen, Artur and Ponci, Ferdinanda and Huchtemann, Kristian and Müller, Dirk},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, RWTH Aachen University, Germany},
+institution = {Institute for Automation of Complex Power Systems, RWTH Aachen University, Germany},
+institution = {Institute for Automation of Complex Power Systems, RWTH Aachen University, Germany},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, RWTH Aachen University, Germany},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, RWTH Aachen University, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {345-351},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Dymola-JADE Co-Simulation for Agent-Based Control in Office Spaces},
+year = {2017},
+issn = {1650-3740},
+keywords = {agent-based control
+JADE
+co-simulation},
+abstract = {This paper presents an application of coupling Modelica under Dymola and JADE to test novel agent-based control for office spaces. The office space with a coupled energy system and weather boundary conditions are modeled in Dymola. The agent platform is programmed in JADE, where the agents communicate with each other to control the technical equipment used to deliver thermal energy to the room. Heating experiments, run for a one room scenario, using a radiator, show better system reaction to the comfort desires of the user when compared to a control with a thermostatic valve, while having similar energy consumption. While the agents run in real time, the simulation in Dymola runs more quickly. We focus on the particularities of the connection for co-simulation to insure smooth transferability of the experiments from simulation to field test, where the energy system as well as the agent platform would be running in real time.}
+}
+@inproceedings{Heo,
+author = {Ko, Kwang-chan and Park, Jong-chan and Kang, Dae-oh and Jo, Jae-hun and Hyun, Min-su and Heo, Seung-jin},
+institution = {Hyundai Motor corporation, Korea},
+institution = {Hyundai Motor corporation, Korea},
+institution = {Institute of Vehicle Engineering, Korea},
+institution = {School of Automotive Engineering, Kookmin University, Korea},
+institution = {School of Automotive Engineering, Kookmin University, Korea},
+institution = {School of Automotive Engineering, Kookmin University, Korea},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {433-440},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Development of hierarchal commercial vehicle model for target cascading suspension design process},
+year = {2017},
+issn = {1650-3740},
+keywords = {Vehicle Dynamics
+Target Cascading
+Commercial Vehicle
+Hierarchal Model},
+abstract = {This thesis gives a description on the study to develop the framework of commercial vehicle design based on the target cascading. Design framework consists of modeler, simulation, and performance index calculation module. The modeler has been developed based on Excel for the general designers with no idea of the vehicle dynamics to easily use the commercial vehicle model library that has the hierarchical structure. The model library with hierarchical structure was created based upon Modelica, and developed in order to interlock the model factors and design factors between hierarchs to fit design process. Simulation module is a module that automatically makes a simulation with the model created in modeler module if a user defines a scenario. Lastly, performance index calculation module is a module that makes the result of simulation into performance index. To check the effectiveness of the developed framework, we applied it to the design matters of suspension system in the consideration of the performance improvement of R&H. We confirmed from the result of design that performance enhanced by 15% and time for design decreased more than 50% as well. These results indicate that the developed framework is suitable for the design process for suspension system of target cascading.}
+}
+@inproceedings{Ferretti,
+author = {Tomiati, Nicolò and Magnani, Gianantonio and Scaglioni, Bruno and Ferretti, Gianni},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {441-447},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Model Based Analysis of Shimmy in a Racing Bicycle},
+year = {2017},
+issn = {1650-3740},
+keywords = {bicycle
+shimmy
+flexible multibody systems},
+abstract = {In this paper we are presenting a model of a racing bicycle, developed in Modelica language within the Dymola environment. The main purpose is to investigate the dynamic response of the bicycle and its modes of vibration, referring in particular to shimmy. This phenomenon occurs at high speeds and consists of sudden oscillations of the front assembly around the steering axis. Lateral accelerations on the horizontal tube of the frame can reach 5-10 g with a frequency that varies between 5-10 Hz. Even if it is quite uncommon, shimmy is a topic of great relevance, because it may be extremely dangerous for the rider. Thanks to this model, we can show that the main elements which contribute to the rise of the oscillations are the lateral compliance of the frame and the tyres’ deformation.}
+}
+@inproceedings{Magnusson,
+author = {Åberg, Marcus and Windahl, Johan and Runvik, Håkan and Magnusson, Fredrik},
+institution = {Department of Automatic Control, Lund University, Sweden},
+institution = {Modelon AB, Ideon Science Park, Lund, Sweden},
+institution = {Modelon AB, Ideon Science Park, Lund, Sweden},
+institution = {Department of Automatic Control, Lund University, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {449-458},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Optimization-friendly thermodynamic properties of water and steam},
+year = {2017},
+issn = {1650-3740},
+keywords = {Dynamic optimization
+Thermodynamic properties
+Power plant start-up
+ThermalPower library
+WaterIF97
+Optimica
+JModelica.org},
+abstract = {This paper describes the development of an optimization-friendly thermodynamic property model of water and steam that covers liquid, vapor, 2-phase as well as the super-critical region. All equations are at least twice continuously differentiable with respect to all model variables and can be used in dynamic optimization problems solved by efficient derivative-based algorithms. The accuracy has been verified against the industry standard IAPWS 97 and performance and robustness has been tested by solving a trajectory optimization problem where the start-up time of a gas power plant has been minimized while satisfying constraints on temperature gradients, pressure and flows. Simulations of various plant models have also been performed to verify and benchmark the implementation. The results show that the new media can be used in both solving dynamic optimization and simulation problems yielding reliable results. The new media has been integrated into Modelon’s Thermal Power library 1.13.}
+}
+@inproceedings{Radermacher,
+author = {Dhumane, Rohit and Ling, Jiazhen and Aute, Vikrant and Radermacher, Reinhard},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {459-465},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling of a Thermosiphon to Recharge Phase Change Material Based Thermal Battery for a Portable Air Conditioning Device},
+year = {2017},
+issn = {1650-3740},
+keywords = {Thermosiphon
+Thermosyphon
+Phase Change Materials},
+abstract = {Closed loop two phase thermosiphons have a wide range of applications due to their simplicity, reliability, low cost and the ability of dissipating high heat fluxes from minimal temperature differences. The present study focuses on one thermosiphon operation which solidifies a phase change material (PCM) based thermal battery for a portable air conditioner called Roving Comforter (RoCo). RoCo uses vapor compression cycle (VCC) to deliver cooling and stores the heat released from the condenser into a compact phase change material (PCM) based thermal battery. Before its next cooling operation, the PCM needs to be re-solidified. This is achieved by the thermosiphon, which operates within the same refrigerant circuitry with the help of a pair of valves. The molten PCM which acts as heat source affects the dynamics of the thermosiphon which in turn affects the solidification process. Thus the dynamics of both the PCM and thermosiphon are coupled. For accurate transient modeling of this process, the PCM model considers the solidification over a temperature range, variable effects of conduction and natural convection during the phase change and variable amounts of heat release at different temperatures within the temperature range of phase change. The paper discusses component modeling for this transient operation of thermosiphon and its validation with experimental data.}
+}
+@inproceedings{Wischhusen,
+author = {Hoppe, Timm and Gottelt, Friedrich and Wischhusen, Stefan},
+institution = {XRG Simulation GmbH, Harburger Schlossstr. 6-12, 21079 Hamburg Germany},
+institution = {XRG Simulation GmbH, Harburger Schlossstr. 6-12, 21079 Hamburg Germany},
+institution = {XRG Simulation GmbH, Harburger Schlossstr. 6-12, 21079 Hamburg Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {467-476},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Extended Modelica Model for Heat Transfer of Two-Phase Flows in Pipes Considering Various Flow Patterns},
+year = {2017},
+issn = {1650-3740},
+keywords = {boiling model
+heat transfer
+two phase flow
+pipe flow
+evaporation
+critical heat flux
+boiling crisis
+FluidDissipation
+ClaRa},
+abstract = {Boiling in vertical and horizontal pipes is a complex process defining transient and static performance of various technical applications. An extensive literature review taking all relevant boiling regimes is presented. The models from the literature are evaluated with respect to accuracy and suitability for system simulation application. A set of sub-models for each of the existing boiling phenomena is implemented and applied to a global boiling model. The work pays special attention to smooth transition between the sub-models and to numerical efficient solutions with respect to the consideration of the boiling crisis.}
+}
+@inproceedings{Janczyk,
+author = {Altshuller, Dmitry and Hüsson, Peter and Jones, Christopher and Janczyk, Leonard},
+institution = {Dassault Systemes, USA},
+institution = {Dassault Systemes, USA},
+institution = {Dassault Systemes, USA},
+institution = {Dassault Systemes, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {477-482},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Improved Model of Photovoltaic Systems},
+year = {2017},
+issn = {1650-3740},
+keywords = {Photovoltaic system
+Modelica
+Thermal effect
+Modeling thermal effect
+Solar power
+Solar cell},
+abstract = {The paper describes a model of a typical photovoltaic (PV) system. Unlike models previously described in literature, heat transfer phenomena are accounted for simultaneously with the electrical dynamics. Furthermore, the model is simulated for a time scale of one full year.}
+}
+@inproceedings{Winkler,
+author = {Magnúsdóttir, Arndís and Winkler, Dietmar},
+institution = {Verkís hf, Iceland},
+institution = {University College of Southeast Norway},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {483-492},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelling of a Hydro Power Station in an Island Operation},
+year = {2017},
+issn = {1650-3740},
+keywords = {Hydropower in Iceland
+modelling
+simulation
+island operation
+Modelica
+Dymola
+Electric Power Library
+Hydro Power Library
+water hammer effect},
+abstract = {There is a strong focus on new renewable energy sources,
+such as, solar power, wind energy and biomass, in the con-
+text of reducing carbon emissions. Because of its maturity,
+hydropower is often overlooked. However, there is an era
+of hydro oriented research in improving many aspects of
+this well established technology.
+Representing a physical system of a hydropower plant
+by mathematical models can serve as a powerful tool for
+analysing and predicting the system performance during
+disturbances. Furthermore it can create opportunities in
+investigating more advanced control method.
+A simulation model of a reference hydropower station
+located in northwest of Iceland was implemented using
+the modelling language Modelica. The main simulation
+scenarios of interest were: 20 % load rejection, worst-case
+scenario of full shut-down and pressure rise in the pressure
+shaft due to the water hammer effect. This paper will show
+that the different simulation scenarios were successfully
+carried out based on the given the data available of the
+Fossárvirkjun power plant. The load rejection simulation
+gave expected results and was verified against a reference
+results from manufacturer.}
+}
+@inproceedings{Kuhn,
+author = {Kuhn, Martin Raphael},
+institution = {German Aerospace Center (DLR e.V.), department of system dynamics and control, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {493-505},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Periodic Steady State Identification of electrical circuits},
+year = {2017},
+issn = {1650-3740},
+keywords = {periodic systems
+steady state identification
+wavelet
+FFT},
+abstract = {This paper focuses on methods for stationary periodic steady state identification of systems. An overview is given and a method suitable for AC connected electrical on-board network is proposed.}
+}
+@inproceedings{Otter,
+author = {Elmqvist, Hilding and Henningsson, Toivo and Otter, Martin},
+institution = {Mogram AB, Magle Lilla Kyrkogata 24, 223 51 Lund, Sweden},
+institution = {Lund, Sweden},
+institution = {Institute of System Dynamics and Control, DLR, Oberpfaffenhofen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {693-702},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Innovations for Future Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+Modia
+Julia
+modeling
+simulation},
+abstract = {This paper discusses language innovations for future Modelica versions, on the one hand for generally applicable language elements, and on the other hand to improve modeling of multibody systems with contacts, and media modeling. In a companion paper new algorithms are proposed to handle much larger models than can be treated today. All these innovations are developed and evaluated with the experimental modeling and simulation environment Modia. Modia is based on Julia, a powerful programming language with strong focus on scientific computing, meta-programming and just-in-time compilation that allows very fast development. The modeling language is directly defined and implemented with Julia’s meta-programming constructs and is designed tightly together with the symbolic and numeric algorithms. This approach is very well suited for innovation and experimenting with evolutions of modeling capabilities in Modelica.}
+}
+@inproceedings{Höger,
+author = {Höger, Christoph},
+institution = {Institute of Software Engineering and Theoretical Computer Science, Technische Universität Berlin, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {703-712},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Hierarchical Semantics of Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Semantics
+Classes
+Compilation},
+abstract = {We present a definition of syntax and semantics for Modelica&#8217;s
+  hierarchical lookup. By using a context-independent encoding of the
+  static semantics of free variables, it becomes possible to define
+  the evaluation of references within a calculus based on
+  substitution. Hence, all steps of evaluation have a concrete
+  syntactic representation. We augment the calculus with a terminating
+  evaluation and a semantics-preserving translation to a basic \(\lambda\)-calculus.}
+}
+@inproceedings{Bellmann,
+author = {Thiele, Bernhard and Beutlich, Thomas and Waurich, Volker and Sjölund, Martin and Bellmann, Tobias},
+institution = {PELAB, Linköping University, Sweden},
+institution = {ESI ITI GmbH, Germany},
+institution = {Chair of Construction Machinery, TU Dresden, Germany},
+institution = {PELAB, Linköping University, Sweden},
+institution = {Institute of System Dynamics and Control, DLR, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {713-723},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Towards a Standard-Conform, Platform-Generic and Feature-Rich Modelica Device Drivers Library},
+year = {2017},
+issn = {1650-3740},
+keywords = {human-in-the-loop
+hardware-in-the-loop
+real-time simulation
+embedded control application
+Modelica external C},
+abstract = {There are many cases where simulation applications need to interact with their environment. Typical examples are Human-in-the-Loop (HITL) simulators (including flight, driving, and marine training simulators), Hardware-in-the-Loop (HIL) simulators, but also offline process simulators which cannot operate in a completely self-contained manner and therefore need to be coupled to external applications. Embedded control applications are another related area which requires that applications interact with their environment. The Modelica_DeviceDrivers library, which had its first release as open-source library in 2012, tries to cater for such use cases. This paper describes the library for the first time and reports about the numerous challenges that the project experienced to meet its goal of supporting several platforms and tools within a standard-conform, platform-generic, feature-rich, and easy-to-use Modelica library.}
+}
+@inproceedings{Winkler,
+author = {Tiller, Michael M. and Winkler, Dietmar},
+institution = {Xogeny, USA},
+institution = {University College of Southeast Norway},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {725-734},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {modelica.university: A Platform for Interactive Modelica Content},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+web
+cloud
+content management systems},
+abstract = {The web was conceived of as a medium for the expression and
+  exploration of scientific and engineering ideas.  However, observing
+  the actual content on the web, an alien race might presume that the
+  primary impetus for web technologies was the dessimention of cat
+  videos or celebrity gossip. Fundamentally, HTML and HTTP are
+  certainly sufficient for the creation of scientific and engineering
+  content just as they are for the creation of online magazines and
+  websites.  But while a number of "content management systems" have
+  been created to facilitate the publication of prose, there are very
+  few such tools that cater to making it easy to create scientific and
+  engineering content.
+
+  In this paper, we will present a platform which can be thought of as
+  a content management system for scientific and engineering content.
+  We will start by describing what we believe to be the fundamental
+  requirements for such a system.  From there, we will discuss two
+  different applications built on this platform.  The first is an
+  interactive tutorial for teaching the basics of the Modelica
+  languages and the other is an example application that involves
+  creating interactive content for use in an engineering course on
+  hydro-electric power generation.  This content will be published on
+  the modelica.university domain and we invite others to
+  contribute additional content to the site.}
+}
+@inproceedings{Albertelli,
+author = {Invernizzi, Davide and Scaglioni, Bruno and Ferretti, Gianni and Albertelli, Paolo},
+institution = {Politecnico Di Milano, Dipartimento di Scienze e Tecnologie Aerospaziali, Via La Masa 34, 20156 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Elettronica, Informazione e Bioingegneria DEIB, Via Ponzio 34/5, 20133 Milano, Italy},
+institution = {Politecnico Di Milano, Dipartimento di Meccanica, Via La Masa 1, 20156 Milano, Italy},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {735-744},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Object-oriented modelling of a flexible beam including geometric nonlinearities},
+year = {2017},
+issn = {1650-3740},
+keywords = {Nonlinear beams
+flexible multibody
+geometric stiffening
+Modelica flexible},
+abstract = {In this paper, an efficient approach for the modelling and simulation of slender beams subject to heavy inertial loads is presented. The limitations imposed by a linear formulation of elasticity are overcome by a second order expansion of the displacement field, based on a geometrical exact beam model. In light of this, the nonlinearities of the elastic terms are shifted as inertial contributions, which yields an expression of the equations of motion in closed form. Thanks to the formulation in closed form, the proposed model is implemented in Modelica, with particular care to the suitability of the model with respect to the Modelica Multibody library.
+After describing the model formulation and implementation, the paper presents some simulation results, in order to validate the model with respect to benchmarks, widely adopted in literature.}
+}
+@inproceedings{Andreasson,
+author = {Swaminathan, Shashank and Andreasson, Johan},
+institution = {Novi, Michigan, USA},
+institution = {Modelon KK, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {745-754},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Musculoskeletal Modeling of the Hand and Contact Object in Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {musculoskeletal model of the hand
+Modelica
+grasp model
+orthotic devices},
+abstract = {The paper&#8217;s primary goal is to develop a mathematical
+model that could be used towards the development and
+improvement of orthotic assist gloves. The model is
+constructed using component based modeling in the
+object-oriented declarative language Modelica,
+specifically the MultiBody Modelica library. Multiple
+hand models currently do exist; however, they are
+mainly causal, and require separate development and
+validation of mathematical solvers before use. By using
+Modelica, the model is constructed from the system’s
+physical equations, thereby relieving issues regarding
+validity of the model’s computational equations; the
+acausality inherent in Modelica allows for more model
+development that more closely mirrors relations in the
+physical world. The model is scoped to be able to model
+the kinematics and dynamics of the hand when grasping
+a spherical object – both bone structure and muscle
+geometry and actuation are simplifications based off
+anatomy literature. The contact model is developed as a
+separate component from the hand system. The main
+design goal of the contact model is to represent the
+characteristics of a relatively rigid object that still
+maintains a degree of friction and pliability on the
+surface layer.
+The main two grasps tested in the paper are the
+prehensile and precision grasps (powerful and dexterous
+grasps). The muscle actuation profiles per each finger
+are adjusted until the desired dynamic profile is
+achieved for each type of grasp. The main data points of
+interests are the joint angles and contact forces for each
+finger. Further validation of the model is done using the
+animation automatically generated by the tool. Testing
+results indicate that the model can successfully simulate
+contractions at all levels of abstraction of the hand’s
+components (basic bone-joint components, finger
+components, and the overall hand system). The results
+also indicate that both prehensile and precision grasps
+are possible, given appropriate muscle actuation and
+finger orientation parameter values.}
+}
+@inproceedings{Tidefelt,
+author = {Dahl, Markus and Wettergren, Håkan and Tidefelt, Henrik},
+institution = {Wolfram MathCore, Linköping, Sweden},
+institution = {Wolfram MathCore, Linköping, Sweden},
+institution = {Wolfram MathCore, Linköping, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {755-763},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modelica Spur Gears with Hertzian Contact Forces},
+year = {2017},
+issn = {1650-3740},
+keywords = {Spur Gear
+Hertz Contact Theory
+Rotating Machinery},
+abstract = {To be able to capture the dynamics of entire systems is one of the strengths of the Modelica language. This article will examine the possibility of modeling spur gears in the Modelica environment Wolfram SystemModeler, and integrating them with other rotating machinery elements, such as roller bearings and flexible shafts. The contact forces between spur gears are based on the Hertzian Theory of Contact.}
+}
+@inproceedings{Corves,
+author = {Weiser, Tobias and Corves, Burkhard},
+institution = {KUKA Robotics GmbH, Germany},
+institution = {Department of Mechanism Theory and Dynamics of Machines , RWTH Aachen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {765-770},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling of Roller Bearings},
+year = {2017},
+issn = {1650-3740},
+keywords = {Bearing Stiffness
+Bearing Modelling
+Multi-BodySystem Library},
+abstract = {Modeling of multibody mechanics plays a central role in
+the design of mechatronic systems. Roller Bearings contribute
+stiffness and damping to the system dynamics of
+a mechatronic system. This article shows the stiffness
+modeling of a few roller bearing types. The kinematics
+of deformation of a roller bearing are shown. Based on
+the principle of Hertz contact stress the elastic forces and
+torques are calculated. These forces are considered and
+implemented in the Multi-Body-System Library.}
+}
+@inproceedings{Nemer,
+author = {Brèque, Florent and Nemer, Maroun},
+institution = {MINES ParisTech, PSL Research University, Center for energy Efficiency of Systems, 5 rue Léon Blum, Palaiseau, 91120, France},
+institution = {MINES ParisTech, PSL Research University, Center for energy Efficiency of Systems, 5 rue Léon Blum, Palaiseau, 91120, France},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {771-781},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Cabin Thermal Needs: Modeling and Assumption Analysis},
+year = {2017},
+issn = {1650-3740},
+keywords = {thermal model
+vehicle cabin
+cabin thermal needs
+HVAC
+heating
+Air-conditioning
+electric vehicle},
+abstract = {Interest for cabin thermal needs has strongly increased for the past 10 years, particularly due to heating. Indeed, the development of electric and hybrid vehicles put a focus on the HVAC, this high-consuming auxiliary, which can dramatically decrease the vehicle electric range. Thus, this paper presents a detailed transient and mono-zonal model of a car cabin in order to predict the thermal needs. The model is developed using the MODELICA language via the DYMOLA environment. It considers conduction, convection, radiation heat transfers as well as the HVAC and water vapor impacts. The different assumptions of the model are discussed and important considerations usually not discussed are pointed out. The thermal loads are analyzed. Finally, the heating and cooling thermal needs are computed for steady state mode and for convergence mode as well as for varying recirculation ratios. This work is useful to better understand what is behind cabin thermal needs.}
+}
+@inproceedings{Bachmann,
+author = {Hagemann, Jan and Täuber, Patrick and Ochel, Lennart and Bachmann, Bernhard},
+institution = {Department of Engineering and Mathematics, University of Applied Sciences Bielefeld, Germany},
+institution = {Department of Engineering and Mathematics, University of Applied Sciences Bielefeld, Germany},
+institution = {Department of Engineering and Mathematics, University of Applied Sciences Bielefeld, Germany},
+institution = {Department of Engineering and Mathematics, University of Applied Sciences Bielefeld, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {581-588},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Smart Processing of Function Calls to Achieve Efficient Simulation Code},
+year = {2017},
+issn = {1650-3740},
+keywords = {function calls
+backend
+simulation},
+abstract = {This paper introduces a new algorithm to increase the simulation performance of algebraic equation systems by encapsulating function calls. This avoids all unnecessary  evaluations of function calls and leads to positive structural effects. To enable the reader to reconstruct the algorithm, all four phases of the algorithm are described in detail and the complexity of them is analyzed. The overall complexity is $O(n)$, where $n$ is the number of equations. It is shown that the algorithm significantly decreases the simulation time for a wide range of physical based models.}
+}
+@inproceedings{Banakar,
+author = {von Manstein, Arnim and Limperich, Dirk and Banakar, Shivakumar},
+institution = {Daimler AG, Germany},
+institution = {Daimler AG, Germany},
+institution = {Mercedes Benz R & D India Pvt. Ltd., India},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {783-790},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Simulative Comparison of Mobile Air-Conditioning Concepts for Mechanical and Electrical Driven Systems},
+year = {2017},
+issn = {1650-3740},
+keywords = {Energy Efficiency
+MAC
+HVAC
+HV
+PHEV
+BEV
+Compressor
+Dymola FD01},
+abstract = {Ever increasing energy demand and the stringent emission norms have resulted in the need for developing more efficient automotive systems. Fuel economy and emission targets are the two important driving factors in the development of an automobile. Efficiency of a Mobile Air-Conditioning system (MAC) has a considerable impact on the fuel economy of an automobile. This study involves simulative comparison of MAC concepts for mechanical & electrical driven systems. System models are developed for MAC concepts using Dymola simulation tool. Drive cycles considered in this study corresponds to the real time driving scenarios and ambient conditions. From this study the conclusions are drawn about the most efficient ways to reach the thermal comfort for the passenger cabin in an automobile.}
+}
+@inproceedings{Radermacher,
+author = {Dhumane, Rohit and Ling, Jiazhen and Aute, Vikrant and Radermacher, Reinhard},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+institution = {Center for Environmental Energy Engineering, University of Maryland, College Park, 4164 Glenn L. Martin Hall, Bldg., MD 20742, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {791-798},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Duty Cycle for Low Energy Operation of a Personal Conditioning Device},
+year = {2017},
+issn = {1650-3740},
+keywords = {Battery
+Air-Conditioner
+Duty-Cycle},
+abstract = {The Roving Comforter (RoCo) is an innovative personal thermal management technology that provides ultimate personal thermal comfort for individuals in inadequately or even unconditioned environments. It is a miniature heat pump system mounted on a robotic platform capable of autonomously following individuals to deliver comfort by directing hot or cold air through automatically controlled nozzles. This allows buildings to relax their thermostats upto 4 degrees Fahrenheit without sacrificing occupant comfort, leading to energy savings anywhere between 10 to 30% depending on climatic conditions. RoCo, a portable device, operates fully on an onboard battery pack which therefore has to be carefully designed to balance power output, operating time and weight. To address this challenge, a multi-physics model that is capable of simultaneously simulating thermodynamics, electricity and mechanics of RoCo is developed and two duty cycles are analyzed. By observing and analyzing the simulation results, control strategies related to RoCo operation are proposed.}
+}
+@inproceedings{Müller,
+author = {Sangi, Roozbeh and Bünning, Felix and Fütterer, Johannes and Müller, Dirk},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, E.ON Energy Research Center, RWTH Aachen University, Germany},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, E.ON Energy Research Center, RWTH Aachen University, Germany},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, E.ON Energy Research Center, RWTH Aachen University, Germany},
+institution = {Institute for Energy Efficient Buildings and Indoor Climate, E.ON Energy Research Center, RWTH Aachen University, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {799-808},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Platform for the Agent-based Control of HVAC Systems},
+year = {2017},
+issn = {1650-3740},
+keywords = {Agent-based control
+Building energy systems
+Control
+HVAC
+Modelica
+Multi-Agent System},
+abstract = {The amount of energy used for heating and cooling in the building sector is about one third of the total energy consumed in the world. The finiteness of natural energy resources on the one hand, and the ever-increasing demand for energy in the world on the other hand, necessitate the development of systematic approaches for improving the efficiency of building energy systems as well as minimizing the usage of primary energy resources and the damaging impacts on the environment. Attempts to tackle these problems have led to modern complex energy concepts for buildings, which have consequently initiated a need for new control strategies for them. Multi-agent control, which is known with other names like agent-based control, offers a promising solution to these challenges. To the knowledge of the authors, there are 96 platforms in different programming languages available, which are mostly java-based and mainly used in logistic applications, but there is no platform in the modeling language Modelica, which is widely used for simulation of dynamic systems, especially buildings performance simulation. This lack motivated the authors to develop a platform for agent-based control of HAVC systems. The platform eliminates the dependency of models developed in Modelica on an extra interface, which is usually required to couple the models to the platforms written in any programming languages other than Modelica. This paper presents the structure of the platform and explains how the agents&#8217; communications work. The flexibility of the optimization objective is ensured through the definition of readily interchangeable cost functions. The applicability and functionality of the platform are proved by applying the platform in the control of building energy systems examples.}
+}
+@inproceedings{Dominik,
+author = {Justus, Nicola and Schölzel, Christopher and Dominik, Andreas},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {809-814},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {MoVE  A Standalone Modelica Vector Graphics Editor},
+year = {2017},
+issn = {1650-3740},
+keywords = {JavaFX
+vector graphics
+open source
+SVG
+Inkscape
+MVC
+MoTE
+OpenModelica},
+abstract = {Modelica models can have a graphical icon defined as a bitmap or vector graphics.
+Vector graphics have several benefits, the most obvious being free scaling of images from icon to poster size. With OpenModelica there already exists one open source tool that can be used for editing these vector graphics icon annotations, but it does not reach the usability comfort of professional vector graphics editing tools.
+
+In this paper we present the Modelica Vector Graphics Editor (MoVE), a standalone open source editor for Modelica&#8217;s vector graphics syntax that provides many convenience features inspired by the vector graphics editor Inkscape. These features include grouping, snap to grid, move to foreground/background, rotation handles, and drawing perfect circles and squares as well as horizontal and vertical lines when holding Shift.
+
+We hope that MoVE, as a part of the Modelica Tool Ensemble (MoTE), can enrich the open source ecosystem of Modelica by simplifying the creation of more elaborate vector graphics icons for Modelica models.}
+}
+@inproceedings{Letschert,
+author = {Justus, Nicola and Schölzel, Christopher and Dominik, Andreas and Letschert, Thomas},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+institution = {KITE, Technische Hochschule Mittelhessen, Giessen, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {815-822},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Mo|E  A Communication Service Between Modelica Compilers and Text Editors},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+open source
+integrated development environment
+distributed systems
+structured editor
+ENSIME
+OpenModelica
+JModelica
+MoTE},
+abstract = {The Modelica language is becoming increasingly popular among scientists and engineers as platform for modelling physical or biological systems. Although Modelica is maintained as non-proprietary language by the Modelica Association, a considerable number of commercial implementations and development environments is complemented by a surprisingly small number of open source tools.
+
+In this paper, we present the communication service Mo|E that connects any text editor as front-end with a Modelica compiler as back-end. Based on the simple HTML communication protocol, editor plugins for a software developer&#8217;s favourite text editor can be developed easily, hence turning any editor into a lightweight Modelica development tool.
+
+We also present a first implementation of a plugin for the text editor Atom that exhibits features necessary for efficient software development, such as display of compile errors, code completion, go to declaration or view of context-sensitive documentation. In addition, Modelica-specific checking of the number of equations in a model is supported.}
+}
+@inproceedings{Fritzson,
+author = {Mengist, Alachew and Pop, Adrian and Asghar, Adeel and Fritzson, Peter},
+institution = {PELAB – Programming Environment Lab, Department of Computer Science, Linköping University, Sweden},
+institution = {PELAB – Programming Environment Lab, Department of Computer Science, Linköping University, Sweden},
+institution = {PELAB – Programming Environment Lab, Department of Computer Science, Linköping University, Sweden},
+institution = {PELAB – Programming Environment Lab, Department of Computer Science, Linköping University, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {823-830},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Traceability Support in OpenModelica Using Open Services for Lifecycle Collaboration (OSLC)},
+year = {2017},
+issn = {1650-3740},
+keywords = {OpenModelica
+traceability
+OSLC
+tool interoperability
+tool integration
+model management
+Modelica},
+abstract = {A common situation in industry is that a system model is composed of several sub-models which may have been developed using different tools. The quality and effectiveness of large scale system modeling heavily depends on the underlying tools used for different phases of the development lifecycle. Available modeling and simulation tools support different operations on models, such as model creation, model simulation, FMU export, model checking, and code generation. Seamless tracing of the requirements and associating them with the models and the simulation results in the context of different modeling tools is becoming increasingly important. This can be used to support several activities such as impact analysis, component reuse, verification, and validation. However, due to the lack of interoperability between tools it is often difficult to use such tools in combination. Recently, the OSLC specification has emerged for integrating different lifecycle tools using linked data. In this paper we present new work on traceability support in OpenModelica where the traceability information is exchanged with other lifecycle tools through a standardized interface and format using OSLC. In particular, OpenModelica supports automatic recording and tracing of modeling activities such as creation, modification, and destruction of models, import model description XML, export of FMUs, and creation of simulation results.}
+}
+@inproceedings{Nassif,
+author = {Nikoukhah, Ramine and Najafi, Masoud and Nassif, Fady},
+institution = {ALTAIR Engineering, France},
+institution = {ALTAIR Engineering, France},
+institution = {ALTAIR Engineering, France},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {831-838},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Simulation Environment  for Efficiently Mixing Signal Blocks and Modelica Components},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica tool
+Signal based tool
+FMI},
+abstract = {There exist several specialized tools that provide environments for the development and simulation of either pure Modelica models or pure signal based models. These  environments have each their own advantages and flaws.
+  solidThinking Activate\tm/ has been developed to mix these domains and take advantage of  both of these approaches to system modeling.
+  This paper presents this mixed Signal-Modelica environment, and in particular the efforts and challenges faced in its development.}
+}
+@inproceedings{Greenwood,
+author = {Greenwood, M. Scott},
+institution = {Oak Ridge National Laboratory, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {839-846},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Component Development for Nuclear Hybrid Energy Systems},
+year = {2017},
+issn = {1650-3740},
+keywords = {thermal hydraulics
+nuclear
+economics
+hybrid energy systems},
+abstract = {A Nuclear Hybrid Energy System (NHES) uses a nuclear reactor as the basic power generation unit. The power generated is then used by multiple customers as either thermal power, electrical power, or both. The definition and architecture of an NHES can be adapted based on the needs and opportunities of a given local market. For example, locations in need of potable water may be best served by coupling a desalination plant to the NHES. Similarly, a location near an oil refinery may have a need for emission-free hydrogen production. Using the flexible, multi-domain capabilities of Modelica, Argonne National Laboratory, Idaho National Laboratory (INL), and Oak Ridge National Laboratory (ORNL) are investigating the dynamics (e.g., thermal hydraulics and electrical generation/consumption) and cost of such a hybrid system. This paper examines ongoing NHES work including the modeling organizational layout, highlighting a few subsystems, describing some of the component development and providing results from a study of multi-dimensional conduction model development.}
+}
+@inproceedings{López Pérez,
+author = {Mesonero, Iván and Febres, Jesús and López Pérez, Susana},
+institution = {IK4-TEKNIKER, Spain},
+institution = {IK4-TEKNIKER, Spain},
+institution = {IK4-TEKNIKER, Spain},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {847-855},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling and simulation of fixed bed regenerators for a multi-tower decoupled advanced solar combined cycle},
+year = {2017},
+issn = {1650-3740},
+keywords = {fixed bed regenerator
+ceramic honeycomb
+stacked wire cloths
+solar Brayton cycle},
+abstract = {Two dynamic models of fixed bed regenerators for metallic and ceramic configurations have been developed in Modelica. These models have been both worked out within CAPTURE European project and will serve as design tool for a fixed bed regenerative heat exchange system. The present article describes in detail both models and presents a case study that compares experimental and simulation results for the testing of a ceramic honeycomb regenerative matrix.}
+}
+@inproceedings{Sammak,
+author = {Sielemann, Michael and Pitchaikani, Anand and Selvan, Nithish and Sammak, Majed},
+institution = {Modelon Deutschland GmbH, Germany},
+institution = {Modelon Engineering Pvt. Ltd., India},
+institution = {Modelon Engineering Pvt. Ltd., India},
+institution = {Modelon AB, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {909-920},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {The Jet Propulsion Library: Modeling and simulation of aircraft engines},
+year = {2017},
+issn = {1650-3740},
+keywords = {Turbo fan
+turbo jet
+turbo prop
+turbo shaft
+performance
+model-based design
+sizing
+secondary power off-take},
+abstract = {The Jet Propulsion Library provides a foundation for modeling and simulation of jet engines, and the model-based design of integrated aircraft systems. It provides a fully rigorous foundation for sizing and performance computations, and provides a number of advantages over existing domain-specific solutions due to the use of the Modelica language. This paper provides an introduction and overview of the new library and describes an application in the design of a turbo fan engine.}
+}
+@inproceedings{Pop,
+author = {Moudgalya, Kannan M. and Nemmaru, Bhargava and Datta, Kaushik and Nayak, Priyam and Jain, Rahul and Fritzson, Peter and Pop, Adrian},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. Computer and Information Sciences, Linköping University, Sweden},
+institution = {Dept. Computer and Information Sciences, Linköping University, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {275-284},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Large Scale Training through Spoken Tutorials to Promote and use   OpenModelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Spoken Tutorial
+Modelica
+OpenModelica
+teaching
+self learning
+modelling
+simulation},
+abstract = {The step-by-step self-teaching approach through audio-video
+  tutorials, known as Spoken Tutorials, has been very successful.
+  About 3.4 million students in India have taken at least one course
+  during the past 6-year period, of which 1.6 million students have
+  attended the rapidly expanding course programme during 2016. This
+  programme has now been expanded by a newly developed course in
+  Modeling and Simulation with Modelica using the OpenModelica open
+  source tool, primarily via the OMEdit graphical user interface. The
+  spoken tutorial programme is exclusively based on free and open
+  source software. This paper gives an introduction to the spoken
+  tutorial approach and presents the recently developed spoken
+  tutorial series for Modelica using OpenModelica.  Feedback of
+  participants shows that this series is an effective tool for
+  self-learning of OpenModelica.  The paper also presents a new web
+  version that generalises the interactive DrModelica course material,
+  OMWebbook:  it enables students to learn Modelica, do text-based
+  modeling exercises, and run simulations without needing to install a
+  Modelica tool. OMWebbook is also planned to be covered in a future
+  update to the spoken tutorial course on Modelica.}
+}
+@inproceedings{Blochwitz,
+author = {Franke, Rüdiger and Mattsson, Sven Erik and Otter, Martin and Wernersson, Karl and Olsson, Hans and Ochel, Lennart and Blochwitz, Torsten},
+institution = {ABB AG, Mannheim, Germany},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {DLR, Institute of System Dynamics and Control, Germany},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {Department of Computer and Information Science, Software and Systems, Linköping University, Sweden},
+institution = {ESI ITI GmbH, Dreseden, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {507-515},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Discrete-time models for control applications with FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+Synchonous modeling
+Inline Integration
+Model-based Control
+Nonlinear Inverse Model
+Feed Forward Control
+NMPC},
+abstract = {The paper proposes an extension of FMI 2.0 for the rigorous treatment of discrete-time models. This includes the introduction of discrete-time states, the declaration of clocks in the model description and an extension of the calling interface for the external activation of clocks by an importing environment.
+
+The synchronous discrete-time extension enables for the first time the synchronization of FMUs with the environment and with other FMUs. It specializes the existing generic event mechanism of FMI 2.0 and maps to synchronous features of Modelica.
+
+Discrete-time FMUs are needed for the generation of controller code from functional models. This paper outlines different use cases, including a simple PI controller, feed forward control with a nonlinear inverse model and nonlinear model predictive control.
+
+The FMI change proposal FCP-001 and the Modelica change proposal MCP-0024 describe the proposed extensions in more detail. Test implementations exist in the simulation tools Dymola and OpenModelica and in the importing optimization solver HQP. The use cases given in this paper served for further refinement of the change proposals and the test implementations.}
+}
+@inproceedings{Bayon,
+author = {de la Calle, Alberto and Bayon, Alicia},
+institution = {CSIRO Energy, 10 Murray Dwyer Ct., Mayfield West, NSW 2304, Australia},
+institution = {CSIRO Energy, 10 Murray Dwyer Ct., Mayfield West, NSW 2304, Australia},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {857-866},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Annual Performance of a Solar-Thermochemical Hydrogen Production Plant Based on CeO2 Redox Cycle},
+year = {2017},
+issn = {1650-3740},
+keywords = {Solar fuels
+Central receiver
+High temperature
+Dynamic modelling},
+abstract = {For the first time, a dynamic model of a 1 MWth thermochemical hydrogen production plant is developed and implemented for CeO2 redox cycle. The work explores the annual performance of a plant by studying the effect of the variables of the process by means of Direct Normal Irradiation (DNI), temperature, pressure and degree of oxidation affects the annual production of hydrogen.
+The model reproduces the behaviour of a thermochemical receiver-reactor exposed to solar radiation accounting of the thermal inertia of CeO2 which is significantly high
+to accomplish the oxidation without extracting the heat of reaction. The operation is optimized to obtain the maximum amount of hydrogen in a year by only modifying the
+mass flow rates at the inlet of the reactors. This characteristic demonstrates the flexibility and adaptability of the model that could be further improved to obtain a constant production of hydrogen.}
+}
+@inproceedings{Nielsen,
+author = {Gottelt, Friedrich and Hoppe, Timm and Nielsen, Lasse},
+institution = {XRG Simulation GmbH, Germany},
+institution = {XRG Simulation GmbH, Germany},
+institution = {TLK Thermo GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {867-877},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Applying the Power Plant Library ClaRa for Control Optimisation},
+year = {2017},
+issn = {1650-3740},
+keywords = {Power plant
+Clausius-Rankine cycle
+open-source library
+control optimisation
+soot blowing},
+abstract = {This paper presents the current state of the open-source Modelica library \ClaRa which enables the user to solve complex power plant simulation tasks. The library can be used to help control experts to develop and test controllers without disturbing the daily operation of the applying power plant. This reduces projects risks and costs significantly. As a use case the analysis and optimisation of a Benson boiler power control is presented. The presented solution reduces the impact of soot blowing on the power output by  57~\%.}
+}
+@inproceedings{Weber,
+author = {Waurich, Volker and Weber, Jürgen},
+institution = {Chair of Construction Machines, TU Dresden, Germany},
+institution = {Chair of Fluid-Mechatronic Systems, TU Dresden, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {879-885},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Interactive FMU-Based Visualization for an Early Design Experience},
+year = {2017},
+issn = {1650-3740},
+keywords = {visualization
+OpenModelica
+engineering education
+rapid prototyping
+construction machines
+game engine},
+abstract = {User experience is an eminent part of holistic product design.
+Especially in the field of mobile machinery, the
+driver’s impression of the machine handling is crucial for
+successful design. To get an early understanding of the ergonomic
+aspects of a new concept of operation, interactive
+simulation can be applied. This paper presents the tools
+to develop a functional prototype using free software and
+low-cost hardware. This includes prototyping of control
+devices, interfaces to the simulation models and a generic
+visualization using a game engine. In order to speed up the
+process of functional prototyping, an approach to automatically
+visualizing FMUs based on a scene description file
+is presented. The application of interactive simulation was
+used to support the development of a novel control device
+for excavators in a student project at TU Dresden.}
+}
+@inproceedings{Matteucci,
+author = {Bardaro, Gianluca and Bascetta, Luca and Casella, Francesco and Matteucci, Matteo},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milano, Italy},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milano, Italy},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milano, Italy},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milano, Italy},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {887-894},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Using Modelica for advanced Multi-Body modelling in 3D graphical robotic simulators},
+year = {2017},
+issn = {1650-3740},
+keywords = {Multi-Body Dynamics
+3D Robotic Simulators
+Autonomous Robotics
+Autonomous Vehicles},
+abstract = {This paper describes a framework to extend the 3D robotic simulation environment Gazebo, and similar ones, with enhanced, tailor-made, multi-body dynamics specified in the Modelica language. The body-to-body interaction models are written in Modelica, but they use the sophisticated collision detection capabilities of the Gazebo engine. This contribution is a first step toward the simulation of complex robotics systems integrating detailed physics modelling and realistic sensors such as lidar and cameras. A proof-of-concept implementation is described in the paper integrating Gazebo collider and the Modelica MultiBody library, and the results obtained when simulating the interaction of an elastic sphere with a rigid plane are shown.}
+}
+@inproceedings{Beutlich,
+author = {Richter, Christian and Weber, Jürgen and Ohser, Florian and Beutlich, Thomas},
+institution = {Chair of Construction Machines, TU Dresden, German},
+institution = {Chair of Fluid-Mechatronic Systems, TU Dresden, Germany},
+institution = {ESI ITI GmbH, Germany},
+institution = {ESI ITI GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {895-900},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A New Object-Oriented Approach for Integrating Discrete Element Method into Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {discrete element method
+co-simulation
+construction machines},
+abstract = {In this paper we present a new library for co-simulation of
+discrete element method and modelica models. For this a
+component-based approach is used which allows closed
+modeling and visualization of discrete element systems
+in a modelica tool. Translation into a native DEM description
+language and co-simulation is done by a separate
+compiler and backend. Usage and functionality are shown
+in a simple use case of a bucket excavator digging a hole.}
+}
+@inproceedings{Sekiguchi,
+author = {Yoshikawa, Hiroki and Oda, Takatsugu and Nonaka, Kenichiro and Sekiguchi, Kazuma},
+institution = {Mechanical Systems Engineering, Tokyo City University, Japan},
+institution = {Mechanical Systems Engineering, Tokyo City University, Japan},
+institution = {Mechanical Systems Engineering, Tokyo City University, Japan},
+institution = {Mechanical Systems Engineering, Tokyo City University, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {901-907},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Modeling and Simulation of Wheel Driving Systems based on Terramechanics for Planetary Explanation Rover using Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {terramechanics
+modeling
+identification
+space robots
+control system},
+abstract = {Planetary exploration rovers have to accomplish various missions on uneven and loose terrain. In recent years, systems of rovers adopting terramechanics which determine the force and moment characteristics of the wheel on loose soil is studied. In this study, using Modelica language, we construct a wheel model based on terramechanics, and we identify the wheel characteristics as a linear for a control. We conduct a numerical simulation of the rover using a controller including the identified longitudinal force model. It is shown that when the rover follows a straight line on a plane, the longitudinal force model identified using known soil parameters has sufficient accuracy
+on the wheel response based on terramechanics and could be used as a control model.}
+}
+@inproceedings{Henriksson,
+author = {Olsson, Hans and Mattsson, Sven Erik and Otter, Martin and Pfeiffer, Andreas and Bürger, Christoff and Henriksson, Dan},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {DLR, Institute of System Dynamics and Control, Germany},
+institution = {DLR, Institute of System Dynamics and Control, Germany},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+institution = {Dassault Systèmes AB, Lund, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {517-526},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Model-based Embedded Control using Rosenbrock Integration Methods},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+inverse models
+real-time
+embedded
+Rosenbrock methods
+inline integration
+feedforward controller
+feedback linearization},
+abstract = {Directly generating controller code from models is important for model-based design. This paper will demonstrate how Dymola can generate embedded C-code for Modelica models – with several novel aspects, and demonstrate this for actual application examples.
+
+Specifically the paper will show that Dymola can generate embedded C-code designed to be easy to embed, with care about minimal foot-print, traceability, and straightforward integration in embedded platforms.
+
+The paper will focus on using Rosenbrock methods for index-1 problems (instead of the normal transformation to index-0) that allows Dymola to handle stiff systems in a way that both is theoretically sound and has an upper bound on the execution time per sample.
+
+The stiff systems in the control system often occur due to using an inverse (simplified) model of the real plant in the controller, and the paper will also propose to extend Modelica making it more straightforward to construct an inverse model of the plant in the controller.}
+}
+@inproceedings{Li,
+author = {Wang, Kai and Greiner, Christopher and Batteh, John and Li, Lixiang},
+institution = {Ford Motor Company, USA},
+institution = {Ford Motor Company, USA},
+institution = {Modelon, Inc., USA},
+institution = {Modelon, Inc., USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {527-532},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Integration of complex Modelica-based physics models and discrete-time control systems: Approaches and observations of numerical performance},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+discrete
+variable
+integration},
+abstract = {As CAE simulations become more complex, the need for computational efficiency increases in order to provide timely solutions and analyses. One facet of this complexity is the integration of multiple software modeling tools and environments in order to utilize the most capable computational technologies for the different features of these complex system models. Physical plant models may be developed in Modelica and require variable step solvers to capture both fast and slow continuum dynamics while discrete time-based control systems may be developed in C-code or Simulink and require fixed time step solvers. Integrating these plant and control models into a single environment can result in computational inefficiencies due to conflicting solver time step requirements.  This paper will discuss the integrated modeling of an automotive vapor compression air conditioning system and associated control systems over a dynamic drive cycle, and the associated numerical performance issues discovered, as well as some approaches taken to increase said performance.}
+}
+@inproceedings{Junghanns,
+author = {Bertsch, Christian and Mukbil, Awad and Junghanns, Andreas},
+institution = {Corporate Research, Robert Bosch GmbH, Germany},
+institution = {Dept. of Informatics, Clausthal University of Technology, Germany},
+institution = {QTronic GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {533-540},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Improving Interoperability of FMI-supporting Tools with Reference FMUs},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+Reference FMUs
+Compliance
+Testing},
+abstract = {The Functional Mockup Interface (FMI) is more and more adopted by industrial users, increasing the pressure for higher quality and standard compliance of FMI supporting tools. The FMI cross check infrastructure was created to support tool vendors in their quest for quality improvements and to give users some measure of confidence in the tool quality. Currently it is up to the tool vendors which FMUs to submit there and therefore the features tested in the FMI cross check is incomplete and interpretation of failures is difficult. While for FMI export there is the FMU compliance checker to test a wide variety of FMI features, no means are available today to prove standard compliance for FMI import. This will be overcome by adding reference FMUs to the FMI cross check, testing specific features of the FMI standard for standard compliance and giving detailed feedback, if an importing tool violates the standard. The paper describes the realization and the importance of reference FMUs.}
+}
+@inproceedings{Schnabel,
+author = {Gundermann, Julia and Thiele, Matthias and Fraulob, Sebastian and Walther, Susanne and Todtermuschke, Karsten and Schnabel, Uwe},
+institution = {ESI ITI GmbH, Germany},
+institution = {Institute of Electromechanical and Electronic Design, Technische Universität Dresden, Germany},
+institution = {Johnson Electric Germany GmbH & Co. KG Dresden, Germany},
+institution = {ESI ITI GmbH, Germany},
+institution = {ESI ITI GmbH, Germany},
+institution = {ESI ITI GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {541-545},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {The Embedded Simulation via FMI and its Application to the Simulation of Lifetime Tests Including Wear},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+wear
+SimulationX
+simulation
+mechatronics},
+abstract = {The "Embedded Simulation via FMI" is a new modeling approach which allows for efficient and fast computation of systems with a clear separation of time axis or time
+scale. For its application the so-called "inner model" is wrapped into an FMU and embedded into an outer model, whose dynamics control the integration. The computation
+of the embedded model is only utilized on demand. In this way the "Embedded Simulation via FMI" uses the Functional Mock-up Interface for Co-Simulation in a different way than it was provided for. The functionality has been realized within SimulationX prototypically. It is applied to the simulation of the lifetime test of a linear stepper motor including wear in the screw drive, for which the axial play after several months’ runtime shall be determined. A significant reduction of computing time while preserving considerable accuracy can be shown.}
+}
+@inproceedings{Ohtomi,
+author = {Matsuda, Shinji and Toriya, Hiroshi and Suzuki, Hiromasa and Ohtomi, Koichi},
+institution = {Lattice Technology Co.,Ltd., Japan},
+institution = {Lattice Technology Co.,Ltd., Japan},
+institution = {Department of Precision Engg., The University of Tokyo, Japan},
+institution = {Department of Precision Engg., The University of Tokyo, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {547-556},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Integration Modelica with Digital Mockup Tool using the FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+1DCAE
+Functional Mockup Interface
+XVL
+Digital Mockup},
+abstract = {Delight Design Platform Project is the project managed by The University of Tokyo as one of the projects included in the Cross-ministerial Strategic Innovation Program (SIP) which is organized by Cabinet Office, Government of Japan. In this project, 1DCAE tool is recommended as a design tool in the concept phase of the product development. In the Delight Design Platform the concept of the new product is simulated with 1DCAE model and evaluated. Prototyping a tool for translating the concept to 3D model is one of the objectives of the project. This paper describes a method of the integration Modelica with 3D digital mockup (DMU) tool. The prototype is implemented as an extension of the XVL Studio which is one of the most popular DMU tools provided by Lattice Technology Co.,Ltd. The integration is realized by the technology of FMI (Functional Mockup Interface).}
+}
+@inproceedings{Bachmann,
+author = {Braun, Willi and Casella, Francesco and Bachmann, Bernhard},
+institution = {FH Bielefeld, Bielefeld, Germany},
+institution = {Dipartimento di Elettronica, Informazione e Bioingegneria, Politecnico di Milano, Milano, Italy},
+institution = {FH Bielefeld, Bielefeld, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {557-563},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Solving large-scale Modelica models: new approaches and experimental results using OpenModelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+OpenModelica
+large-scale
+sparse solver techniques},
+abstract = {Modelica-based modeling and simulation is becoming increasingly important for the development of high quality engineering products. Therefore, the system size of interest in a Modelica-based simulation is continously increasing and the traditional way of generating simulation code, e.g. involving symbolic transformations like matching, sorting, and tearing, must be adapted to this situation.
+This paper describes recently implemented sparse solver techniques in OpenModelica in order to efficiently compile and simulate large-scale Modelica models. A proof
+of concept is given by evaluating the performance of selected benchmark problems.}
+}
+@inproceedings{Elmqvist,
+author = {Otter, Martin and Elmqvist, Hilding},
+institution = {Institute of System Dynamics and Control, DLR, Germany},
+institution = {Mogram AB, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {565-579},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Transformation of Differential Algebraic Array Equations to Index One Form},
+year = {2017},
+issn = {1650-3740},
+keywords = {Modelica
+Modia
+Julia
+DAE
+sparse DAE
+large DAE
+Gear/Gupta/Leimkuhler algorithm
+Pantelides algorithm
+Dummy Derivative Method},
+abstract = {Several new algorithms are proposed that in effect transform DAEs (Differential Algebraic Equations) to a special index one form that can be simulated with standard DAE integrators. The transformation to this form is performed without solving linear and/or nonlinear equation systems, the sparsity of the equations is kept, and array equations remain array equations or differentiated versions of them. Furthermore, certain DAEs can be handled where structural index reduction methods fail. It is expected that these new algorithms will help to treat large Modelica models of any index in a better way as it is currently possible. The algorithms have been evaluated and tested in the experimental simulation environment Modia that is implemented with the Julia programming language.}
+}
+@inproceedings{Hirano,
+author = {Hirano, Yutaka},
+institution = {Toyota Motor Corporation, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {17-26},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Development of an Integrated Control of Front Steering and Torque Vectoring Differential Gear System Using Modelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {Model Based Development
+Vehicle Dynamics Control
+Torque Vectoring
+Active Front Steering
+Model Matching Control},
+abstract = {To achieve future low carbon mobility society, many new-type electric vehicles (EVs) are developed actively in recent period. Those EVs have integrated power unit which take place of conventional engine, transmission and differential gear components. Additionally it is rather easy to integrate torque vectoring function to those power units using gear sets to control torque distribution between left wheel and right wheel. In this paper, model-based development of an integrated control of the front steering angle and torque vectoring differential (TVD) gear system is described. New integrated control logic was developed using model matching control to let the vehicle yaw rate and vehicle slip angle follow the desired dynamics. Simulation results using a single track model of vehicle dynamics are shown to prove the efficacy of the proposed control. Though, full vehicle model considering all of vehicle dynamics and drive train motion using Modelica clarified the problem of this method in actual cases. Difference between single track model and full vehicle model was compared to estimate the reason of the problem}
+}
+@inproceedings{Matsuoka,
+author = {Cho, Hyung Yun and Han, Manyong and Hirao, Akinari and Matsuoka, Hisayoshi},
+institution = {Hongik University, Korea},
+institution = {Hongik University, Korea},
+institution = {Nissan Motor Co. Ltd, Japan},
+institution = {Nissan Motor Co. Ltd, Japan},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {27-34},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Virtual Occupant Model for Riding Comfort Simulation},
+year = {2017},
+issn = {1650-3740},
+keywords = {digital human body model
+riding comfort simulation
+1D lumped network Modelica model
+3D mesh based Finite Element model
+vibration excitation},
+abstract = {A digital human body model as a virtual occupant surrogate for the riding comfort simulation is developed for both 1D lumped network (Modelica) and 3D mesh based (Finite Element) solutions. Since the composition of 1D and 3D versions of the human body model has a similar multibody system architecture, the kinematic responses from both solutions are almost equivalent. The models are therefore complementary, since the economic 1D models can serve effectively in design exploration and optimization, while their sophisticated 3D counterparts can serve in final design validation. The detailed modeling process and validation results against standard seat vibration excitation test are introduced in this paper, preparing the models for use in seat design.}
+}
+@inproceedings{Haumer,
+author = {Grimm, Alexander and Haumer, Anton},
+institution = {OTH Regensburg, Germany},
+institution = {OTH Regensburg, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {285-290},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {EMOTH The EMobility Library of OTH Regensburg},
+year = {2017},
+issn = {1650-3740},
+keywords = {e-mobility
+electric vehicle
+vehicle interfaces},
+abstract = {The importance of E-Mobility is rapidly increasing, not only for private vehicle traffic but also for public transport. In and around Regensburg, Germany there are a lot of automotive companies. Therefore E-Mobility is an important topic in the curriculum of several courses of study at the East-Bavarian Technical University of Applied Sciences Regensburg (OTH).
+One Master of Applied Research student at OTH has chosen the topic to develop an open-source simulation tool for electric vehicles – the EMOTH Library – based on Modelica and to refine several aspects of the library during the one and a half year of the master course.
+After one semester, the basic version of the library is available and will be presented in this paper.}
+}
+@inproceedings{Stüber,
+author = {Stüber, Moritz},
+institution = {University of Applied Sciences Vorarlberg, Austria},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {291-298},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Simulating a Variable-structure Model of an Electric Vehicle for Battery Life Estimation Using Modelica/Dymola and Python},
+year = {2017},
+issn = {1650-3740},
+keywords = {Variable-structure Model
+VSM
+Modelica
+Dymola
+Simulation},
+abstract = {A variable-structure model (VSM) of a battery electric vehicle used for simulating the ageing of the battery pack is presented. The operating principle of the software used to simulate the models is described and a brief summary of the state of science and technology regarding the simulation of VSMs is given. By comparing the performance of the VSM to a conventional model, it is found that the simulation time does not necessarily decrease when replacing a model with a variable-structure version. However, the VSM has advantages regarding the handling of the result files and the possibility to analyse the results.}
+}
+@inproceedings{Dempsey,
+author = {Gillot, Romain and Gallagher, Stephen and Picarelli, Alessandro and Dempsey, Mike},
+institution = {Claytex Services Ltd. Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+institution = {Ford Motor Company Ltd, Dunton Technical Centre, SS15 6EE, UK},
+institution = {Claytex Services Ltd. Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+institution = {Claytex Services Ltd. Edmund House, Rugby Road, Leamington Spa, CV32 6EL, UK},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {299-306},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Model Reduction Techniques Applied to a Physical Vehicle Model for HiL Testing},
+year = {2017},
+issn = {1650-3740},
+keywords = {vehicle model
+model reduction
+real-time simulation
+Hardware-in-the-Loop testing},
+abstract = {To build a full vehicle model entirely based on physical
+equations is a challenge. To have this model to run fast
+enough so that it is suitable for Hardware-in-the-Loop testing
+is even more challenging. The level of detail in the physical
+representation of the vehicle can always be increased at the
+cost of simulation time. Even if the performance of the
+hardware is constantly improving, we still have to
+compromise.
+As part of the MORSE (MOdel based Real-time Systems
+Engineering) project, model reduction techniques are
+developed and applied to a vehicle model. The results in
+terms of accuracy and simulation speed are then investigated.}
+}
+@inproceedings{Samlaus,
+author = {Mikelsons, Lars and Samlaus, Roland},
+institution = {Robert Bosch GmbH, Germany},
+institution = {Robert Bosch GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {307-311},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Towards Virtual Validation of ECU Software using FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+virtual validation
+ECU
+vECU
+autonomous driving},
+abstract = {Connected, Automated, Electrified. These three trends in the automotive industry require rethinking of the use of simulation respectively models. The use of models for evaluation of new concepts or stimulating the unit-under-test (in HiL testing), already firmly rooted in the development process of software functions, will not be sufficient to realize visions like autonomous driving or update-over-the-air. One key enabler for such technologies is virtual validation, i.e. the validation or release of software functions in a pure virtual setup. That is, simulation is not only a tool to shorten the development cycle, but one of the key technologies to release future software functions, e.g. highly automated or autonomous driving. 
+In this contribution a feasibility study for the validation of FMI-based virtual ECUs (vECUs) in a co-simulation setup is presented. Thereby, the powertrain and the vECU are represented by FMUs, while the tool CarMaker is used for vehicle dynamics. On the base of the gained experience requirements for the FMI standard are formulated that would allow to go for virtual validation of future software functions.}
+}
+@inproceedings{Menager,
+author = {Kampfmann, Rüdiger and Mösch, Danny and Menager, Nils},
+institution = {Bosch Rexroth AG, Lohr am Main, Germany},
+institution = {Bosch Rexroth AG, Lohr am Main, Germany},
+institution = {Bosch Rexroth AG, Lohr am Main, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {313-319},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Parameter Estimation based on FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {Parameter Estimation
+Levenberg-Marquardt Algorithm
+FMI
+Least Squares Optimization
+Log-likelihood method},
+abstract = {In order to stay competitive the requirements on machinery in the producing industry have enormously increased. Within the automation industry these demands, like higher throughput or better energy efficiency, result in increasing complexity of the installed plants. Additionally, Industry 4.0 and the Internet of Things continuously increase the amount of software. Using model-based development methods is one approach to deal with this complexity. But model-based methods can also be utilized during the operational phase of a plant in order to generate additional value for the plant operator. Introducing smart services based on the usage of physical models enables new control and diagnosis features, e.g. the utilization of inverse plant models for feedforward control or comparing the output of a model with measurements of the plant in order to prove for correct behavior. For all these services the accuracy of the considered models is crucial. With an inexact model neither the future behavior can be foreseen nor the control quality can be improved. The used models don&#8217;t have to be built up from scratch, existing models already created for sizing can be reused. However, these models cannot be used directly. First a reparametrization is necessary, because effects like friction or manufacturing tolerances cannot be taken into account correctly during sizing. For this special kind of problem dedicated optimization algorithms are available for parameter estimation, which take randomly distributed measurement errors and the special structure of this problem class into account. 
+In this paper a work flow for parameter estimation based on open source tools is presented, in which the considered models are provided as Functional Mock-up Unit. Afterwards the performance of this work flow is demonstrated on a real industrial problem: A three arm Delta Robot.}
+}
+@inproceedings{Müller,
+author = {Widl, Edmund and Müller, Wolfgang},
+institution = {Center for Energy, AIT Austrian Institute of Technology, Austria},
+institution = {Institute of Analysis and Scientific Computing, TU Wien, Austria},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {321-327},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Generic FMI-compliant Simulation Tool Coupling},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI for Co-Simulation
+tool coupling
+front-end/back-end concept
+TRNSYS
+MATLAB},
+abstract = {The Functional Mock-up Interface (FMI) specification provides a simple yet effective definition for co-simulation APIs. Even though the number of simulation tools supporting the export of Functional Mock-up Units (FMU) is growing steadily, there is a considerable number of well-established tools that do not. This paper addresses this issue by introducing a generic and adaptable way of coupling established simulation tools in an FMI-compliant manner. The proposed concept has been implemented as part of the FMI++ library, which is used as basis for FMI-compliant wrappers for the TRNSYS simulation tool and the MATLAB environment. These examples demonstrate the potential of the proposed approach to include well-established simulation tools with minimal effort. This not only enables researchers and engineers to include a diverse range of tools more easily into their work flow, but is also an incentive for tool developers to provide FMI-compliant wrappers.}
+}
+@inproceedings{Henningsson,
+author = {Durling, Erik and Palmkvist, Elias and Henningsson, Maria},
+institution = {Modelon AB, Sweden},
+institution = {Modelon AB, Sweden},
+institution = {Modelon AB, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {329-335},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {FMI and IP protection of models: A survey of use cases and support in the standard},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+IP protection
+model exchange},
+abstract = {FMI is increasingly being adopted as a standard for exchanging simulation models within and between organizations. Such models often represent significant investments for the model creator. There is thus a large interest in protecting intellectual property while collaborating and sharing simulation model in the form of FMUs. This paper presents a collection of use cases and issues related to IP protection of model contents that have been identified in interviews with industrial representatives. The requirements in each use case are described, along with an investigation of how well the use cases can be managed within the current version of the FMI standard, and proposed extension of the standard.}
+}
+@inproceedings{Desmet,
+author = {Gonzalez Cocho, Mikel and Salgado, Oscar and Croes, Jan and Pluymers, Bert and Desmet, Wim},
+institution = {IK4-Ikerlan Technology Research Center, Control and Monitoring Area, Spain / KU Leuven, Department of Mechanical Engineering, Belgium},
+institution = {IK4-Ikerlan Technology Research Center, Control and Monitoring Area, Spain},
+institution = {KU Leuven, Department of Mechanical Engineering, Belgium /Member of Flanders Make, Belgium},
+institution = {KU Leuven, Department of Mechanical Engineering, Belgium /Member of Flanders Make, Belgium},
+institution = {KU Leuven, Department of Mechanical Engineering, Belgium /Member of Flanders Make, Belgium},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {337-344},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Model-based virtual sensors by means of Modelica and FMI},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+virtual sensors
+Extended Kalman Filter},
+abstract = {This paper presents an application case for the estimation of forces using  Modelica and the FMI. For that purpose state estimation and model-based virtual sensors are used. These techniques are presented and the development of the state estimation and virtual sensor library for Modelica and the FMI is discussed. This library is developed in Python where the package pyFMI is used with models exported with the FMI 2.0 for model exchange. The technique is used for the estimation of forces and the friction coefficient in a scaled test bench of a vertical transportation system. The model of this test bench is explained and the results of the estimation of forces and the friction coefficient are discussed.}
+}
+@inproceedings{Pitchaikani,
+author = {Magargle, Ryan and Johnson, Lee and Mandloi, Padmesh and Davoudabadi, Peyman and Kesarkar, Omkar and Krishnaswamy, Sivasubramani and Batteh, John and Pitchaikani, Anand},
+institution = {ANSYS Inc., USA},
+institution = {ANSYS Inc., USA},
+institution = {ANSYS Inc., USA},
+institution = {ANSYS Inc., USA},
+institution = {ANSYS Inc., USA},
+institution = {ANSYS Inc., USA},
+institution = {Modelon Inc., USA},
+institution = {Modelon Inc., USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {35-46},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {A Simulation-Based Digital Twin for Model-Driven Health Monitoring and Predictive Maintenance of an Automotive Braking System},
+year = {2017},
+issn = {1650-3740},
+keywords = {digital twin
+electronics
+electromagnetics
+hydraulics
+pneumatics
+braking system
+automotive
+FEA},
+abstract = {This paper describes a model-driven approach to support heat monitoring and predictive maintenance of an automotive braking system.  This approach includes the creation of a simulation-based digital twin that combines models and different modeling formalisms into an integrated model of the braking system that can be used for monitoring, diagnostics, and prognostics.  The paper provides an overview of the basic models including Modelica models, reduced order models for various key components of the system model, and controls and sensor models.  The simulation results include both baseline results for the system and the results of injecting failures into the system for monitoring and predictive maintenance.}
+}
+@inproceedings{Batteh,
+author = {Tate, Ed and Gargoloff, Joaquin and Duncan, Brad and Tummescheit, Hubertus and Griffin, John and Batteh, John},
+institution = {Exa, USA},
+institution = {Exa, USA},
+institution = {Exa, USA},
+institution = {Modelon, USA},
+institution = {Modelon, USA},
+institution = {Modelon, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {47-53},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Improved Aerodynamic Prediction Through Coupled System and CFD Models},
+year = {2017},
+issn = {1650-3740},
+keywords = {aerodynamics
+vehicle suspension
+co-simulation
+FMI},
+abstract = {High accuracy predictions of aerodynamic forces using computational fluid dynamics requires accurate geometry. The aerodynamic forces on the vehicle body affects the vehicle posture or the vehicle position with respect to ground. When a vehicle is cruising, the change in vehicle posture is usually relatively small with respect to the size of a vehicle. However, these small changes in geometry can lead to significant correlation differences in drag and airflow structure. To address this issue, a coupled simulation approach was developed to predict vehicle posture in typical cruise and wind tunnel test conditions. This coupled approach was tested using PowerFLOW and Modelon’s Vehicle Dynamics Library (VDL). In this approach, the aerodynamic forces on the body are used to calculate the movement of the body and geometry. This modified geometry is then used to recalculate the operating aerodynamic forces. The modified geometry shows changes in total force, the distribution of forces, and the structure of the airflow over the vehicle. The results provided by correct geometry under load conditions offer better correlation to test and provide car makers with the improved accuracy to confidently improve real world fuel economy.}
+}
+@inproceedings{Sohn,
+author = {Tian, Wei and Zuo, Wangda and Sevilla, Thomas and Sohn, Michael},
+institution = {Department of Civil, Architectural, and Environmental Engineering, University of Miami, USA},
+institution = {Department of Civil, Architectural, and Environmental Engineering, University of Miami, USA},
+institution = {Department of Civil, Architectural, and Environmental Engineering, University of Miami, USA},
+institution = {Sustainable Energy Systems Group, Lawrence Berkeley National Laboratory, USA},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {55-61},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Coupled Simulation between CFD and Multizone Models Based on Modelica Buildings Library to Study Indoor Environment Control},
+year = {2017},
+issn = {1650-3740},
+keywords = {CFD
+Multizone
+Coupled Simulation},
+abstract = {Multizone models are widely used in building airflow and energy performance simulations because they are often suitable for the analysis needed, and due to their fast computation speed.However, the results provided by the multizone
+models are sometimes limited due to the underlying well-mixed assumption of the air in a zone (e.g., a room). For zones where this assumption is not suitable, a Computational Fluid Dynamics (CFD) models may be needed. This paper proposes a coupled simulation model between the multizone and CFD models. The model allows the simulation of a dynamic interaction between airflow and Heating, Ventilation and Air-Conditioning (HVAC) systems for buildings with stratified airflow
+distribution in some of the zones. The approach is implemented using Modelica and its buildings library. In this presenation, we first discuss the
+design and implementation of a data synchronization strategy between the two
+models. We then show a possible validation of the implementation by comparing the simulated results with experimental data from previous research. Finally, we perform a case study by linking a Variable Air Volume (VAV) terminal box to the space in order to evaluate the capability of the coupled simulation. Finally,
+further research needs are discussed at the end of the paper.}
+}
+@inproceedings{Paepcke,
+author = {Nicolai, Andreas and Paepcke, Anne},
+institution = {Institut for Building Climatology, Faculty of Architecture, TU Dresden, Germany},
+institution = {Institut for Building Climatology, Faculty of Architecture, TU Dresden, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {63-72},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Co-Simulation between detailed building energy performance simulation and Modelica HVAC component models},
+year = {2017},
+issn = {1650-3740},
+keywords = {FMI
+Co-Simulation
+Energy
+Building Simulation
+HVAC System
+Physical Interface
+Master Algorithm},
+abstract = {We discuss the application of the FMI Co-Simulation technology to building energy performance simulation, where detailed physical building models are coupled to Modelica-based HVAC component and plant models. First, we describe the generation process of the building FMU from our stand-alone building simulation program NANDRAD and sketch out internal algorithms for FMI version 2 capabilities. Then, coupling scenarios are described and physical interface conventions are presented. Usability is addressed by automatic generation of building-model specific adapters and wrappers. The building FMU and plant FMUs are then simulated together using different Co-Simulation master algorithms. Finally, based on simulation results and performance analysis we conclude with recommendations on suitable master algorithm options and specific features of suitable building FMUs.}
+}
+@inproceedings{Pipiorke,
+author = {Schwan, Torsten and Unger, René and Pipiorke, Jörg},
+institution = {EA Systems Dresden GmbH, Germany},
+institution = {EA Systems Dresden GmbH, Germany},
+institution = {ESI ITI GmbH, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {73-78},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Aspects of FMI in Building Simulation},
+year = {2017},
+issn = {1650-3740},
+keywords = {Building Simulation
+FMI
+Model-in-the-loop
+Controller Test},
+abstract = {Building physics and HVAC system simulation have become an important usage scenario of the Modelica modeling language and related simulation tools since the publication of first adequate libraries (Wetter, 2009). In 2010, the tool independent standard FMI was published in version 1.0. It enables the exchange of models between different simulation tools and even different modeling approaches. Although, automotive industry mainly initiated the FMI development, it can extensively benefit building simulation, too.
+This paper describes four completely different applications of FMI in the building simulation environment which even extend the basic idea of simple model exchange. This includes the description of developed models as well as additionally required software components implementing the FMI standard.}
+}
+@inproceedings{Meyer,
+author = {Clauß, Christoph and Majetta, Kristin and Meyer, Richard},
+institution = {Fraunhofer IIS EAS, Zeunerstraße 38, D-01069 Dresden, Germany},
+institution = {Fraunhofer IIS EAS, Zeunerstraße 38, D-01069 Dresden, Germany},
+institution = {Fraunhofer IIS EAS, Zeunerstraße 38, D-01069 Dresden, Germany},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {79-88},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Application of Richardson Extrapolation to the Co-Simulation of FMUs from Building Simulation},
+year = {2017},
+issn = {1650-3740},
+keywords = {Building Simulation
+FMI
+Co-Simulation
+Richardson Extrapolation
+Variable Time Step Size},
+abstract = {The application of the FMI technology gains ground in building simulation. As far as specialized tools support the FMI simulator coupling becomes an important option to simulate complex building models. Co-simulation needs a master algorithm which controls the communication time steps as well as the signal exchange between FMUs. Often a constant communication step size is applied chosen by the user. The Richardson extrapolation approach allows variable master step sizes. An extension of this approach is presented, and the method is applied to both academic test examples as well as examples of building simulation which co-simulate FMUs from NANDRAD and SimulationX. Richardson extrapolation turns out to guarantee finding an appropriate step size at the prize of downgraded performance.}
+}
+@inproceedings{Pop,
+author = {Jain, Rahul and Moudgalya, Kannan M. and Fritzson, Peter and Pop, Adrian},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. of Chemical Engineering, Indian Institute of Technology Bombay, India},
+institution = {Dept. Computer and Information Sciences, Linköping University, Sweden},
+institution = {Dept. Computer and Information Sciences, Linköping University, Sweden},
+booktitle = {Proceedings of the 12th International Modelica Conference, Prague, Czech Republic, May 15-17, 2017},
+number = {132},
+pages = {89-99},
+publisher = {Linköping University Electronic Press, Linköpings universitet},
+title = {Development of a Thermodynamic Engine in OpenModelica},
+year = {2017},
+issn = {1650-3740},
+keywords = {OpenModelica
+DWSIM
+Chemsep
+thermodynamics
+modeling
+simulation
+chemical engineering
+media
+Python-C API
+Socket programming},
+abstract = {OpenModelica, an open source equation oriented modeling environment
+  for steady state and dynamic simulation, lacks good chemical
+  engineering support.  This problem is addressed by making available
+  in different ways the thermodynamic library Chemsep that comes with
+  DWSIM, an open source sequential modular steady state simulator.
+  Only slow speeds could be achieved through a Python-C API based
+  interface connecting OpenModelica with the thermodynamic library.  A
+  socket programming based interface helps achieve faster speeds.
+  Best results have been achieved by porting the thermodynamic library
+  and the calculation routines to OpenModelica, due to two reasons:
+  (1) thermodynamic equations are solved simultaneously with mass and
+  energy balances (2) overheads in calling the external routines of
+  DWSIM are eliminated.  Performances of the above mentioned three
+  approaches have been validated with steady state and dynamic
+  simulations.  Benzene - toluene separation, methanol - ethanol -
+  water distillation, and steam distillation of an n-octane - n-decane
+  mixture, have been carried out through these simulations.  This work
+  makes available a powerful simulation platform to the chemical
+  engineering.}
+}
