@@ -9,3 +9,6 @@ dist/
 modelicapy/raven/pyfmi_raven/
 modelicapy/raven/out.log
 modelicapy/wordclouds/InternationalModelicaConference/original/
+modelicapy/optimization/*
+!modelicapy/optimization/ModelicaModelOptimization.py
+!modelicapy/optimization/OptimizationDemonstration

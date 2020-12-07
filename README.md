@@ -39,6 +39,7 @@ or
 8. createUnitScripts.py - autogenerate .mos files for use with buildingspy regression test.
 9. raven folder - contains an example of running FMU (via pyFMI) with [RAVEN](https://github.com/idaholab/raven)
 10. wordclouds folder - example playing with the Modelica conference proceedings and wordcloud
+11. optimize folder - a demonstration. auto-simulate multiple heat transfer models, select the best one based on gold values, and then optimize CFs to match the gold values
 
 ## To Contribute...
 You may report any issues with using the Issues button.
