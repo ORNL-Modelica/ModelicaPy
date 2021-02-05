@@ -5,12 +5,6 @@ A Python package containing a variety of scripts and functions for interaction w
 
 Scott Greenwood
 
-## License
-
-This project is licensed under the UT-Battelle Open Source [License](LICENSE.md) (Permissive)
-
-Copyright 2017, UT-Battelle, LLC
-
 ## Installation and Use
 
 https://pypi.org/project/modelicapy/ - *pip version may be behind GitHub* 
