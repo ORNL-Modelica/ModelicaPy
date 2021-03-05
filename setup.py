@@ -12,7 +12,7 @@ setuptools.setup(
     description=("A Python library containing a variety of scripts and functions for interaction with Modelica and TRANSFORM"),
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
-    license="UT-Battelle Open Source License (Permissive)",
+    license="Apache 2.0 License",
     keywords="modelica dymola openmodelica mat",
     url="https://github.com/ORNL-Modelica/ModelicaPy",
     install_requires=['future'],
