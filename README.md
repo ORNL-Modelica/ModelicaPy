@@ -15,11 +15,13 @@ https://pypi.org/project/modelicapy/ - *pip version may be behind GitHub*
 	
 **For updating your pip install to the latest GitHub version:**
 
-    pip install git+git://ADDRESS@master
+    pip install git+https://github.com/ORNL-Modelica/ModelicaPy.git@master
+    
+  
 	
 or
 
-    pip install --upgrade git+git://ADDRESS@master
+    pip install --upgrade git+https://github.com/ORNL-Modelica/ModelicaPy.git@master
 	
 ## Brief Description of Files
 
