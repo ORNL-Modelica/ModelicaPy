@@ -86,29 +86,33 @@ def simulateFMU(inputFileName,outputFileName,input,set_input_derivatives):
     
 if __name__ == '__main__':
 
-    # # Check for number of arguments provided by raven and define appropriate file name
-    # if len(sys.argv) == 1:
-    #     inputFileName = "referenceInput.txt"
-    # else:
-    #     inputFileName = sys.argv[1]
+    # Check for number of arguments provided by raven and define appropriate file name
+    if len(sys.argv) == 1:
+        inputFileName = "referenceInput_pyTest.txt"
+    else:
+        inputFileName = sys.argv[1]
         
-    # if len(sys.argv) < 3:
-    #     outputFileName = "results.csv"
-    # else:
-    #     outputFileName = sys.argv[2]
+    if len(sys.argv) < 3:
+        outputFileName = "results.csv"
+    else:
+        outputFileName = sys.argv[2]
 
-    # if outputFileName.endswith(".csv"):
-    #     outputFileName = outputFileName
-    # else:
-    #     outputFileName = outputFileName + ".csv"
+    if outputFileName.endswith(".csv"):
+        outputFileName = outputFileName
+    else:
+        outputFileName = outputFileName + ".csv"
 
     set_input_derivatives = False
+       
+    # Simple inputs to play with
     dtype = [('time', np.double), ('u', np.double)]
-    signals = np.array([(0.0, 1)], dtype=dtype)
-        
-    inputFileName = "referenceInput_pyTest.txt"
-    outputFileName = "results.csv"
+    # signals = np.array([(0.0, 0.0), (10.0, 1.0)], dtype=dtype)
     
+    # Alternative more complicated input shapes
+    t = np.linspace(0.0,25,25)
+    x = np.sin(0.5*t)
+    signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
+   
     # Run the FMU and create the output file
     simulateFMU(inputFileName,outputFileName,input=signals,set_input_derivatives=set_input_derivatives)
 
