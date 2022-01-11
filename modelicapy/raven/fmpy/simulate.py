@@ -6,11 +6,12 @@ Created on Tue Jan 11 09:03:37 2022
 """
 
 from fmpy import simulate_fmu
+import numpy as np
 import pandas as pd  
 import sys 
 import re
 
-def simulateFMU(inputFileName,outputFileName):
+def simulateFMU(inputFileName,outputFileName,input,set_input_derivatives):
     '''
     Read an input file of a specific format, update setting values, simulate the FMU, and output results.
 
@@ -75,30 +76,49 @@ def simulateFMU(inputFileName,outputFileName):
     if len(output) == 0: output = None
     
     # Simulate
-    results = simulate_fmu(fmuName,start_time=start_time,stop_time=stop_time,output_interval=output_interval,start_values=start_values,output=output)
+    results = simulate_fmu(fmuName,
+                           start_time=start_time,stop_time=stop_time,output_interval=output_interval,
+                           input=input,set_input_derivatives=set_input_derivatives,
+                           start_values=start_values,output=output)
 
     # Save results to csv (column - variable, row - values)
     pd.DataFrame(results).to_csv(outputFileName, index=False)
     
 if __name__ == '__main__':
 
-    # Check for number of arguments provided by raven and define appropriate file name
-    if len(sys.argv) == 1:
-        inputFileName = "referenceInput.txt"
-    else:
-        inputFileName = sys.argv[1]
+    # # Check for number of arguments provided by raven and define appropriate file name
+    # if len(sys.argv) == 1:
+    #     inputFileName = "referenceInput.txt"
+    # else:
+    #     inputFileName = sys.argv[1]
         
-    if len(sys.argv) < 3:
-        outputFileName = "results.csv"
-    else:
-        outputFileName = sys.argv[2]
+    # if len(sys.argv) < 3:
+    #     outputFileName = "results.csv"
+    # else:
+    #     outputFileName = sys.argv[2]
 
-    if outputFileName.endswith(".csv"):
-        outputFileName = outputFileName
-    else:
-        outputFileName = outputFileName + ".csv"
+    # if outputFileName.endswith(".csv"):
+    #     outputFileName = outputFileName
+    # else:
+    #     outputFileName = outputFileName + ".csv"
 
+    set_input_derivatives = False
+    dtype = [('time', np.double), ('u', np.double)]
+    signals = np.array([(0.0, 1)], dtype=dtype)
+        
+    inputFileName = "referenceInput_pyTest.txt"
+    outputFileName = "results.csv"
+    
     # Run the FMU and create the output file
-    simulateFMU(inputFileName,outputFileName)
+    simulateFMU(inputFileName,outputFileName,input=signals,set_input_derivatives=set_input_derivatives)
 
+    df=pd.read_csv('results.csv')
+    
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots()
+    ax1 = ax.twinx()
+    ax.plot(df['time'].values,df['x'].values,'b',label='prey')
+    ax.plot(df['time'].values,df['y'].values,'r',label='predator')
+    ax1.plot(df['time'].values,df['u'].values,'k--',label='control')
+    fig.legend(loc=[.6,.5])
     

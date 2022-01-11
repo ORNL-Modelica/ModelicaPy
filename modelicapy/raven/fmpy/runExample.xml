@@ -19,8 +19,36 @@
 	</RunInfo>
 
 
+	<Steps>
+		<MultiRun name="runSteps">
+			<Input class="Files" type="input">referenceInput</Input>
+			<Model class="Models" type="Code">testModel</Model>
+			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
+			<!--<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>-->
+			<Output class="DataObjects" type="PointSet">pointValues</Output>
+			<Output class="DataObjects" type="HistorySet">history</Output>
+		</MultiRun>
+
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">pointValues</Output>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+			<Output class="OutStreams" type="Plot">sampleSpace</Output>
+		</IOStep>
+		
+		<PostProcess name="processRuns">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Model class="Models" type="PostProcessor">statisticalAnalysis</Model>
+			<Output class="DataObjects" type="PointSet">statisticalAnalysisOutput</Output>
+			<Output class="OutStreams" type="Print">statisticalAnalysisOutput_dump</Output>
+		</PostProcess>
+	</Steps>
+
+
 	<Files>
-		<Input name="referenceInput" type="input">referenceInput.txt</Input>
+		<Input name="referenceInput" type="input">../referenceInput.txt</Input>
 		<Input name="statisticsOutput" type="">statisticsOutput.xml</Input>
 	</Files>
 	
@@ -88,7 +116,7 @@
 
 	<Distributions>
 		<Uniform name="dalpha">
-			<upperBound>3</upperBound>
+			<upperBound>2</upperBound>
 			<lowerBound>1</lowerBound>
 		</Uniform>
 
@@ -104,7 +132,7 @@
 
 		<Uniform name="ddelta">
 			<upperBound>2</upperBound>
-			<lowerBound>1</lowerBound>
+			<lowerBound>0</lowerBound>
 		</Uniform>
 	</Distributions>
 
@@ -133,55 +161,25 @@
 		</MonteCarlo>
 		
 		<Grid name='simpleGrid'>
+		    <constant name="x_start">10</constant>
+			<constant name="y_start">5</constant>
+			<constant name="output_interval">0.5</constant>
+
 			<variable name='alpha'>
 				<distribution>dalpha</distribution>
-				<grid type='value' construction='equal' steps='3' >1 3</grid>
+				<grid type='value' construction='equal' steps='2' >1 2</grid>
 			</variable>
 
 			<variable name='beta'>
 				<distribution>dbeta</distribution>
-				<grid type='value' construction='equal' steps='3' >1 2</grid>
-			</variable>
-				
-			<variable name='gamma'>
-				<distribution>dgamma</distribution>
-				<grid type='value' construction='equal' steps='1' >3</grid>
+				<grid type='CDF' construction='equal' steps='2' >0 1</grid>
 			</variable>
 
-			<variable name='delta'>
-				<distribution>ddelta</distribution>
-				<grid type='value' construction='equal' steps='1' >1</grid>
-			</variable>
+			<!-- steps are actually nIntervals-->
+			<constant name="gamma">3</constant>
+			<constant name="delta">1</constant>
 		</Grid>
 	</Samplers>
-
-	
-	<Steps>
-		<MultiRun name="runSteps">
-			<Input class="Files" type="input">referenceInput</Input>
-			<Model class="Models" type="Code">testModel</Model>
-			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
-			<!--<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>-->
-			<Output class="DataObjects" type="PointSet">pointValues</Output>
-			<Output class="DataObjects" type="HistorySet">history</Output>
-		</MultiRun>
-
-		<IOStep name="createOutput">
-			<Input class="DataObjects" type="PointSet">pointValues</Input>
-			<Input class="DataObjects" type="HistorySet">history</Input>
-			<Output class="OutStreams" type="Print">pointValues</Output>
-			<Output class="OutStreams" type="Print">history</Output>
-			<Output class="OutStreams" type="Plot">historyPlot</Output>
-			<Output class="OutStreams" type="Plot">sampleSpace</Output>
-		</IOStep>
-		
-		<PostProcess name="processRuns">
-			<Input class="DataObjects" type="PointSet">pointValues</Input>
-			<Model class="Models" type="PostProcessor">statisticalAnalysis</Model>
-			<Output class="DataObjects" type="PointSet">statisticalAnalysisOutput</Output>
-			<Output class="OutStreams" type="Print">statisticalAnalysisOutput_dump</Output>
-		</PostProcess>
-	</Steps>
 
 	
 	<VariableGroups>

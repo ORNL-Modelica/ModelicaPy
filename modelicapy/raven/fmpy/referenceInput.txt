@@ -1,4 +1,4 @@
-fmuName = 'resources/simulator.fmu'
+fmuName = '../../../resources/simulator.fmu'
 x_start = $RAVEN-x_start$
 y_start = $RAVEN-y_start$
 output_interval = $RAVEN-output_interval$

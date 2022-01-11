@@ -12,3 +12,6 @@ modelicapy/wordclouds/InternationalModelicaConference/original/
 modelicapy/optimization/*
 !modelicapy/optimization/ModelicaModelOptimization.py
 !modelicapy/optimization/OptimizationDemonstration
+modelicapy/raven/fmpy/fmpy_raven/
+*dsfinal.txt
+*results.csv
