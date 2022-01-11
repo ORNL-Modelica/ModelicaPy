@@ -14,7 +14,7 @@
 	<RunInfo>
 		<JobName>StatisticalAnalysis</JobName>
 		<WorkingDir>fmpy_raven</WorkingDir>
-		<Sequence>runSteps,createOutput</Sequence>
+		<Sequence>runSteps,createOutput,processRuns</Sequence>
 		<batchSize>2</batchSize>
 	</RunInfo>
 
@@ -38,12 +38,12 @@
 			<Output class="OutStreams" type="Plot">sampleSpace</Output>
 		</IOStep>
 		
-		<!-- <PostProcess name="processRuns">
+		<PostProcess name="processRuns">
 			<Input class="DataObjects" type="PointSet">pointValues</Input>
 			<Model class="Models" type="PostProcessor">statisticalAnalysis</Model>
 			<Output class="DataObjects" type="PointSet">statisticalAnalysisOutput</Output>
 			<Output class="OutStreams" type="Print">statisticalAnalysisOutput_dump</Output>
-		</PostProcess> -->
+		</PostProcess>
 	</Steps>
 
 
@@ -186,6 +186,52 @@
 		<Group name="gInputs" >alpha, beta, gamma, delta</Group>
 		<Group name="gOutputs" >time, x, y, u</Group>
 		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+		<Group name="statisticalAnalysis_vars">
+			skew_x,
+			skew_y,
+			vc_x,
+			vc_y,
+			percentile_5_x,
+			percentile_95_x,
+			percentile_5_y,
+			percentile_95_y,
+			mean_x,
+			mean_y,
+			kurt_x,
+			kurt_y,
+			median_x,
+			median_y,
+			max_x,
+			max_y,
+			min_x,
+			min_y,
+			samp_x,
+			samp_y,
+			var_x,
+			var_y,
+			sigma_x,
+			sigma_y,
+			nsen_x_alpha,
+			nsen_x_beta,
+			nsen_y_alpha,
+			nsen_y_beta,
+			sen_x_alpha,
+			sen_x_beta,
+			sen_y_alpha,
+			sen_y_beta,
+			pear_x_alpha,
+			pear_x_beta,
+			pear_y_alpha,
+			pear_y_beta,
+			cov_x_alpha,
+			cov_x_beta,
+			cov_y_alpha,
+			cov_y_beta,
+			vsen_x_alpha,
+			vsen_x_beta,
+			vsen_y_alpha,
+			vsen_y_beta,
+		</Group>
 	</VariableGroups>
 	
 	
@@ -207,7 +253,7 @@
 		
 		<Plot name="historyPlot" overwrite="false" verbosity="debug">
 			<plotSettings>
-				<gridSpace>2 1</gridSpace>
+				<gridSpace>2 2</gridSpace>
 				<plot>
 					<type>line</type>
 					<x>history|Output|time</x>
