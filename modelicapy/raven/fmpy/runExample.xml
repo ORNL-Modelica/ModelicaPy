@@ -1,0 +1,309 @@
+<?xml version="1.0" ?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>lotkaVolterraExample</name>
+		<author>Scott Greenwood</author>
+		<created>2022-01-11</created>
+		<classesTested>FMPy-RAVEN interface</classesTested>
+		<description>
+		   This file runs a parameter sweep for the Lotka Volterra Model through RAVEN using FMPy.
+		</description>
+	</TestInfo>
+
+  
+	<RunInfo>
+		<JobName>StatisticalAnalysis</JobName>
+		<WorkingDir>fmpy_raven</WorkingDir>
+		<Sequence>runSteps,createOutput,processRuns</Sequence>
+		<batchSize>2</batchSize>
+	</RunInfo>
+
+
+	<Files>
+		<Input name="referenceInput" type="input">referenceInput.txt</Input>
+		<Input name="statisticsOutput" type="">statisticsOutput.xml</Input>
+	</Files>
+	
+	
+	<Models>
+		<Code name="testModel" subType="GenericCode">
+			<executable>simulate.py</executable>
+			<clargs arg="python" type="prepend" />		
+			<clargs arg="" extension=".txt" type="input"/>
+			<clargs arg="" extension=".csv" type="output"/>
+		</Code>
+				
+		<PostProcessor name="statisticalAnalysis" subType="BasicStatistics">
+			<skewness prefix="skew">gOutputs_notime</skewness>
+			<variationCoefficient prefix="vc">gOutputs_notime</variationCoefficient>
+			<percentile prefix="percentile">gOutputs_notime</percentile>
+			<expectedValue prefix="mean">gOutputs_notime</expectedValue>
+			<kurtosis prefix="kurt">gOutputs_notime</kurtosis>
+			<median prefix="median">gOutputs_notime</median>
+			<maximum prefix="max">gOutputs_notime</maximum>
+			<minimum prefix="min">gOutputs_notime</minimum>
+			<samples prefix="samp">gOutputs_notime</samples>
+			<variance prefix="var">gOutputs_notime</variance>
+			<sigma prefix="sigma">gOutputs_notime</sigma>
+			<NormalizedSensitivity prefix="nsen">
+				<targets>gOutputs_notime</targets>
+				<features>gInputs</features>
+			</NormalizedSensitivity>
+			<sensitivity prefix="sen">
+				<targets>gOutputs_notime</targets>
+				<features>gInputs</features>
+			</sensitivity>
+			<pearson prefix="pear">
+				<targets>gOutputs_notime</targets>
+				<features>gInputs</features>
+			</pearson>
+			<covariance prefix="cov">
+				<targets>gOutputs_notime</targets>
+				<features>gInputs</features>
+			</covariance>
+			<VarianceDependentSensitivity prefix="vsen">
+				<targets>gOutputs_notime</targets>
+				<features>gInputs</features>
+			</VarianceDependentSensitivity>
+		</PostProcessor>
+	</Models>
+	
+	
+	<DataObjects>
+		<PointSet name="pointValues">
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
+		</PointSet>
+		
+		<HistorySet name="history">
+		  <Input>gInputs</Input>
+		  <Output>gOutputs</Output>
+		</HistorySet>
+		
+		<PointSet name="statisticalAnalysisOutput">
+			<Output>statisticalAnalysis_vars</Output>
+		</PointSet>
+	</DataObjects>
+	
+
+	<Distributions>
+		<Uniform name="dalpha">
+			<upperBound>3</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="dbeta">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="dgamma">
+			<upperBound>5</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="ddelta">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+	</Distributions>
+
+
+	<Samplers>
+		<MonteCarlo name="monteCarlo">
+			<samplerInit>
+				<limit>9</limit>
+			</samplerInit>
+
+			<variable name="alpha">
+				<distribution>dalpha</distribution>
+			</variable>
+
+			<variable name="beta">
+				<distribution>dbeta</distribution>
+			</variable>
+
+			<variable name="gamma">
+				<distribution>dgamma</distribution>
+			</variable>
+
+			<variable name="delta">
+				<distribution>ddelta</distribution>
+			</variable>
+		</MonteCarlo>
+		
+		<Grid name='simpleGrid'>
+			<variable name='alpha'>
+				<distribution>dalpha</distribution>
+				<grid type='value' construction='equal' steps='3' >1 3</grid>
+			</variable>
+
+			<variable name='beta'>
+				<distribution>dbeta</distribution>
+				<grid type='value' construction='equal' steps='3' >1 2</grid>
+			</variable>
+				
+			<variable name='gamma'>
+				<distribution>dgamma</distribution>
+				<grid type='value' construction='equal' steps='1' >3</grid>
+			</variable>
+
+			<variable name='delta'>
+				<distribution>ddelta</distribution>
+				<grid type='value' construction='equal' steps='1' >1</grid>
+			</variable>
+		</Grid>
+	</Samplers>
+
+	
+	<Steps>
+		<MultiRun name="runSteps">
+			<Input class="Files" type="input">referenceInput</Input>
+			<Model class="Models" type="Code">testModel</Model>
+			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
+			<!--<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>-->
+			<Output class="DataObjects" type="PointSet">pointValues</Output>
+			<Output class="DataObjects" type="HistorySet">history</Output>
+		</MultiRun>
+
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">pointValues</Output>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+			<Output class="OutStreams" type="Plot">sampleSpace</Output>
+		</IOStep>
+		
+		<PostProcess name="processRuns">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Model class="Models" type="PostProcessor">statisticalAnalysis</Model>
+			<Output class="DataObjects" type="PointSet">statisticalAnalysisOutput</Output>
+			<Output class="OutStreams" type="Print">statisticalAnalysisOutput_dump</Output>
+		</PostProcess>
+	</Steps>
+
+	
+	<VariableGroups>
+		<Group name="gInputs" >alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs" >time, x, y, u</Group>
+		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+		<Group name="statisticalAnalysis_vars">
+			skew_x,
+			skew_y,
+			vc_x,
+			vc_y,
+			percentile_5_x,
+			percentile_95_x,
+			percentile_5_y,
+			percentile_95_y,
+			mean_x,
+			mean_y,
+			kurt_x,
+			kurt_y,
+			median_x,
+			median_y,
+			max_x,
+			max_y,
+			min_x,
+			min_y,
+			samp_x,
+			samp_y,
+			var_x,
+			var_y,
+			sigma_x,
+			sigma_y,
+			nsen_x_alpha,
+			nsen_x_beta,
+			nsen_y_alpha,
+			nsen_y_beta,
+			sen_x_alpha,
+			sen_x_beta,
+			sen_y_alpha,
+			sen_y_beta,
+			pear_x_alpha,
+			pear_x_beta,
+			pear_y_alpha,
+			pear_y_beta,
+			cov_x_alpha,
+			cov_x_beta,
+			cov_y_alpha,
+			cov_y_beta,
+			vsen_x_alpha,
+			vsen_x_beta,
+			vsen_y_alpha,
+			vsen_y_beta,
+		</Group>
+	</VariableGroups>
+	
+	
+	<OutStreams>
+		<Print name="pointValues">
+			<type>csv</type>
+			<source>pointValues</source>
+		</Print>
+		
+		<Print name="history">
+			<type>csv</type>
+			<source>history</source>
+		</Print>
+
+		<Print name="statisticalAnalysisOutput_dump">
+			<type>csv</type>
+			<source>statisticalAnalysisOutput</source>
+		</Print>
+		
+		<Plot name="historyPlot" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<gridSpace>2 2</gridSpace>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|x</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>x</ylabel>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|y</y>
+					<gridLocation>
+						<x>1</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>y</ylabel>
+				</plot>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+		
+		<Plot name="sampleSpace" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<plot>
+					<type>scatter</type>
+					<x>pointValues|Input|alpha</x>
+					<y>pointValues|Input|beta</y>
+					<color>blue</color>
+				</plot>
+				<xlabel>alpha</xlabel>
+				<ylabel>beta</ylabel>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+	</OutStreams>
+</Simulation>
