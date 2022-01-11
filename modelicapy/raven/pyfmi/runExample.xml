@@ -27,7 +27,7 @@
 	
 	<Models>
 		<Code name="testModel" subType="GenericCode">
-			<executable>simulatePyFMI.py</executable>
+			<executable>simulate.py</executable>
 			<clargs arg="python" type="prepend" />		
 			<clargs arg="" extension=".txt" type="input"/>
 			<clargs arg="" extension=".csv" type="output"/>
