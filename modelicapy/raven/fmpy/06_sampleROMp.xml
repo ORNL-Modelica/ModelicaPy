@@ -13,8 +13,8 @@
   
 	<RunInfo>
 		<JobName>SimpleTest</JobName>
-		<WorkingDir>fmpy_05_sampleROM</WorkingDir>
-		<Sequence>sampleFMU, trainROM, pickleROM, loadROM, sampleROM, createOutput</Sequence>
+		<WorkingDir>fmpy_06_sampleROMp</WorkingDir>
+		<Sequence>sampleFMU, trainROM, pickleROM, loadROM, sampleROM, sampleROMp, createOutput</Sequence>
 		<batchSize>2</batchSize>
 	</RunInfo>
 
@@ -51,6 +51,13 @@
 			<Output class="DataObjects" type="PointSet">outputROM</Output>
 		</MultiRun>
 
+		<MultiRun name="sampleROMp">
+			<Input class="DataObjects" type="PointSet">inputROM</Input>
+			<Model class="Models" type="ROM">pIDW</Model>
+			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
+			<Output class="DataObjects" type="PointSet">outputROMp</Output>
+		</MultiRun>
+
 		<IOStep name="createOutput">
 			<Input class="DataObjects" type="PointSet">pointValues</Input>
 			<Input class="DataObjects" type="HistorySet">history</Input>
@@ -60,6 +67,7 @@
 			<Output class="OutStreams" type="Plot">sampleSpace</Output>
 
 			<Input class="DataObjects" type="PointSet">outputROM</Input>
+			<Input class="DataObjects" type="PointSet">outputROMp</Input>
 			<Output class="OutStreams" type="Plot">comparison</Output>
 		</IOStep>
 	</Steps>
@@ -110,6 +118,11 @@
 		</PointSet>
 
 		<PointSet name="outputROM">
+			<Input>alpha, beta</Input>
+			<Output>x, y</Output>
+		</PointSet>
+
+		<PointSet name="outputROMp">
 			<Input>alpha, beta</Input>
 			<Output>x, y</Output>
 		</PointSet>
@@ -275,6 +288,13 @@
 					<x>outputROM|Input|alpha</x>
 					<y>outputROM|Output|x</y>
 					<c>red</c>
+				</plot>
+				<plot>
+					<type>scatter</type>
+					<marker>v</marker>
+					<x>outputROMp|Input|angle</x>
+					<y>outputROMp|Output|x</y>
+					<c>black</c>
 				</plot>
 				<xlabel>alpha</xlabel>
 				<ylabel>x</ylabel>
