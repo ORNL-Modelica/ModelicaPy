@@ -6,21 +6,21 @@
 		<created>2022-01-11</created>
 		<classesTested>FMPy-RAVEN interface</classesTested>
 		<description>
-		   This file runs a parameter sweep for the Lotka Volterra Model through RAVEN using FMPy.
+		   Lotka Volterra Model: Sample the input space.
 		</description>
 	</TestInfo>
 
   
 	<RunInfo>
 		<JobName>SimpleTest</JobName>
-		<WorkingDir>fmpy_raven</WorkingDir>
-		<Sequence>runSteps,createOutput</Sequence>
+		<WorkingDir>fmpy_01_sampleFMU</WorkingDir>
+		<Sequence>sampleFMU,createOutput</Sequence>
 		<batchSize>2</batchSize>
 	</RunInfo>
 
 
 	<Steps>
-		<MultiRun name="runSteps">
+		<MultiRun name="sampleFMU">
 			<Input class="Files" type="input">referenceInput</Input>
 			<Model class="Models" type="Code">fmuSimulator</Model>
 			<!-- <Sampler class="Samplers" type="Grid">simpleGrid</Sampler> -->

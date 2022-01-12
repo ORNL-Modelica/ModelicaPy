@@ -15,3 +15,4 @@ modelicapy/optimization/*
 modelicapy/raven/fmpy/fmpy_raven/
 *dsfinal.txt
 *results.csv
+modelicapy/raven/fmpy/fmpy_*
