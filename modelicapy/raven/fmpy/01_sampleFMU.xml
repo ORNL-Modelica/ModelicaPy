@@ -54,7 +54,7 @@
 		</Code>
 	</Models>
 	
-	
+
 	<DataObjects>
 		<PointSet name="pointValues">
 			<Input>gInputs</Input>
@@ -66,7 +66,14 @@
 		  <Output>gOutputs</Output>
 		</HistorySet>
 	</DataObjects>
+
 	
+	<VariableGroups>
+		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs" >time, x, y, u</Group>
+		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+	</VariableGroups>
+
 
 	<Distributions>
 		<Uniform name="dalpha">
@@ -140,13 +147,6 @@
 		</Grid>
 	</Samplers>
 
-	
-	<VariableGroups>
-		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
-		<Group name="gOutputs" >time, x, y, u</Group>
-		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
-	</VariableGroups>
-	
 	
 	<OutStreams>
 		<Print name="pointValues">

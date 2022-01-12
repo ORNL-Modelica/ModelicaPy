@@ -29,6 +29,11 @@
 			<Output class="DataObjects" type="HistorySet">history</Output>
 		</MultiRun>
 
+		<RomTrainer name="trainRom">
+			<Input class="DataObjects" type="PointSet">outMC</Input>
+			<Output class="Models" type="ROM">IDW</Output>
+		</RomTrainer>
+
 		<IOStep name="createOutput">
 			<Input class="DataObjects" type="PointSet">pointValues</Input>
 			<Input class="DataObjects" type="HistorySet">history</Input>
@@ -54,7 +59,7 @@
 		</Code>
 	</Models>
 	
-	
+
 	<DataObjects>
 		<PointSet name="pointValues">
 			<Input>gInputs</Input>
@@ -66,7 +71,14 @@
 		  <Output>gOutputs</Output>
 		</HistorySet>
 	</DataObjects>
+
 	
+	<VariableGroups>
+		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs" >time, x, y, u</Group>
+		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+	</VariableGroups>
+
 
 	<Distributions>
 		<Uniform name="dalpha">
@@ -140,13 +152,6 @@
 		</Grid>
 	</Samplers>
 
-	
-	<VariableGroups>
-		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
-		<Group name="gOutputs" >time, x, y, u</Group>
-		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
-	</VariableGroups>
-	
 	
 	<OutStreams>
 		<Print name="pointValues">
