@@ -6,7 +6,7 @@
 		<created>2022-01-11</created>
 		<classesTested>FMPy-RAVEN interface</classesTested>
 		<description>
-		   Lotka Volterra Model: Sample the ROM.
+		   Lotka Volterra Model: Sample both the ROM and the pickled ROM.
 		</description>
 	</TestInfo>
 
