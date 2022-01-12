@@ -1,7 +1,9 @@
 fmuName = '../../../resources/simulator.fmu'
+start_time = $RAVEN-start_time$
+stop_time = $RAVEN-stop_time$
+output_interval = $RAVEN-output_interval$
 x_start = $RAVEN-x_start$
 y_start = $RAVEN-y_start$
-output_interval = $RAVEN-output_interval$
 alpha = $RAVEN-alpha$
 beta = $RAVEN-beta$
 gamma = $RAVEN-gamma$

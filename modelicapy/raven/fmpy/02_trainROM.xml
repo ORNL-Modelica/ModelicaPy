@@ -1,0 +1,215 @@
+<?xml version="1.0" ?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>lotkaVolterraExample</name>
+		<author>Scott Greenwood</author>
+		<created>2022-01-11</created>
+		<classesTested>FMPy-RAVEN interface</classesTested>
+		<description>
+		   This file runs a parameter sweep for the Lotka Volterra Model through RAVEN using FMPy.
+		</description>
+	</TestInfo>
+
+  
+	<RunInfo>
+		<JobName>SimpleTest</JobName>
+		<WorkingDir>fmpy_raven</WorkingDir>
+		<Sequence>runSteps,createOutput</Sequence>
+		<batchSize>2</batchSize>
+	</RunInfo>
+
+
+	<Steps>
+		<MultiRun name="runSteps">
+			<Input class="Files" type="input">referenceInput</Input>
+			<Model class="Models" type="Code">fmuSimulator</Model>
+			<!-- <Sampler class="Samplers" type="Grid">simpleGrid</Sampler> -->
+			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
+			<Output class="DataObjects" type="PointSet">pointValues</Output>
+			<Output class="DataObjects" type="HistorySet">history</Output>
+		</MultiRun>
+
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">pointValues</Output>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+			<Output class="OutStreams" type="Plot">sampleSpace</Output>
+		</IOStep>
+	</Steps>
+
+
+	<Files>
+		<Input name="referenceInput" type="input">../referenceInput.txt</Input>
+	</Files>
+	
+	
+	<Models>
+		<Code name="fmuSimulator" subType="GenericCode">
+			<executable>simulate.py</executable>
+			<clargs arg="python" type="prepend" />		
+			<clargs arg="" extension=".txt" type="input"/>
+			<clargs arg="" extension=".csv" type="output"/>
+		</Code>
+	</Models>
+	
+	
+	<DataObjects>
+		<PointSet name="pointValues">
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
+		</PointSet>
+		
+		<HistorySet name="history">
+		  <Input>gInputs</Input>
+		  <Output>gOutputs</Output>
+		</HistorySet>
+	</DataObjects>
+	
+
+	<Distributions>
+		<Uniform name="dalpha">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="dbeta">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="dgamma">
+			<upperBound>5</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="ddelta">
+			<upperBound>2</upperBound>
+			<lowerBound>0</lowerBound>
+		</Uniform>
+	</Distributions>
+
+
+	<Samplers>
+		<MonteCarlo name="monteCarlo">
+			<samplerInit>
+				<limit>9</limit>
+			</samplerInit>
+
+		    <constant name="start_time">0</constant>
+			<constant name="stop_time">25</constant>
+			<constant name="output_interval">0.5</constant>
+
+			<constant name="x_start">10</constant>
+			<constant name="y_start">5</constant>
+
+			<variable name="alpha">
+				<distribution>dalpha</distribution>
+			</variable>
+
+			<variable name="beta">
+				<distribution>dbeta</distribution>
+			</variable>
+
+			<constant name="gamma">3</constant>
+			<constant name="delta">1</constant>
+
+		</MonteCarlo>
+		
+		<Grid name='simpleGrid'>
+		    <constant name="start_time">0</constant>
+			<constant name="stop_time">25</constant>
+			<constant name="output_interval">0.5</constant>
+
+			<constant name="x_start">10</constant>
+			<constant name="y_start">5</constant>
+
+			<variable name='alpha'>
+				<distribution>dalpha</distribution>
+				<grid type='value' construction='equal' steps='2' >1 2</grid>
+			</variable>
+
+			<variable name='beta'>
+				<distribution>dbeta</distribution>
+				<grid type='CDF' construction='equal' steps='2' >0 1</grid>
+			</variable>
+
+			<constant name="gamma">3</constant>
+			<constant name="delta">1</constant>
+		</Grid>
+	</Samplers>
+
+	
+	<VariableGroups>
+		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs" >time, x, y, u</Group>
+		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+	</VariableGroups>
+	
+	
+	<OutStreams>
+		<Print name="pointValues">
+			<type>csv</type>
+			<source>pointValues</source>
+		</Print>
+		
+		<Print name="history">
+			<type>csv</type>
+			<source>history</source>
+		</Print>
+		
+		<Plot name="historyPlot" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<gridSpace>2 1</gridSpace>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|x</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>x</ylabel>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|y</y>
+					<gridLocation>
+						<x>1</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>y</ylabel>
+				</plot>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+		
+		<Plot name="sampleSpace" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<plot>
+					<type>scatter</type>
+					<x>pointValues|Input|alpha</x>
+					<y>pointValues|Input|beta</y>
+					<color>blue</color>
+				</plot>
+				<xlabel>alpha</xlabel>
+				<ylabel>beta</ylabel>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+	</OutStreams>
+</Simulation>

@@ -11,7 +11,7 @@ import pandas as pd
 import sys 
 import re
 
-def simulateFMU(inputFileName,outputFileName,input,set_input_derivatives):
+def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=False):
     '''
     Read an input file of a specific format, update setting values, simulate the FMU, and output results.
 
@@ -102,27 +102,28 @@ if __name__ == '__main__':
     else:
         outputFileName = outputFileName + ".csv"
 
-    set_input_derivatives = False
+    set_input_derivatives = False # suggested to leave as False for now - does not perform as expected -https://github.com/CATIA-Systems/FMPy/issues/214
        
     # Simple inputs to play with
     dtype = [('time', np.double), ('u', np.double)]
-    # signals = np.array([(0.0, 0.0), (10.0, 1.0)], dtype=dtype)
+    signals = np.array([(0.0, 0.0), (10.0, 1.0)], dtype=dtype)
     
     # Alternative more complicated input shapes
-    t = np.linspace(0.0,25,25)
-    x = np.sin(0.5*t)
-    signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
-   
-    # Run the FMU and create the output file
-    simulateFMU(inputFileName,outputFileName,input=signals,set_input_derivatives=set_input_derivatives)
+    # t = np.linspace(0.0,25,25)
+    # x = np.sin(0.5*t)
+    # signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
 
-    df=pd.read_csv('results.csv')
-    
-    import matplotlib.pyplot as plt
-    fig, ax = plt.subplots()
-    ax1 = ax.twinx()
-    ax.plot(df['time'].values,df['x'].values,'b',label='prey')
-    ax.plot(df['time'].values,df['y'].values,'r',label='predator')
-    ax1.plot(df['time'].values,df['u'].values,'k--',label='control')
-    fig.legend(loc=[.6,.5])
-    
+    # Run the FMU and create the output file
+    simulateFMU(inputFileName,outputFileName)#,input=signals,set_input_derivatives=set_input_derivatives)
+
+
+    if inputFileName == "referenceInput_pyTest.txt":
+        df=pd.read_csv('results.csv')
+        
+        import matplotlib.pyplot as plt
+        fig, ax = plt.subplots()
+        ax1 = ax.twinx()
+        ax.plot(df['time'].values,df['x'].values,'b',label='prey')
+        ax.plot(df['time'].values,df['y'].values,'r',label='predator')
+        ax1.plot(df['time'].values,df['u'].values,'k--',label='control')
+        fig.legend(loc=[.6,.5])
