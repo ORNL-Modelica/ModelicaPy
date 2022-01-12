@@ -13,8 +13,8 @@
   
 	<RunInfo>
 		<JobName>SimpleTest</JobName>
-		<WorkingDir>fmpy_03_pickleROM</WorkingDir>
-		<Sequence>sampleFMU,trainROM,pickleROM,createOutput</Sequence>
+		<WorkingDir>fmpy_04_loadROM</WorkingDir>
+		<Sequence>sampleFMU, trainROM, pickleROM, loadROM, createOutput</Sequence>
 		<batchSize>2</batchSize>
 	</RunInfo>
 
@@ -37,6 +37,11 @@
 		<IOStep name="pickleROM">
 			<Input class="Models" type="ROM">IDW</Input>
 			<Output class="Files" type="">pIDW</Output>
+		</IOStep>
+
+		<IOStep name="loadROM">
+			<Input class="Files" type="">pIDW</Input>
+			<Output class="Models" type="ROM">loadIDW</Output>
 		</IOStep>
 
 		<IOStep name="createOutput">
@@ -69,6 +74,12 @@
 			<Target>x, y</Target>
 			<p>3</p>
 		</ROM>
+
+		<ROM name="loadIDW" subType="NDinvDistWeight">
+			<Features>alpha, beta</Features>
+			<Target>x, y</Target>
+			<p>3</p>
+    	</ROM>
 	</Models>
 	
 
