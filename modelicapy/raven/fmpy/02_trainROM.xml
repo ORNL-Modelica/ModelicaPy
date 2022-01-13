@@ -30,7 +30,7 @@
 		</MultiRun>
 
 		<RomTrainer name="trainROM">
-			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
 			<Output class="Models" type="ROM">IDW</Output>
 		</RomTrainer>
 
@@ -59,8 +59,8 @@
 		</Code>
 
 		<ROM name="IDW" subType="NDinvDistWeight">
-			<Features>alpha, beta</Features>
-			<Target>x, y</Target>
+			<Features>gFeaturesROM</Features>
+			<Target>gTargetsROM</Target>
 			<p>3</p>
 		</ROM>
 	</Models>
@@ -82,11 +82,22 @@
 	<VariableGroups>
 		<Group name="gInputs" >start_time, stop_time, output_interval, x_start, y_start, alpha, beta, gamma, delta</Group>
 		<Group name="gOutputs" >time, x, y, u</Group>
-		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+		<Group name="gFeaturesROM" dependencies="gInputs" base="gInputs">-start_time, -stop_time, -output_interval,</Group>
+		<Group name="gTargetsROM" dependencies="gOutputs" base="gOutputs">-time, -u</Group>
 	</VariableGroups>
 
 
 	<Distributions>
+		<Uniform name="dx_start">
+			<upperBound>10</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
+		<Uniform name="dy_start">
+			<upperBound>5</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+
 		<Uniform name="dalpha">
 			<upperBound>2</upperBound>
 			<lowerBound>1</lowerBound>
@@ -118,18 +129,27 @@
 		    <constant name="start_time">0</constant>
 			<constant name="stop_time">25</constant>
 			<constant name="output_interval">0.5</constant>
+s
+			<!-- <constant name="x_start">10</constant>
+			<constant name="y_start">5</constant> -->
 
-			<constant name="x_start">10</constant>
-			<constant name="y_start">5</constant>
+			<variable name='x_start'>
+				<distribution>dx_start</distribution>
+			</variable>
+			<variable name='y_start'>
+				<distribution>dy_start</distribution>
+			</variable>
 
-			<variable name="alpha">
+			<!-- <variable name='alpha'>
 				<distribution>dalpha</distribution>
 			</variable>
 
-			<variable name="beta">
+			<variable name='beta'>
 				<distribution>dbeta</distribution>
-			</variable>
+			</variable> -->
 
+			<constant name="alpha">1.5</constant>
+			<constant name="beta">1</constant>
 			<constant name="gamma">3</constant>
 			<constant name="delta">1</constant>
 
@@ -140,10 +160,19 @@
 			<constant name="stop_time">25</constant>
 			<constant name="output_interval">0.5</constant>
 
-			<constant name="x_start">10</constant>
-			<constant name="y_start">5</constant>
+			<!-- <constant name="x_start">10</constant>
+			<constant name="y_start">5</constant> -->
 
-			<variable name='alpha'>
+			<variable name='x_start'>
+				<distribution>dx_start</distribution>
+				<grid type='CDF' construction='equal' steps='4' >0 1</grid>
+			</variable>
+			<variable name='y_start'>
+				<distribution>dy_start</distribution>
+				<grid type='CDF' construction='equal' steps='4' >0 1</grid>
+			</variable>
+
+			<!-- <variable name='alpha'>
 				<distribution>dalpha</distribution>
 				<grid type='value' construction='equal' steps='2' >1 2</grid>
 			</variable>
@@ -151,8 +180,10 @@
 			<variable name='beta'>
 				<distribution>dbeta</distribution>
 				<grid type='CDF' construction='equal' steps='2' >0 1</grid>
-			</variable>
+			</variable> -->
 
+			<constant name="alpha">1.5</constant>
+			<constant name="beta">1</constant>
 			<constant name="gamma">3</constant>
 			<constant name="delta">1</constant>
 		</Grid>
