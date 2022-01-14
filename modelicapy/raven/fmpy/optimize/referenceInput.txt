@@ -1,0 +1,21 @@
+fmuName = '../../../resources/simulator.fmu'
+CFs[1] = $RAVEN-CFs_1$
+CFs[2] = $RAVEN-CFs_2$
+CFs[3] = $RAVEN-CFs_3$
+CFs[4] = $RAVEN-CFs_4$
+CFs[5] = $RAVEN-CFs_5$
+CFs[6] = $RAVEN-CFs_6$
+CFs[7] = $RAVEN-CFs_7$
+CFs[8] = $RAVEN-CFs_8$
+CFs[9] = $RAVEN-CFs_9$
+CFs[10] = $RAVEN-CFs_10$
+pipe.mediums[1].T
+pipe.mediums[2].T
+pipe.mediums[3].T
+pipe.mediums[4].T
+pipe.mediums[5].T
+pipe.mediums[6].T
+pipe.mediums[7].T
+pipe.mediums[8].T
+pipe.mediums[9].T
+pipe.mediums[10].T

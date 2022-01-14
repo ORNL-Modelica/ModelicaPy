@@ -1,0 +1,21 @@
+fmuName = 'resources/simulator.fmu'
+CFs[1] = 1.0
+CFs[2] = 1.0
+CFs[3] = 1.0
+CFs[4] = 1.0
+CFs[5] = 1.0
+CFs[6] = 1.0
+CFs[7] = 1.0
+CFs[8] = 1.0
+CFs[9] = 1.0
+CFs[10] = 1.0
+pipe.mediums[1].T
+pipe.mediums[2].T
+pipe.mediums[3].T
+pipe.mediums[4].T
+pipe.mediums[5].T
+pipe.mediums[6].T
+pipe.mediums[7].T
+pipe.mediums[8].T
+pipe.mediums[9].T
+pipe.mediums[10].T
