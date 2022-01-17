@@ -1,0 +1,151 @@
+<?xml version="1.0" ?>
+<Simulation verbosity="debug">
+  <TestInfo>
+    <name>fmpy_optimize</name>
+    <author>Scott Greenwood</author>
+    <created>2022-01-13</created>
+    <classesTested>Optimizer</classesTested>
+    <description>
+      Provides an example of a simple optimization of FMU parameters.
+    </description>
+  </TestInfo>
+
+
+  <RunInfo>
+    <WorkingDir>optimizeCFs</WorkingDir>
+    <Sequence>optimize,print</Sequence>
+  </RunInfo>
+
+
+  <Steps>
+    <MultiRun name="optimize">
+      <Input class="Files" type="input">referenceInput</Input>
+      <Input class="Files" type="csv">goldValues</Input>
+      <Model class="Models" type="Code">fmuSimulator</Model>
+      <Optimizer class="Optimizers" type="SPSA">opter</Optimizer>
+      <SolutionExport class="DataObjects" type="HistorySet">opt_export</SolutionExport>
+      <Output class="DataObjects" type="PointSet">optOut</Output>
+    </MultiRun>
+
+    <IOStep name="print">
+      <Input class="DataObjects" type="HistorySet">opt_export</Input>
+      <Output class="OutStreams" type="Print">opt_export</Output>
+    </IOStep>
+  </Steps>
+
+
+	<Files>
+		<Input name="referenceInput" type="input">../referenceInput.txt</Input>
+    <Input name="goldValues" type="csv">../goldValues.csv</Input>
+	</Files>
+
+
+  <Optimizers>
+    <GradientDescent name="opter">
+      <objective>errorSum</objective>
+      <variable name="CFs_1">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_2">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_3">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_4">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_5">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_6">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_7">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_8">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_9">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <variable name="CFs_10">
+        <distribution>bounds</distribution>
+        <initial>1.0</initial>
+      </variable>
+      <TargetEvaluation class="DataObjects" type="PointSet">optOut</TargetEvaluation>
+      <samplerInit>
+        <limit>5000</limit>
+        <initialSeed>1234</initialSeed>
+      </samplerInit>
+      <gradient>
+        <SPSA/>
+      </gradient>
+      <stepSize>
+        <GradientHistory/>
+      </stepSize>
+      <acceptance>
+        <Strict/>
+      </acceptance>
+      <convergence>
+        <gradient>1e-1</gradient>
+        <!-- <persistence>5</persistence> -->
+      </convergence>
+    </GradientDescent>
+  </Optimizers>
+
+
+  <Distributions>
+    <Uniform name='bounds'>
+      <lowerBound>0.001</lowerBound>
+      <upperBound>100</upperBound>
+    </Uniform>
+  </Distributions>
+
+
+  <Models>
+    <Code name="fmuSimulator" subType="GenericCode">
+			<executable>simulate.py</executable>
+			<clargs arg="python" type="prepend" />		
+			<clargs arg="" extension=".txt" type="input"/>
+			<clargs arg="" extension=".csv" type="output"/>
+		</Code>
+  </Models>
+
+
+  <DataObjects>
+    <PointSet name="placeholder"/>
+    <PointSet name="optOut">
+      <Input>gInputs</Input>
+      <Output>errorSum</Output>
+    </PointSet>
+    <PointSet name="opt_export">
+      <Input>trajID</Input>
+      <Output>iteration,gInputs,gOutputs</Output>
+    </PointSet>
+  </DataObjects>
+
+
+	<VariableGroups>
+		<Group name="gInputs" >CFs_1, CFs_2, CFs_3, CFs_4, CFs_5, CFs_6, CFs_7, CFs_8, CFs_9, CFs_10</Group>
+		<Group name="gOutputs">errorSum</Group>
+	</VariableGroups>
+
+
+  <OutStreams>
+    <Print name="opt_export">
+      <type>csv</type>
+      <source>opt_export</source>
+    </Print>
+  </OutStreams>
+</Simulation>

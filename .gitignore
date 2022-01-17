@@ -17,3 +17,4 @@ modelicapy/raven/fmpy/fmpy_raven/
 *results.csv
 modelicapy/raven/fmpy/fmpy_*
 modelicapy/raven/fmpy/optimize/fmpy_*
+modelicapy/raven/plugin/tests/test_*

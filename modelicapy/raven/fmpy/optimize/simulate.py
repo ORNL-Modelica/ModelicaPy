@@ -12,7 +12,7 @@ import sys
 import re
    
     
-def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=False):
+def simulateFMU(inputFileName,input=None,set_input_derivatives=False):
     '''
     Read an input file of a specific format, update setting values, simulate the FMU, and output results.
 
@@ -71,7 +71,8 @@ def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=Fa
         else:
             # Generate key for variable to be saved
             key = line.replace(' ','').strip()
-            output.append(key)
+            if not 'errorSum' in key:
+                output.append(key)
             
     # If empty set to None to return default output variables
     if len(output) == 0: output = None
@@ -83,8 +84,34 @@ def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=Fa
                            start_values=start_values,output=output)
 
     # Save results to csv (column - variable, row - values)
-    pd.DataFrame(results).to_csv(outputFileName, index=False)
+    df = pd.DataFrame(results)#.to_csv(outputFileName, index=False)
+    return df
+
+def compareResults(values,goldValues):
+    '''
+    '''
+    sharedKeys = []
+    skippedKeys = []
+    for key in values.keys():
+        if key in goldValues:
+            sharedKeys.append(key)
+        else:
+            skippedKeys.append(key)
     
+    summary = {}
+    summary['error'] = {}
+    summary['errorRelative'] = {}
+    errorSum = 0
+    for key in sharedKeys:
+        summary['error'][key] = values[key] - goldValues[key]
+        summary['errorRelative'][key] = summary['error'][key]/goldValues[key]
+        errorSum += np.abs(summary['errorRelative'][key])   
+    summary['errorSum'] = errorSum
+    
+    print('The following variables were skipped as they were NOT found in the goldValues file:\n {}\n'.format(skippedKeys))
+    return summary
+
+
 if __name__ == '__main__':
 
     # Check for number of arguments provided by raven and define appropriate file name
@@ -97,12 +124,18 @@ if __name__ == '__main__':
         outputFileName = "results.csv"
     else:
         outputFileName = sys.argv[2]
-
-    if outputFileName.endswith(".csv"):
-        outputFileName = outputFileName
+        
+    if len(sys.argv) < 4:
+        goldValuesFileName = "goldValues.csv"
     else:
+        goldValuesFileName = sys.argv[3]
+            
+    if not outputFileName.endswith(".csv"):
         outputFileName = outputFileName + ".csv"
-          
+    
+    if not goldValuesFileName.endswith(".csv"):
+        goldValuesFileName = goldValuesFileName + ".csv"
+             
     set_input_derivatives = False # suggested to leave as False for now - does not perform as expected -https://github.com/CATIA-Systems/FMPy/issues/214
        
     # Simple inputs to play with
@@ -115,16 +148,23 @@ if __name__ == '__main__':
     # signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
 
     # Run the FMU and create the output file
-    simulateFMU(inputFileName,outputFileName)#,input=signals,set_input_derivatives=set_input_derivatives)
-
-
-    if inputFileName == "referenceInput_pyTest.txt":
-        df=pd.read_csv('results.csv')
+    df = simulateFMU(inputFileName)#,input=signals,set_input_derivatives=set_input_derivatives)
         
-        import matplotlib.pyplot as plt
-        fig, ax = plt.subplots()
-        ax1 = ax.twinx()
-        ax.plot(df['time'].values,df['x'].values,'b',label='prey')
-        ax.plot(df['time'].values,df['y'].values,'r',label='predator')
-        ax1.plot(df['time'].values,df['u'].values,'k--',label='control')
-        fig.legend(loc=[.6,.5])
+    # Block to check final values against gold values
+    values = df.iloc[-1].to_dict()   
+    goldValues = pd.read_csv(goldValuesFileName).iloc[0].to_dict()
+    # goldValues = {'pipe.mediums[1].T':	300,
+    #                 'pipe.mediums[2].T':	305.5555556,
+    #                 'pipe.mediums[3].T':	311.1111111,
+    #                 'pipe.mediums[4].T':	316.6666667,
+    #                 'pipe.mediums[5].T':	322.2222222,
+    #                 'pipe.mediums[6].T':	327.7777778,
+    #                 'pipe.mediums[7].T':	333.3333333,
+    #                 'pipe.mediums[8].T':	338.8888889,
+    #                 'pipe.mediums[9].T':	344.4444444,
+    #                 'pipe.mediums[10].T':	350}
+
+    summary = compareResults(values,goldValues)
+    with open(outputFileName, 'w') as f:
+        f.write('errorSum\n')
+        f.write(str(summary['errorSum']))

@@ -72,7 +72,8 @@ def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=Fa
             # Generate key for variable to be saved
             key = line.replace(' ','').strip()
             output.append(key)
-            
+    
+    output.append('alpha')
     # If empty set to None to return default output variables
     if len(output) == 0: output = None
     
@@ -106,8 +107,8 @@ if __name__ == '__main__':
     set_input_derivatives = False # suggested to leave as False for now - does not perform as expected -https://github.com/CATIA-Systems/FMPy/issues/214
        
     # Simple inputs to play with
-    dtype = [('time', np.double), ('u', np.double)]
-    signals = np.array([(0.0, 0.0), (10.0, 1.0)], dtype=dtype)
+    dtype = [('time', np.double), ('u', np.double), ('alpha', np.double)]
+    signals = np.array([(0.0, 0.0, 1.5), (10.0, 1.0, 3)], dtype=dtype)
     
     # Alternative more complicated input shapes
     # t = np.linspace(0.0,25,25)
@@ -115,7 +116,7 @@ if __name__ == '__main__':
     # signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
 
     # Run the FMU and create the output file
-    simulateFMU(inputFileName,outputFileName)#,input=signals,set_input_derivatives=set_input_derivatives)
+    simulateFMU(inputFileName,outputFileName,input=signals)#,set_input_derivatives=set_input_derivatives)
 
 
     if inputFileName == "referenceInput_pyTest.txt":
@@ -127,4 +128,5 @@ if __name__ == '__main__':
         ax.plot(df['time'].values,df['x'].values,'b',label='prey')
         ax.plot(df['time'].values,df['y'].values,'r',label='predator')
         ax1.plot(df['time'].values,df['u'].values,'k--',label='control')
+        ax1.plot(df['time'].values,df['alpha'].values,'k--',label='control')
         fig.legend(loc=[.6,.5])

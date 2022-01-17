@@ -19,3 +19,4 @@ pipe.mediums[7].T
 pipe.mediums[8].T
 pipe.mediums[9].T
 pipe.mediums[10].T
+errorSum
