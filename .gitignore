@@ -18,3 +18,4 @@ modelicapy/raven/fmpy/fmpy_raven/
 modelicapy/raven/fmpy/fmpy_*
 modelicapy/raven/fmpy/optimize/fmpy_*
 modelicapy/raven/plugin/tests/test_*
+log.txt

@@ -7,6 +7,10 @@
 		<classesTested>FMPy-RAVEN interface</classesTested>
 		<description>
 		   Lotka Volterra Model: Sample the FMU.
+		   Extra:
+			- Show how certain reserved names in the FMU simulation setup are overwritten when they are in the sampling space.
+			- Two different samplers shown and can be switched by the user.
+			- Some basic RAVEN-based plotting.
 		</description>
 	</TestInfo>
 
@@ -43,14 +47,14 @@
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputs, output_interval</inputs>
 			<outputs>gOutputs</outputs>
-			<settingsFMU>
+			<settings>
 				<filename>../fmus/lotkaVolterra.fmu</filename>
 				<parameters>gInputs, output_interval</parameters>
 				<outputs>gOutputs</outputs>
 				<start_time>0.0</start_time>
 				<stop_time>25.0</stop_time>
 				<output_interval>0.1</output_interval>
-			</settingsFMU>
+			</settings>
 		</ExternalModel>
 	</Models>
 	
