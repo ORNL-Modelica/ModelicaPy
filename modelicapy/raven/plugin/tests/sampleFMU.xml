@@ -12,9 +12,9 @@
 
   
 	<RunInfo>
-		<JobName>SimpleTest</JobName>
+		<JobName>SampleFMU</JobName>
 		<WorkingDir>test_sampleFMU</WorkingDir>
-		<Sequence>sampleFMU,createOutput</Sequence>
+		<Sequence>sampleFMU, createOutput</Sequence>
 		<batchSize>2</batchSize>
 	</RunInfo>
 
@@ -22,7 +22,6 @@
 	<Steps>
 		<MultiRun name="sampleFMU">
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
-			<!-- <Input class="Files" type="input">referenceInput</Input> -->
 			<Model class="Models" type="ExternalModel">simulateFMU</Model>
 			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
 			<!-- <Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler> -->
@@ -41,29 +40,17 @@
 	</Steps>
 
 
-	<!-- <Files>
-		<Input name="referenceInput" type="input">../referenceInput.txt</Input>
-	</Files> -->
-	
-	
 	<Models>
-		<!-- <Code name="fmuSimulator" subType="GenericCode">
-			<executable>simulate.py</executable>
-			<clargs arg="python" type="prepend" />		
-			<clargs arg="" extension=".txt" type="input"/>
-			<clargs arg="" extension=".csv" type="output"/>
-		</Code> -->
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
-			<!-- <variables>gInputs, gOutputs</variables> -->
-			<inputs>gInputs</inputs>
+			<inputs>gInputs,gFMUSetup</inputs>
 			<outputs>gOutputs</outputs>
 			<settingsFMU>
 				<filename>../fmus/lotkaVolterra.fmu</filename>
-				<start_time>0.0</start_time>
-				<stop_time>25.0</stop_time>
-				<output_interval>0.1</output_interval>
-				<start_values>gInputs</start_values>
-				<output>gOutputs</output>
+				<start_time>1.0</start_time>
+				<stop_time>50.0</stop_time>
+				<output_interval>0.5</output_interval>
+				<parameters>gInputs,gFMUSetup</parameters>
+				<outputs>gOutputs</outputs>
 			</settingsFMU>
 		</ExternalModel>
 	</Models>
@@ -73,11 +60,13 @@
 		<PointSet name="placeholder"/>
 
 		<PointSet name="pointValues">
+			<!-- <Input>gInputs,gFMUSetup</Input> -->
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
 		
 		<HistorySet name="history">
+		  <!-- <Input>gInputs,gFMUSetup</Input> -->
 		  <Input>gInputs</Input>
 		  <Output>gOutputs</Output>
 		</HistorySet>
@@ -85,9 +74,10 @@
 
 	
 	<VariableGroups>
+		<Group name="gFMUSetup" >start_time, stop_time, output_interval</Group>
 		<Group name="gInputs" >x_start, y_start, alpha, beta, gamma, delta</Group>
 		<Group name="gOutputs" >time, x, y, u</Group>
-		<Group name="gOutputs_notime" dependencies="gOutputs" base="gOutputs">-time</Group>
+		<Group name="gOutputs_notime">gOutputs, -time</Group>
 	</VariableGroups>
 
 
@@ -120,9 +110,9 @@
 				<limit>9</limit>
 			</samplerInit>
 
-		    <!-- <constant name="start_time">0</constant>
+		    <constant name="start_time">0</constant>
 			<constant name="stop_time">25</constant>
-			<constant name="output_interval">0.5</constant> -->
+			<constant name="output_interval">0.1</constant>
 
 			<constant name="x_start">10</constant>
 			<constant name="y_start">5</constant>
@@ -141,9 +131,9 @@
 		</MonteCarlo>
 		
 		<Grid name='simpleGrid'>
-		    <!-- <constant name="start_time">0</constant>
+		    <constant name="start_time">0</constant>
 			<constant name="stop_time">25</constant>
-			<constant name="output_interval">0.5</constant> -->
+			<constant name="output_interval">0.1</constant>
 
 			<constant name="x_start">10</constant>
 			<constant name="y_start">5</constant>
