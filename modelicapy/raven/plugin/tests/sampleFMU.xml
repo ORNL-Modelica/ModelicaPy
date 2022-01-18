@@ -28,7 +28,6 @@
 			<Output class="DataObjects" type="PointSet">pointValues</Output>
 			<Output class="DataObjects" type="HistorySet">history</Output>
 		</MultiRun>
-
 		<IOStep name="createOutput">
 			<Input class="DataObjects" type="PointSet">pointValues</Input>
 			<Input class="DataObjects" type="HistorySet">history</Input>
@@ -58,12 +57,10 @@
 
 	<DataObjects>
 		<PointSet name="placeholder"/>
-
 		<PointSet name="pointValues">
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
-		
 		<HistorySet name="history">
 		  <Input>gInputs</Input>
 		  <Output>gOutputs</Output>
@@ -83,17 +80,14 @@
 			<upperBound>2</upperBound>
 			<lowerBound>1</lowerBound>
 		</Uniform>
-
 		<Uniform name="dbeta">
 			<upperBound>2</upperBound>
 			<lowerBound>1</lowerBound>
 		</Uniform>
-
 		<Uniform name="dgamma">
 			<upperBound>5</upperBound>
 			<lowerBound>1</lowerBound>
 		</Uniform>
-
 		<Uniform name="ddelta">
 			<upperBound>2</upperBound>
 			<lowerBound>0</lowerBound>
@@ -106,46 +100,30 @@
 			<samplerInit>
 				<limit>9</limit>
 			</samplerInit>
-
-		    <constant name="start_time">0</constant>
-			<constant name="stop_time">25</constant>
 			<constant name="output_interval">0.1</constant>
-
 			<constant name="x_start">10</constant>
 			<constant name="y_start">5</constant>
-
 			<variable name="alpha">
 				<distribution>dalpha</distribution>
 			</variable>
-
 			<variable name="beta">
 				<distribution>dbeta</distribution>
 			</variable>
-
 			<constant name="gamma">3</constant>
 			<constant name="delta">1</constant>
-
 		</MonteCarlo>
-		
 		<Grid name='simpleGrid'>
-		    <constant name="start_time">0</constant>
-			<constant name="stop_time">25</constant>
 			<constant name="output_interval">0.1</constant>
-
 			<constant name="x_start">10</constant>
 			<constant name="y_start">5</constant>
-			<!-- <constant name="alpha">1.5</constant> -->
-			<!-- <constant name="beta">1</constant> -->
 			<variable name='alpha'>
 				<distribution>dalpha</distribution>
 				<grid type='value' construction='equal' steps='2' >1 2</grid>
 			</variable>
-
 			<variable name='beta'>
 				<distribution>dbeta</distribution>
 				<grid type='CDF' construction='equal' steps='2' >0 1</grid>
 			</variable>
-
 			<constant name="gamma">3</constant>
 			<constant name="delta">1</constant>
 		</Grid>
@@ -157,12 +135,10 @@
 			<type>csv</type>
 			<source>pointValues</source>
 		</Print>
-		
 		<Print name="history">
 			<type>csv</type>
 			<source>history</source>
 		</Print>
-		
 		<Plot name="historyPlot" overwrite="false" verbosity="debug">
 			<plotSettings>
 				<gridSpace>2 1</gridSpace>

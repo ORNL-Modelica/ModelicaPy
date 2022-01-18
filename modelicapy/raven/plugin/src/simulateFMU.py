@@ -62,23 +62,7 @@ def _readMoreXML(raven,xmlNode):
     
     xmlNodeName = 'settingsFMU'
     main = xmlNode.find(xmlNodeName)
-    # for key in settings.keys():
-    #     node = main.find(key)
-    #     if key == 'filename':
-    #         settings[key] = node.text
-    #     elif key == 'start_time' or key == 'stop_time' or key == 'output_interval':
-    #         settings[key] = float(node.text)
-    #     elif key == 'start_values':
-    #         vals = node.text
-    #         vals = vals.replace(' ','').strip().split(',')
-    #         for v in vals:
-    #             settings[key][v] = None
-    #     elif key == 'outputs':
-    #         vals = node.text
-    #         settings[key] = vals.replace(' ','').strip().split(',')      
-    #     else:
-    #         raise ValueError('Unrecognized XML node in: {}\n'.format(xmlNodeName))
-        
+       
     for node in main:
         if node.tag == 'filename':
             settings[node.tag] = node.text
