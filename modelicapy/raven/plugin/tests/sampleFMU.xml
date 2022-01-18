@@ -42,15 +42,15 @@
 
 	<Models>
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
-			<inputs>gInputs,gFMUSetup</inputs>
+			<inputs>gInputs, output_interval</inputs>
 			<outputs>gOutputs</outputs>
 			<settingsFMU>
 				<filename>../fmus/lotkaVolterra.fmu</filename>
-				<start_time>1.0</start_time>
-				<stop_time>50.0</stop_time>
-				<output_interval>0.5</output_interval>
-				<parameters>gInputs,gFMUSetup</parameters>
+				<parameters>gInputs, output_interval</parameters>
 				<outputs>gOutputs</outputs>
+				<start_time>0.0</start_time>
+				<stop_time>25.0</stop_time>
+				<output_interval>0.1</output_interval>
 			</settingsFMU>
 		</ExternalModel>
 	</Models>
@@ -60,13 +60,11 @@
 		<PointSet name="placeholder"/>
 
 		<PointSet name="pointValues">
-			<!-- <Input>gInputs,gFMUSetup</Input> -->
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
 		
 		<HistorySet name="history">
-		  <!-- <Input>gInputs,gFMUSetup</Input> -->
 		  <Input>gInputs</Input>
 		  <Output>gOutputs</Output>
 		</HistorySet>
@@ -74,7 +72,6 @@
 
 	
 	<VariableGroups>
-		<Group name="gFMUSetup" >start_time, stop_time, output_interval</Group>
 		<Group name="gInputs" >x_start, y_start, alpha, beta, gamma, delta</Group>
 		<Group name="gOutputs" >time, x, y, u</Group>
 		<Group name="gOutputs_notime">gOutputs, -time</Group>
