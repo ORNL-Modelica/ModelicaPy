@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>CalibrateFMUExample</name>
+		<author>Scott Greenwood</author>
+		<created>2022-01-18</created>
+		<classesTested>FMPy-RAVEN interface</classesTested>
+		<description>
+		   Simple Pipe CFs: Calibrate correction factors.
+		   Extra:
+			- shows an example of using aliases if FMU variables contain characters not usable for defining python variables.
+		</description>
+	</TestInfo>
+
+
+	<RunInfo>
+		<JobName>CalibrateFMU</JobName>
+		<WorkingDir>test_calibrateFMU</WorkingDir>
+		<Sequence>sampleFMU, createOutput</Sequence>
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+
+	<Steps>
+		<MultiRun name="sampleFMU">
+			<!-- <Input class="Files" type="input">fmu</Input> -->
+			<Input class="DataObjects" type="PointSet">placeholder</Input>
+			<Model class="Models" type="ExternalModel">simulateFMU</Model>
+			<Optimizer class="Optimizers" type="SPSA">opter</Optimizer>
+			<SolutionExport class="DataObjects" type="HistorySet">opt_export</SolutionExport>
+			<Output class="DataObjects" type="PointSet">optOut</Output>
+		</MultiRun>
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="HistorySet">opt_export</Input>
+			<Output class="OutStreams" type="Print">opt_export</Output>
+		  </IOStep>
+	</Steps>
+
+
+	<!-- <Files>
+		<Input name="fmu" type="input">../fmus/simplePipeCFs.fmu</Input>
+	</Files> -->
+
+
+	<Models>
+		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
+			<inputs>gInputsFMU</inputs>
+			<outputs>errorSum</outputs>
+			<alias variable="CFs_1" type="input">CFs[1]</alias>
+			<alias variable="CFs_2" type="input">CFs[2]</alias>
+			<alias variable="CFs_3" type="input">CFs[3]</alias>
+			<alias variable="CFs_4" type="input">CFs[4]</alias>
+			<alias variable="CFs_5" type="input">CFs[5]</alias>
+			<alias variable="CFs_6" type="input">CFs[6]</alias>
+			<alias variable="CFs_7" type="input">CFs[7]</alias>
+			<alias variable="CFs_8" type="input">CFs[8]</alias>
+			<alias variable="CFs_9" type="input">CFs[9]</alias>
+			<alias variable="CFs_10" type="input">CFs[10]</alias>
+			<!-- <alias variable="pipe_mediums_1_T" type="output">pipe.mediums[1].T</alias>
+			<alias variable="pipe_mediums_2_T" type="output">pipe.mediums[2].T</alias>
+			<alias variable="pipe_mediums_3_T" type="output">pipe.mediums[3].T</alias>
+			<alias variable="pipe_mediums_4_T" type="output">pipe.mediums[4].T</alias>
+			<alias variable="pipe_mediums_5_T" type="output">pipe.mediums[5].T</alias>
+			<alias variable="pipe_mediums_6_T" type="output">pipe.mediums[6].T</alias>
+			<alias variable="pipe_mediums_7_T" type="output">pipe.mediums[7].T</alias>
+			<alias variable="pipe_mediums_8_T" type="output">pipe.mediums[8].T</alias>
+			<alias variable="pipe_mediums_9_T" type="output">pipe.mediums[9].T</alias>
+			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias> -->
+			<settings>
+				<filename>../fmus/simplePipeCFs.fmu</filename>
+				<filenameGoldValues>goldValues/calibrateFMU.csv</filenameGoldValues>
+				<parameters>CFs[1], CFs[2], CFs[3], CFs[4], CFs[5], CFs[6], CFs[7], CFs[8], CFs[9], CFs[10]</parameters>
+				<outputs>pipe.mediums[1].T, pipe.mediums[2].T, pipe.mediums[3].T, pipe.mediums[4].T, pipe.mediums[5].T, pipe.mediums[6].T, pipe.mediums[7].T, pipe.mediums[8].T, pipe.mediums[9].T, pipe.mediums[10].T</outputs>
+			</settings>
+		</ExternalModel>
+	</Models>
+
+
+	<DataObjects>
+		<PointSet name="placeholder"/>
+		<PointSet name="optOut">
+		  <Input>gInputsFMU</Input>
+		  <Output>errorSum</Output>
+		</PointSet>
+		<PointSet name="opt_export">
+		  <Input>trajID</Input>
+		  <Output>iteration, gInputsFMU, errorSum</Output>
+		</PointSet>
+	</DataObjects>
+
+
+	<VariableGroups>
+		<Group name="gInputsFMU">CFs_1, CFs_2, CFs_3, CFs_4, CFs_5, CFs_6, CFs_7, CFs_8, CFs_9, CFs_10,</Group>
+		<Group name="gOutputsFMU">time, pipe_mediums_1_T, pipe_mediums_2_T, pipe_mediums_3_T, pipe_mediums_4_T, pipe_mediums_5_T, pipe_mediums_6_T, pipe_mediums_7_T, pipe_mediums_8_T, pipe_mediums_9_T, pipe_mediums_10_T</Group>
+	</VariableGroups>
+
+
+	<Distributions>
+		<Uniform name='bounds'>
+		  <lowerBound>0.001</lowerBound>
+		  <upperBound>5.0</upperBound>
+		</Uniform>
+	  </Distributions>
+
+
+	<Samplers>
+		<MonteCarlo name="monteCarlo">
+			<samplerInit>
+				<limit>9</limit>
+			</samplerInit>
+			<constant name="CFs_1">1.5</constant>
+			<constant name="CFs_2">1.5</constant>
+			<constant name="CFs_3">1.5</constant>
+			<constant name="CFs_4">1.5</constant>
+			<constant name="CFs_5">1.5</constant>
+			<constant name="CFs_6">1.5</constant>
+			<constant name="CFs_7">1.5</constant>
+			<constant name="CFs_8">1.5</constant>
+			<constant name="CFs_9">1.5</constant>
+			<constant name="CFs_10">1.5</constant>
+		</MonteCarlo>
+
+		<Grid name='simpleGrid'>
+			<constant name="CFs_1">1.5</constant>
+			<constant name="CFs_2">1.5</constant>
+			<constant name="CFs_3">1.5</constant>
+			<constant name="CFs_4">1.5</constant>
+			<constant name="CFs_5">1.5</constant>
+			<constant name="CFs_6">1.5</constant>
+			<constant name="CFs_7">1.5</constant>
+			<constant name="CFs_8">1.5</constant>
+			<constant name="CFs_9">1.5</constant>
+			<variable name="CFs_10">
+				<distribution>bounds</distribution>
+				<grid type='CDF' construction='equal' steps='2' >0 1</grid>
+			</variable>
+		</Grid>
+	</Samplers>
+
+
+	<Optimizers>
+		<GradientDescent name="opter">
+			<objective>errorSum</objective>
+			<variable name="CFs_1">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_2">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_3">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_4">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_5">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_6">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_7">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_8">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_9">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<variable name="CFs_10">
+				<distribution>bounds</distribution>
+				<initial>1.0</initial>
+			</variable>
+			<TargetEvaluation class="DataObjects" type="PointSet">optOut</TargetEvaluation>
+			<samplerInit>
+				<limit>5000</limit>
+				<initialSeed>1234</initialSeed>
+			</samplerInit>
+			<gradient>
+				<SPSA />
+			</gradient>
+			<stepSize>
+				<GradientHistory />
+			</stepSize>
+			<acceptance>
+				<Strict />
+			</acceptance>
+			<convergence>
+				<gradient>1e-1</gradient>
+				<persistence>5</persistence>
+			</convergence>
+		</GradientDescent>
+	</Optimizers>
+
+
+	<OutStreams>
+		<Print name="opt_export">
+			<type>csv</type>
+			<source>opt_export</source>
+		</Print>
+	</OutStreams>
+</Simulation>

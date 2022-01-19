@@ -17,45 +17,54 @@ RAVEN XML node description:
 <settingsFMU> - custom XML node for FMU specific external model
     <filename> - REQUIRED - str - location of gold values relative to current working directory
     <parameters> - REQUIRED - str - Variables names of the provided <inputs>. This is required to extract the variable values from the raven object. Note: Should be identical to <inputs> on the raven xml side.
-    <outputs> - REQUIRED -  str - Variables names of the provided <outputs>. This is required to extract the variable values from the raven object. Note: Should be identical to <outputs> on the raven xml side.
-    <start_time> - OPTIONAL - float - start time for the FMU simulation. If not provided will default to time in FMU modelDescription.xml.
-    <stop_time> - OPTIONAL - float - stop time for the FMU simulation. If not provided will default to time in FMU modelDescription.xml.
-    <output_interval> - OPTIONAL - float - time step for simulation. If not provided will default to interval in FMU modelDescription.xml or autocalculated..
+    <outputs> - REQUIRED -  str - Variables names of the provided <outputs>. This is required to save the variable values to the raven object. Note: Should be identical to <outputs> on the raven xml side.
+
 
 IMPORTANT:
-    - If reserved variables names ['start_time', 'stop_time', 'output_interval'] are part of the sample space (i.e., in <parameters.), then the value provided will overwrite the pertinent section.
-    For example, the sample XML input below will use the sampled output_interval values instead of the defined value of 0.5.
 
 TODO:
-    - Currently expects single values for comparison. Potential to generalize to any data shape.
-    
+   
 Example XML Input:
 	<Models>
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
-			<inputs>a, b, c, output_interval</inputs>
-			<outputs>x, y, z</outputs>
+			<inputs>a, b, c</inputs>
+			<outputs>errorSumz</outputs>
 			<settingsFMU>
-				<filename>../fmus/myFMU.fmu</filename>
-				<parameters>a, b, c, output_intervalp</parameters>
-				<outputs>x, y, z</outputs>
-				<start_time>0.0</start_time>
-				<stop_time>50.0</stop_time>
-				<output_interval>0.5</output_interval>
+				<filename>../goldValues/myGoldValues.csv</filename>
+				<parameters>a, b, c</parameters>
+          <outputs>errorSum</outputs>
 			</settingsFMU>
 		</ExternalModel>
 	</Models>
 """
 
 import numpy as np
+import pandas as pd
 
-
-reservedNames = ['start_time', 'stop_time', 'output_interval']
-
-def without_keys(d, keys):
+def compareResults(values,goldValues):
     '''
-    Return a copy of dictionary 'd' without the specified 'keys'.
     '''
-    return {x: d[x] for x in d if x not in keys}
+    sharedKeys = []
+    skippedKeys = []
+    for key in values.keys():
+        if key in goldValues:
+            sharedKeys.append(key)
+        else:
+            skippedKeys.append(key)
+    
+    summary = {}
+    summary['error'] = {}
+    summary['errorRelative'] = {}
+    errorSum = 0
+    for key in sharedKeys:
+        summary['error'][key] = values[key] - goldValues[key]
+        summary['errorRelative'][key] = summary['error'][key]/goldValues[key]
+        errorSum += np.abs(summary['errorRelative'][key])   
+    summary['errorSum'] = errorSum
+    
+    print('The following variables were skipped as they were NOT found in the goldValues file:\n {}\n'.format(skippedKeys))
+    return summary
+
 
 
 ##### RAVEN methods #####
@@ -64,8 +73,7 @@ def _readMoreXML(raven,xmlNode):
     Initialization section. Only run once.
     '''
     settings = {'filename':'',
-                'start_time':None,'stop_time':None,'output_interval':None,
-                'parameters':{},'outputs':[]}
+                'parameters':{}}
     
     xmlNodeName = 'settings'
     main = xmlNode.find(xmlNodeName)
@@ -77,10 +85,7 @@ def _readMoreXML(raven,xmlNode):
             vals = node.text
             vals = vals.replace(' ','').strip().split(',')
             for v in vals:
-                settings[node.tag][v] = None
-        elif node.tag == 'outputs':
-            vals = node.text
-            settings[node.tag] = vals.replace(' ','').strip().split(',')      
+                settings[node.tag][v] = None     
         else:
             raise ValueError('Unrecognized XML node "{}" in parent "{}". xml\n'.format(node.tag, main))  
             
@@ -99,21 +104,18 @@ def run(raven, Input):
     
     # Setup
     filename = raven.settings['filename']
-    start_time = raven.settings['start_time']
-    stop_time = raven.settings['stop_time']
-    output_interval = raven.settings['output_interval']
-    parameters = without_keys(raven.settings['parameters'], reservedNames)
+    parameters = raven.settings['parameters']
     outputs = raven.settings['outputs']
     
-    # Simulate
-    results = simulate_fmu(filename,
-                           start_time=start_time,stop_time=stop_time,output_interval=output_interval,
-                           start_values=parameters,output=outputs)
-                           # input=input))
+    # Compare values
+    values = parameters#pd.DataFrame(results).iloc[-1].to_dict()    
+    goldValues = pd.read_csv(raven.settings['filename']).iloc[0].to_dict()
+    summary = compareResults(values,goldValues)
+    
     # Save output
     parentkey = 'outputs'
     for key in raven.settings[parentkey]:
-        setattr(raven, key, np.asarray(results[key]))
+        setattr(raven, key, np.asarray(summary[key]))
         
 if __name__ == '__main__':
     
