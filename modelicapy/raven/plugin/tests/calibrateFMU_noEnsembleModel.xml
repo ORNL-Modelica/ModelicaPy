@@ -9,7 +9,6 @@
 		   Simple Pipe CFs: Calibrate correction factors.
 		   Extra:
 			- shows an example of using aliases if FMU variables contain characters not usable for defining python variables.
-			- example use of ensemble models
 		</description>
 	</TestInfo>
 
@@ -25,7 +24,7 @@
 	<Steps>
 		<MultiRun name="optimize">
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
-			<Model class="Models" type="EnsembleModel">calibrateFMU</Model>
+			<Model class="Models" type="ExternalModel">simulateFMU</Model>
 			<Optimizer class="Optimizers" type="SPSA">opter</Optimizer>
 			<SolutionExport class="DataObjects" type="HistorySet">opt_export</SolutionExport>
 			<Output class="DataObjects" type="PointSet">optOut</Output>
@@ -40,7 +39,7 @@
 	<Models>
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputsFMU</inputs>
-			<outputs>gOutputsFMU</outputs>
+			<outputs>errorSum, gOutputsFMU</outputs>
 			<alias variable="CFs_1" type="input">CFs[1]</alias>
 			<alias variable="CFs_2" type="input">CFs[2]</alias>
 			<alias variable="CFs_3" type="input">CFs[3]</alias>
@@ -63,40 +62,11 @@
 			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
 				<filename>../fmus/simplePipeCFs.fmu</filename>
+				<filenameGoldValues>goldValues/calibrateFMU.csv</filenameGoldValues>
 				<parameters>CFs[1], CFs[2], CFs[3], CFs[4], CFs[5], CFs[6], CFs[7], CFs[8], CFs[9], CFs[10]</parameters>
 				<outputs>pipe.mediums[1].T, pipe.mediums[2].T, pipe.mediums[3].T, pipe.mediums[4].T, pipe.mediums[5].T, pipe.mediums[6].T, pipe.mediums[7].T, pipe.mediums[8].T, pipe.mediums[9].T, pipe.mediums[10].T</outputs>
 			</settings>
 		</ExternalModel>
-		<ExternalModel ModuleToLoad="../../src/compareGoldValues" name="compareGoldValues" subType="">
-			<inputs>gOutputsFMU</inputs>
-			<outputs>errorSum</outputs>
-			<alias variable="pipe_mediums_1_T" type="input">pipe.mediums[1].T</alias>
-			<alias variable="pipe_mediums_2_T" type="input">pipe.mediums[2].T</alias>
-			<alias variable="pipe_mediums_3_T" type="input">pipe.mediums[3].T</alias>
-			<alias variable="pipe_mediums_4_T" type="input">pipe.mediums[4].T</alias>
-			<alias variable="pipe_mediums_5_T" type="input">pipe.mediums[5].T</alias>
-			<alias variable="pipe_mediums_6_T" type="input">pipe.mediums[6].T</alias>
-			<alias variable="pipe_mediums_7_T" type="input">pipe.mediums[7].T</alias>
-			<alias variable="pipe_mediums_8_T" type="input">pipe.mediums[8].T</alias>
-			<alias variable="pipe_mediums_9_T" type="input">pipe.mediums[9].T</alias>
-			<alias variable="pipe_mediums_10_T" type="input">pipe.mediums[10].T</alias>
-			<settings>
-				<filename>goldValues/calibrateFMU.csv</filename>
-				<parameters>pipe.mediums[1].T, pipe.mediums[2].T, pipe.mediums[3].T, pipe.mediums[4].T, pipe.mediums[5].T, pipe.mediums[6].T, pipe.mediums[7].T, pipe.mediums[8].T, pipe.mediums[9].T, pipe.mediums[10].T</parameters>
-			</settings>
-		</ExternalModel>
-		<EnsembleModel name="calibrateFMU" subType="">
-			<Model class="Models" type="ExternalModel">
-				simulateFMU
-				<Input class="DataObjects" type="PointSet">placeholder</Input>
-				<TargetEvaluation class="DataObjects" type="PointSet">IO_simulateFMU</TargetEvaluation>
-			</Model>
-			<Model class="Models" type="ExternalModel">
-				compareGoldValues
-				<Input class="DataObjects" type="PointSet">placeholder</Input>
-				<TargetEvaluation class="DataObjects" type="PointSet">IO_compareGoldValues</TargetEvaluation>
-			</Model>
-		</EnsembleModel>
 	</Models>
 
 
@@ -109,15 +79,6 @@
 		<PointSet name="opt_export">
 		  <Input>trajID</Input>
 		  <Output>iteration, gInputsFMU, errorSum</Output>
-		</PointSet>
-
-		<PointSet name="IO_simulateFMU">
-			<Input>gInputsFMU</Input>
-			<Output>gOutputsFMU</Output>
-		</PointSet>
-		<PointSet name="IO_compareGoldValues">
-			<Input>gOutputsFMU</Input>
-			<Output>errorSum</Output>
 		</PointSet>
 	</DataObjects>
 
