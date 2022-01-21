@@ -8,7 +8,7 @@ RAVEN XML node description:
 <inputs> - REQUIRED - float - RAVEN default node for defining in-memory input variables
 <outputs> - REQUIRED - float - RAVEN default node for defining in-memory output variables
 <settings> - custom XML node for FMU specific external model
-    <filename> - REQUIRED - str - location of FMU relative to current working directory
+    <filename> - REQUIRED - str - location of FMU relative to current working directory.
     <parameters> - REQUIRED - str - Variables names of the provided <inputs>. This is required to extract the variable values from the raven object. Note: Should be identical to <inputs> on the raven xml side.
     <outputs> - REQUIRED -  str - Variables names of the provided <outputs>. This is required to save the variable values to the raven object. Note: Should be identical to <outputs> on the raven xml side.
     <start_time> - OPTIONAL - float - start time for the FMU simulation. If not provided will default to time in FMU modelDescription.xml.
@@ -155,9 +155,14 @@ def run(raven, Input):
     parentkey = 'outputs'
     for key in raven.settings[parentkey]:
         try:
-            setattr(raven, key, np.asarray(results[key]))
+            Input[key] = np.asarray(results[key])
         except:
             pass
+    
+    try:
+        setattr(raven, 'time', np.asarray(results['time']))
+    except:
+        pass
         
     if 'filenameGoldValues' in raven.settings:
         # df = pd.DataFrame(results).to_
@@ -168,7 +173,8 @@ def run(raven, Input):
         #     f.write('errorSum\n')
         #     f.write(str(summary['errorSum']))
 
-        raven.errorSum = summary['errorSum']
+        # raven.errorSum = summary['errorSum']
+        setattr(raven, 'errorSum', np.asarray(summary['errorSum']))
         print('\n\nDEBUG ############### BEGIN')
         print('errorSum = {}'.format(summary['errorSum']))
         print('DEBUG ############### END\n\n')

@@ -264,7 +264,7 @@ if __name__ == '__main__':
 
     
     ### Setup the problem
-    PackagePath = "C:\\Users\\vmg\\Documents\\Dymola"
+    PackagePath = "C:\\Users\\greems\\Documents\\Dymola"
     PackageName = "OptimizationDemonstration"
     problem='Demo_1'
     tempDir = 'temp' #  Placed in current working directory

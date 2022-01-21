@@ -15,7 +15,7 @@ RAVEN XML node description:
 <inputs> - REQUIRED - float - RAVEN default node for defining in-memory input variables
 <outputs> - REQUIRED - float - RAVEN default node for defining in-memory output variables
 <settingsFMU> - custom XML node for FMU specific external model
-    <filename> - REQUIRED - str - location of gold values relative to current working directory
+    <filename> - REQUIRED - str - location of gold values relative to root directory (e.g., location of python file?)
     <parameters> - REQUIRED - str - Variables names of the provided <inputs>. This is required to extract the variable values from the raven object. Note: Should be identical to <inputs> on the raven xml side.
     <outputs> - REQUIRED -  str - Variables names of the provided <outputs>. This is required to save the variable values to the raven object. Note: Should be identical to <outputs> on the raven xml side.
 

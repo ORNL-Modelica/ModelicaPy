@@ -17,7 +17,7 @@
 		<JobName>CalibrateFMU</JobName>
 		<WorkingDir>test_calibrateFMU</WorkingDir>
 		<Sequence>sampleFMU, createOutput</Sequence>
-		<batchSize>1</batchSize>
+		<batchSize>2</batchSize>
 	</RunInfo>
 
 
@@ -45,7 +45,7 @@
 	<Models>
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputsFMU</inputs>
-			<outputs>errorSum</outputs>
+			<outputs>errorSum, gOutputsFMU</outputs>
 			<alias variable="CFs_1" type="input">CFs[1]</alias>
 			<alias variable="CFs_2" type="input">CFs[2]</alias>
 			<alias variable="CFs_3" type="input">CFs[3]</alias>
@@ -56,7 +56,7 @@
 			<alias variable="CFs_8" type="input">CFs[8]</alias>
 			<alias variable="CFs_9" type="input">CFs[9]</alias>
 			<alias variable="CFs_10" type="input">CFs[10]</alias>
-			<!-- <alias variable="pipe_mediums_1_T" type="output">pipe.mediums[1].T</alias>
+			<alias variable="pipe_mediums_1_T" type="output">pipe.mediums[1].T</alias>
 			<alias variable="pipe_mediums_2_T" type="output">pipe.mediums[2].T</alias>
 			<alias variable="pipe_mediums_3_T" type="output">pipe.mediums[3].T</alias>
 			<alias variable="pipe_mediums_4_T" type="output">pipe.mediums[4].T</alias>
@@ -65,7 +65,7 @@
 			<alias variable="pipe_mediums_7_T" type="output">pipe.mediums[7].T</alias>
 			<alias variable="pipe_mediums_8_T" type="output">pipe.mediums[8].T</alias>
 			<alias variable="pipe_mediums_9_T" type="output">pipe.mediums[9].T</alias>
-			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias> -->
+			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
 				<filename>../fmus/simplePipeCFs.fmu</filename>
 				<filenameGoldValues>goldValues/calibrateFMU.csv</filenameGoldValues>
@@ -97,8 +97,8 @@
 
 	<Distributions>
 		<Uniform name='bounds'>
-		  <lowerBound>0.001</lowerBound>
-		  <upperBound>5.0</upperBound>
+		  <lowerBound>0.5</lowerBound>
+		  <upperBound>1.0</upperBound>
 		</Uniform>
 	  </Distributions>
 
