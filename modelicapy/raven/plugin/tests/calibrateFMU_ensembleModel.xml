@@ -29,11 +29,14 @@
 			<Optimizer class="Optimizers" type="SPSA">opter</Optimizer>
 			<SolutionExport class="DataObjects" type="HistorySet">opt_export</SolutionExport>
 			<Output class="DataObjects" type="PointSet">optOut</Output>
+			<Output class="DataObjects" type="PointSet">IO_simulateFMU</Output>
 		</MultiRun>
 		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">IO_simulateFMU</Input>
 			<Input class="DataObjects" type="HistorySet">opt_export</Input>
 			<Output class="OutStreams" type="Print">opt_export</Output>
-		  </IOStep>
+			<Output class="OutStreams" type="Print">history</Output>
+		</IOStep>
 	</Steps>
 
 
@@ -205,6 +208,10 @@
 		<Print name="opt_export">
 			<type>csv</type>
 			<source>opt_export</source>
+		</Print>
+		<Print name="history">
+			<type>csv</type>
+			<source>IO_simulateFMU</source>
 		</Print>
 	</OutStreams>
 </Simulation>
