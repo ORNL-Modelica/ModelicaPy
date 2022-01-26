@@ -44,7 +44,7 @@ Example XML Input:
 import numpy as np
 from fmpy import simulate_fmu
 import pandas as pd
-from compareGoldValues import compareResults
+from compareGoldValues import _compareResults
 
 reservedNames = ['start_time', 'stop_time', 'output_interval']
 
@@ -82,6 +82,8 @@ def _readMoreXML(raven,xmlNode):
             vals = node.text
             settings[node.tag] = vals.replace(' ','').strip().split(',') # TODO: 2  
         elif node.tag == "filenameGoldValues":
+            settings[node.tag] = node.text
+        elif node.tag == 'method':
             settings[node.tag] = node.text
         else:
             raise ValueError('Unrecognized XML node "{}" in parent "{}". xml\n'.format(node.tag, main))  
@@ -136,8 +138,9 @@ def run(raven, Input):
     # Conditional output for non-ensemble model approaches and calibration
     if 'filenameGoldValues' in raven.settings:
         values = pd.DataFrame(results).iloc[-1].to_dict()    
-        summary = compareResults(values,raven.settings['goldValues'])
+        summary = _compareResults(values, raven.settings['goldValues'], raven.settings['method'])
         setattr(raven, 'errorSum', np.asarray(summary['errorSum']))    
+
 
 if __name__ == '__main__':
     

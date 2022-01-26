@@ -73,7 +73,6 @@ def simulateFMU(inputFileName,outputFileName,input=None,set_input_derivatives=Fa
             key = line.replace(' ','').strip()
             output.append(key)
     
-    output.append('alpha')
     # If empty set to None to return default output variables
     if len(output) == 0: output = None
     
@@ -116,7 +115,7 @@ if __name__ == '__main__':
     # signals = np.array([(t[i],x[i]) for i in range(len(t))],dtype=dtype)
 
     # Run the FMU and create the output file
-    simulateFMU(inputFileName,outputFileName,input=signals)#,set_input_derivatives=set_input_derivatives)
+    simulateFMU(inputFileName,outputFileName)#,input=signals)#,set_input_derivatives=set_input_derivatives)
 
 
     if inputFileName == "referenceInput_pyTest.txt":

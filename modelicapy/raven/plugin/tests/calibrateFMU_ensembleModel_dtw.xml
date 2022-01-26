@@ -1,0 +1,179 @@
+<?xml version="1.0"?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>CalibrateFMUExample</name>
+		<author>Scott Greenwood</author>
+		<created>2022-01-18</created>
+		<classesTested>FMPy-RAVEN interface</classesTested>
+		<description>
+			Lotka Volterra Model: Calibrate parameters using time history.
+			Extra:
+			 - uses option dtw
+		</description>
+	</TestInfo>
+
+
+	<RunInfo>
+		<JobName>CalibrateFMU</JobName>
+		<WorkingDir>test_calibrateFMU_dtw</WorkingDir>
+		<Sequence>optimize, createOutput</Sequence>
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+
+	<Steps>
+		<MultiRun name="optimize">
+			<Input class="DataObjects" type="PointSet">placeholder</Input>
+			<Model class="Models" type="EnsembleModel">calibrateFMU</Model>
+			<Optimizer class="Optimizers" type="SPSA">opter</Optimizer>
+			<SolutionExport class="DataObjects" type="HistorySet">opt_export</SolutionExport>
+			<Output class="DataObjects" type="PointSet">optOut</Output>
+		</MultiRun>
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="HistorySet">opt_export</Input>
+			<Output class="OutStreams" type="Print">opt_export</Output>
+		</IOStep>
+	</Steps>
+
+
+	<Models>
+		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
+			<inputs>gInputsFMU</inputs>
+			<outputs>gOutputsFMU</outputs>
+			<settings>
+				<filename>../fmus/lotkaVolterra.fmu</filename>
+				<parameters>gInputsFMU</parameters>
+				<outputs>gOutputsFMU</outputs>
+			</settings>
+		</ExternalModel>
+		<ExternalModel ModuleToLoad="../../src/compareGoldValues" name="compareGoldValues" subType="">
+			<inputs>gOutputsFMU</inputs>
+			<outputs>errorSum</outputs>
+			<settings>
+				<filename>goldValues/calibrateFMU_lotkaVolterra1.csv</filename>
+				<parameters>gOutputsFMU</parameters>
+				<method>dtw</method>
+			</settings>
+		</ExternalModel>
+		<EnsembleModel name="calibrateFMU" subType="">
+			<Model class="Models" type="ExternalModel">
+				simulateFMU
+				<Input class="DataObjects" type="PointSet">placeholder</Input>
+				<TargetEvaluation class="DataObjects" type="HistorySet">IO_simulateFMU</TargetEvaluation>
+			</Model>
+			<Model class="Models" type="ExternalModel">
+				compareGoldValues
+				<Input class="DataObjects" type="PointSet">placeholder</Input>
+				<TargetEvaluation class="DataObjects" type="PointSet">IO_compareGoldValues</TargetEvaluation>
+			</Model>
+		</EnsembleModel>
+	</Models>
+
+
+	<DataObjects>
+		<PointSet name="placeholder"/>
+		<PointSet name="optOut">
+		  <Input>gInputsFMU</Input>
+		  <Output>errorSum</Output>
+		</PointSet>
+		<PointSet name="opt_export">
+		  <Input>trajID</Input>
+		  <Output>iteration, gInputsFMU, errorSum</Output>
+		</PointSet>
+
+		<HistorySet name="IO_simulateFMU">
+			<Input>gInputsFMU</Input>
+			<Output>gOutputsFMU</Output>
+		</HistorySet>
+		<PointSet name="IO_compareGoldValues">
+			<Input>gOutputsFMU</Input>
+			<Output>errorSum</Output>
+		</PointSet>
+	</DataObjects>
+
+
+	<VariableGroups>
+		<Group name="gInputsFMU" >x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputsFMU" >time, x, y</Group>
+	</VariableGroups>
+
+
+	<Distributions>
+		<Uniform name="dalpha">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+		<Uniform name="dbeta">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+		<Uniform name="dgamma">
+			<upperBound>5</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+		<Uniform name="ddelta">
+			<upperBound>2</upperBound>
+			<lowerBound>0</lowerBound>
+		</Uniform>
+	</Distributions>
+
+
+	<Optimizers>
+		<GradientDescent name="opter">
+			<objective>errorSum</objective>
+			<constant name="x_start">10</constant>
+			<constant name="y_start">5</constant>
+			<variable name="alpha">
+				<distribution>dalpha</distribution>
+				<initial>1.4</initial>
+			</variable>
+			<variable name="beta">
+				<distribution>dbeta</distribution>
+				<initial>1.1</initial>
+			</variable>
+			<variable name="gamma">
+				<distribution>dgamma</distribution>
+				<initial>2.9</initial>
+			</variable>
+			<variable name="delta">
+				<distribution>ddelta</distribution>
+				<initial>0.8</initial>
+			</variable>
+			<TargetEvaluation class="DataObjects" type="PointSet">optOut</TargetEvaluation>
+			<samplerInit>
+				<limit>5000</limit>
+				<initialSeed>1234</initialSeed>
+			</samplerInit>
+			<gradient>
+				<FiniteDifference>
+				  <gradDistanceScalar> 0.7 </gradDistanceScalar>
+				</FiniteDifference>
+			</gradient>
+			<stepSize>
+				<GradientHistory>
+				  <growthFactor>1.25</growthFactor>
+				  <shrinkFactor>1.1</shrinkFactor>
+				</GradientHistory>
+			</stepSize>
+			<acceptance>
+				<Strict />
+			</acceptance>
+			<convergence>
+				<gradient>1e-1</gradient>
+				<persistence>5</persistence>
+			</convergence>
+		</GradientDescent>
+	</Optimizers>
+
+
+	<OutStreams>
+		<Print name="opt_export">
+			<type>csv</type>
+			<source>opt_export</source>
+		</Print>
+		<Print name="history">
+			<type>csv</type>
+			<source>IO_simulateFMU</source>
+		</Print>
+	</OutStreams>
+</Simulation>
