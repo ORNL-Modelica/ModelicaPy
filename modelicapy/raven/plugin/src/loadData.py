@@ -26,8 +26,6 @@ def _readMoreXML(raven,xmlNode):
     xmlNodeName = 'settings'
     main = xmlNode.find(xmlNodeName)
      
-    import os
-    print(os.getcwd())
     for node in main:
         if node.tag == 'filename':
             settings[node.tag] = node.text
@@ -35,6 +33,8 @@ def _readMoreXML(raven,xmlNode):
         elif node.tag == 'outputs':
             vals = node.text
             settings[node.tag]  = vals.replace(' ','').strip().split(',')
+        elif node.tag == 'pivotParameter':
+            settings[node.tag] = node.text
         else:
             raise ValueError('Unrecognized XML node "{}" in parent "{}". xml\n'.format(node.tag, main))  
     
@@ -57,6 +57,15 @@ def run(raven, Input):
         except:
             pass
     
+    if 'pivotParameter' in raven.settings:
+        timeValue = raven.settings['values'][raven.settings['pivotParameter']]
+    else:
+        timeValue = raven.settings['values']['time']
+
+    try:
+        setattr(raven, 'time', timeValue)
+    except:
+        pass
     
 #%% Default
 if __name__ == '__main__':

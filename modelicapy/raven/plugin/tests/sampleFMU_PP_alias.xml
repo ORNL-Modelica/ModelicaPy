@@ -6,8 +6,9 @@
 		<created>2022-01-11</created>
 		<classesTested>FMPy-RAVEN interface</classesTested>
 		<description>
-		   Simple  Model: Sample the FMU with a Post Process Step.
+			Simple Pipe CFs: Calibrate correction factors with a Post Process Step.
 		   Extra:
+			- Includes the use of alias variables to handling naming conventions
 			- PostProcess step used for creating an inner raven loop for optimization.
 			- Two methods for reading a csv are attempted:To switch, comment/uncomment the appropriate block in the "Steps" section.
 				1. Using the built in reading CSV method requires two layers of csv files.
@@ -20,27 +21,27 @@
 	<RunInfo>
 		<JobName>SampleFMU</JobName>
 		<WorkingDir>test_sampleFMU_PP</WorkingDir>
-		<Sequence>loadData, sampleFMU, postProcess, weightPP</Sequence>
+		<Sequence>loadData, sampleFMU, postProcess</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
 
 	<Files>
-		<Input name="goldValuesFile" type="csv">../goldValues/calibrateFMU_lotkaVolterra_testList.csv</Input>
+		<Input name="goldValuesFile" type="csv">../goldValues/calibrateFMU_CFs_testList.csv</Input>
 	</Files>
 
 
 	<Steps>
-		<IOStep name="loadData">
+		<!-- <IOStep name="loadData">
 			<Input class="Files" type="">goldValuesFile</Input>
 			<Output class="DataObjects" type="HistorySet">goldValues</Output>
-		</IOStep>
-		<!-- <MultiRun name='loadData'>
+		</IOStep> -->
+		<MultiRun name='loadData'>
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
 			<Model class='Models' type='ExternalModel'>loadGoldValues</Model>
 			<Sampler class="Samplers" type="MonteCarlo">dummy</Sampler>
 			<Output class="DataObjects" type="HistorySet">goldValues</Output>
-		</MultiRun> -->
+		</MultiRun>
 		<MultiRun name="sampleFMU">
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
 			<Model class="Models" type="ExternalModel">simulateFMU</Model>
@@ -53,48 +54,47 @@
 			<Input class="DataObjects" type="HistorySet">history</Input>
 			<Model class="Models" type="PostProcessor">pp</Model>
 			<Output class="DataObjects" type="PointSet">pp_out</Output>
-		</PostProcess>
-		<MultiRun name='weightPP'>
-			<Input class="DataObjects" type="PointSet">pp_out</Input>
-			<Model class='Models' type='ExternalModel'>weightPostProcess</Model>
-			<Sampler class="Samplers" type="MonteCarlo">dummy</Sampler>
-			<Output class="DataObjects" type="PointSet">weight_out</Output>
 			<Output class="OutStreams" type="Print">inner_out</Output>
-		</MultiRun>
+		</PostProcess>
 	</Steps>
 
 
 	<Models>
 		<ExternalModel ModuleToLoad="../../src/loadData" name="loadGoldValues" subType="">
 			<variables>gOutputs</variables>
+			<alias variable="pipe_mediums_1_T" type="output">pipe.mediums[1].T</alias>
+			<alias variable="pipe_mediums_5_T" type="output">pipe.mediums[5].T</alias>
+			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
-				<filename>goldValues/calibrateFMU_lotkaVolterra1.csv</filename>
-				<outputs>gOutputs</outputs>
+				<filename>goldValues/calibrateFMU_CFs1.csv</filename>
+				<outputs>pipe.mediums[1].T, pipe.mediums[5].T, pipe.mediums[10].T</outputs>
 			</settings>
 		</ExternalModel>
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputs</inputs>
 			<outputs>gOutputs</outputs>
+			<alias variable="CFs_1" type="input">CFs[1]</alias>
+			<alias variable="CFs_5" type="input">CFs[5]</alias>
+			<alias variable="CFs_10" type="input">CFs[10]</alias>
+			<alias variable="pipe_mediums_1_T" type="output">pipe.mediums[1].T</alias>
+			<alias variable="pipe_mediums_5_T" type="output">pipe.mediums[5].T</alias>
+			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
-				<filename>../fmus/lotkaVolterra.fmu</filename>
-				<parameters>gInputs</parameters>
-				<outputs>gOutputs</outputs>
+				<filename>../fmus/simplePipeCFs.fmu</filename>
+				<parameters>CFs[1], CFs[5], CFs[10]</parameters>
+				<outputs>pipe.mediums[1].T, pipe.mediums[5].T, pipe.mediums[10].T</outputs>
 			</settings>
 		</ExternalModel>
 		<PostProcessor name="pp" subType="Metric">
-			<Features type="variable">goldValues|Output|x,goldValues|Output|y</Features>
-			<Targets type="variable">history|Output|x,history|Output|y</Targets>
+			<Features type="variable">goldValues|Output|pipe_mediums_1_T,goldValues|Output|pipe_mediums_5_T,goldValues|Output|pipe_mediums_10_T</Features>
+			<Targets type="variable">history|Output|pipe_mediums_1_T,history|Output|pipe_mediums_5_T,history|Output|pipe_mediums_10_T</Targets>
 			<pivotParameter>time</pivotParameter>
+			<!-- <alias variable="goldValues|Output|pipe_mediums_1_T" type='output'>pipe.mediums[1].T</alias>
+			<alias variable="goldValues|Output|pipe_mediums_5_T" type='output'>pipe.mediums[5].T</alias>
+			<alias variable="goldValues|Output|pipe_mediums_10_T" type='output'>pipe.mediums[10].T</alias> -->
 			<Metric class="Metrics" type="Metric">DTW</Metric>
+			<!-- something to summarize metric output -->
 		</PostProcessor>
-		<ExternalModel ModuleToLoad="../../src/weightPostProcess" name="weightPostProcess" subType="">
-			<inputs>gPostProcess</inputs>
-			<outputs>ans</outputs>
-			<settings>
-				<parameters>gPostProcess</parameters>
-				<weights>1.0, 1.0</weights>
-			</settings>
-		</ExternalModel>
 	</Models>
 	
 
@@ -120,38 +120,24 @@
 			<Output>gOutputs</Output>
 		</HistorySet>
 		<PointSet name="pp_out">
-			<Output>gPostProcess</Output>
-		</PointSet>
-		<PointSet name="weight_out">
-			<Output>ans</Output>
+			<Output>DTW_history_Output_pipe_mediums_1_T_goldValues_Output_pipe_mediums_1_T,
+					DTW_history_Output_pipe_mediums_5_T_goldValues_Output_pipe_mediums_5_T,
+					DTW_history_Output_pipe_mediums_10_T_goldValues_Output_pipe_mediums_10_T</Output>
 		</PointSet>
 	</DataObjects>
 
 	
 	<VariableGroups>
-		<Group name="gInputs">x_start, y_start, alpha, beta, gamma, delta</Group>
-		<Group name="gOutputs">time, x, y</Group>
+		<Group name="gInputs" >CFs_1, CFs_5, CFs_10</Group>
+		<Group name="gOutputs" >time, pipe_mediums_1_T, pipe_mediums_5_T, pipe_mediums_10_T</Group>
 		<Group name="gOutputs_notime">gOutputs, -time</Group>
-		<Group name="gPostProcess">DTW_history_Output_x_goldValues_Output_x,DTW_history_Output_y_goldValues_Output_y</Group>
 	</VariableGroups>
 
 
 	<Distributions>
-		<Uniform name="dalpha">
-			<upperBound>2</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="dbeta">
-			<upperBound>2</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="dgamma">
-			<upperBound>5</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="ddelta">
-			<upperBound>2</upperBound>
-			<lowerBound>0</lowerBound>
+		<Uniform name='bounds'>
+			<lowerBound>0.001</lowerBound>
+			<upperBound>5.0</upperBound>
 		</Uniform>
 	</Distributions>
 
@@ -166,13 +152,9 @@
 		  <samplerInit>
 			<limit>1</limit>
 		  </samplerInit>
-		  <constant name="output_interval">0.1</constant>
-		  <constant name="x_start">10</constant>
-		  <constant name="y_start">5</constant>
-		  <constant name="alpha">1.5</constant>
-		  <constant name="beta">1</constant>
-		  <constant name="gamma">3</constant>
-		  <constant name="delta">1</constant>
+		  <constant name="CFs_1">0.8</constant>
+		  <constant name="CFs_5">1.5</constant>
+		  <constant name="CFs_10">4.2</constant>
 		</MonteCarlo>
 	  </Samplers>
 
@@ -188,7 +170,7 @@
 		</Print>
 		<Print name="inner_out">
 			<type>csv</type>
-			<source>weight_out</source>
+			<source>pp_out</source>
 		</Print>
 	</OutStreams>
 </Simulation>
