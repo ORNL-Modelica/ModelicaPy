@@ -151,12 +151,12 @@
 	</VariableGroups>
 
 
-	<Distributions>
+	<!-- <Distributions>
 		<Uniform name='bounds'>
 			<lowerBound>0.001</lowerBound>
 			<upperBound>5.0</upperBound>
 		</Uniform>
-	</Distributions>
+	</Distributions> -->
 
 
 	<Samplers>

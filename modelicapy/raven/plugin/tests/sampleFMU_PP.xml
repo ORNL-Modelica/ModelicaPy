@@ -135,27 +135,6 @@
 		<Group name="gPostProcess">DTW_history_Output_x_goldValues_Output_x,DTW_history_Output_y_goldValues_Output_y</Group>
 	</VariableGroups>
 
-
-	<Distributions>
-		<Uniform name="dalpha">
-			<upperBound>2</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="dbeta">
-			<upperBound>2</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="dgamma">
-			<upperBound>5</upperBound>
-			<lowerBound>1</lowerBound>
-		</Uniform>
-		<Uniform name="ddelta">
-			<upperBound>2</upperBound>
-			<lowerBound>0</lowerBound>
-		</Uniform>
-	</Distributions>
-
-
 	<Samplers>
 		<MonteCarlo name="dummy">
 			<samplerInit>
