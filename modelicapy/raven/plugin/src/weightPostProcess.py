@@ -31,6 +31,11 @@ def _readMoreXML(raven,xmlNode):
         else:
             raise ValueError('Unrecognized XML node "{}" in parent "{}". xml\n'.format(node.tag, main))  
     
+    if not settings['weights']:
+        settings['weights'] = [1.0 for v in settings['parameters']]
+    if not len(settings['weights']) == len(settings['parameters']):
+        raise ValueError('The length of parameters and weights must be equal')  
+        
     raven.settings = settings   
     
 def run(raven, Input):

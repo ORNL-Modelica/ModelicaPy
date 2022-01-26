@@ -189,6 +189,7 @@
 		<Print name="inner_out">
 			<type>csv</type>
 			<source>weight_out</source>
+			<what>Output|ans</what>
 		</Print>
 	</OutStreams>
 </Simulation>

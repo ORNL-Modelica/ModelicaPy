@@ -11,7 +11,7 @@
 			- Includes the use of alias variables to handling naming conventions
 			- PostProcess step used for creating an inner raven loop for optimization.
 			- Two methods for reading a csv are attempted:To switch, comment/uncomment the appropriate block in the "Steps" section.
-				1. Using the built in reading CSV method requires two layers of csv files.
+				1. (Does not work -- aliasing not supported from csvs). Using the built in reading CSV method requires two layers of csv files.
 				2. Use a custom external model.
 			- PostProcess returns more than one metric so an externalModel sums the output to a single value for optimization.
 		</description>
@@ -20,8 +20,8 @@
   
 	<RunInfo>
 		<JobName>SampleFMU</JobName>
-		<WorkingDir>test_sampleFMU_PP</WorkingDir>
-		<Sequence>loadData, sampleFMU, postProcess</Sequence>
+		<WorkingDir>test_sampleFMU_PP_alias</WorkingDir>
+		<Sequence>loadData, sampleFMU, postProcess, weightPP</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
@@ -54,8 +54,14 @@
 			<Input class="DataObjects" type="HistorySet">history</Input>
 			<Model class="Models" type="PostProcessor">pp</Model>
 			<Output class="DataObjects" type="PointSet">pp_out</Output>
-			<Output class="OutStreams" type="Print">inner_out</Output>
 		</PostProcess>
+		<MultiRun name='weightPP'>
+			<Input class="DataObjects" type="PointSet">pp_out</Input>
+			<Model class='Models' type='ExternalModel'>weightPostProcess</Model>
+			<Sampler class="Samplers" type="MonteCarlo">dummy</Sampler>
+			<Output class="DataObjects" type="PointSet">weight_out</Output>
+			<Output class="OutStreams" type="Print">inner_out</Output>
+		</MultiRun>
 	</Steps>
 
 
@@ -93,8 +99,15 @@
 			<alias variable="goldValues|Output|pipe_mediums_5_T" type='output'>pipe.mediums[5].T</alias>
 			<alias variable="goldValues|Output|pipe_mediums_10_T" type='output'>pipe.mediums[10].T</alias> -->
 			<Metric class="Metrics" type="Metric">DTW</Metric>
-			<!-- something to summarize metric output -->
 		</PostProcessor>
+		<ExternalModel ModuleToLoad="../../src/weightPostProcess" name="weightPostProcess" subType="">
+			<inputs>gPostProcess</inputs>
+			<outputs>ans</outputs>
+			<settings>
+				<parameters>gPostProcess</parameters>
+				<weights>1.0,1.0</weights>
+			</settings>
+		</ExternalModel>
 	</Models>
 	
 
@@ -120,9 +133,10 @@
 			<Output>gOutputs</Output>
 		</HistorySet>
 		<PointSet name="pp_out">
-			<Output>DTW_history_Output_pipe_mediums_1_T_goldValues_Output_pipe_mediums_1_T,
-					DTW_history_Output_pipe_mediums_5_T_goldValues_Output_pipe_mediums_5_T,
-					DTW_history_Output_pipe_mediums_10_T_goldValues_Output_pipe_mediums_10_T</Output>
+			<Output>gPostProcess</Output>
+		</PointSet>
+		<PointSet name="weight_out">
+			<Output>ans</Output>
 		</PointSet>
 	</DataObjects>
 
@@ -131,6 +145,9 @@
 		<Group name="gInputs" >CFs_1, CFs_5, CFs_10</Group>
 		<Group name="gOutputs" >time, pipe_mediums_1_T, pipe_mediums_5_T, pipe_mediums_10_T</Group>
 		<Group name="gOutputs_notime">gOutputs, -time</Group>
+		<Group name="gPostProcess">DTW_history_Output_pipe_mediums_1_T_goldValues_Output_pipe_mediums_1_T,
+									DTW_history_Output_pipe_mediums_5_T_goldValues_Output_pipe_mediums_5_T,
+									DTW_history_Output_pipe_mediums_10_T_goldValues_Output_pipe_mediums_10_T</Group>
 	</VariableGroups>
 
 
@@ -170,7 +187,8 @@
 		</Print>
 		<Print name="inner_out">
 			<type>csv</type>
-			<source>pp_out</source>
+			<source>weight_out</source>
+			<what>Output|ans</what>
 		</Print>
 	</OutStreams>
 </Simulation>
