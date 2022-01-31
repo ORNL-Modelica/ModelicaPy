@@ -13,6 +13,8 @@
 				1. Using the built in reading CSV method requires two layers of csv files.
 				2. Use a custom external model.
 			- PostProcess returns more than one metric so an externalModel sums the output to a single value for optimization.
+
+			## - models are commented because of path issues if in RrR mode. Models are checked even if they are not used.
 		</description>
 	</TestInfo>
 
@@ -65,18 +67,19 @@
 
 
 	<Models>
-		<ExternalModel ModuleToLoad="../../src/loadData" name="loadGoldValues" subType="">
+		<!-- <ExternalModel ModuleToLoad="../../src/loadData" name="loadGoldValues" subType="">
 			<variables>gOutputs</variables>
 			<settings>
 				<filename>goldValues/calibrateFMU_lotkaVolterra1.csv</filename>
 				<outputs>gOutputs</outputs>
 			</settings>
-		</ExternalModel>
+		</ExternalModel> -->
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputs</inputs>
 			<outputs>gOutputs</outputs>
 			<settings>
-				<filename>../fmus/lotkaVolterra.fmu</filename>
+				<filename>C:\Users\greems\Documents\Modelica\ModelicaPy\modelicapy\raven\plugin\tests\fmus\lotkaVolterra.fmu</filename>
+				<!-- <filename>../fmus/lotkaVolterra.fmu</filename> -->
 				<parameters>gInputs</parameters>
 				<outputs>gOutputs</outputs>
 			</settings>

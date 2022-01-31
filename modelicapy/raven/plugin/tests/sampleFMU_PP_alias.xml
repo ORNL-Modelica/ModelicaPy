@@ -21,7 +21,7 @@
 	<RunInfo>
 		<JobName>SampleFMU</JobName>
 		<WorkingDir>test_sampleFMU_PP_alias</WorkingDir>
-		<Sequence>loadData, sampleFMU, postProcess, weightPP</Sequence>
+		<Sequence>loadData, sampleFMU, postProcess, weightPP, createOutput</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
@@ -62,6 +62,12 @@
 			<Output class="DataObjects" type="PointSet">weight_out</Output>
 			<Output class="OutStreams" type="Print">inner_out</Output>
 		</MultiRun>
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="HistorySet">goldValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+		</IOStep>
 	</Steps>
 
 
@@ -72,7 +78,8 @@
 			<alias variable="pipe_mediums_5_T" type="output">pipe.mediums[5].T</alias>
 			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
-				<filename>goldValues/calibrateFMU_CFs1.csv</filename>
+				<filename>C:\Users\greems\Documents\Modelica\ModelicaPy\modelicapy\raven\plugin\tests\goldValues\calibrateFMU_CFs1.csv</filename>
+				<!-- <filename>goldValues/calibrateFMU_CFs1.csv</filename> -->
 				<outputs>pipe.mediums[1].T, pipe.mediums[5].T, pipe.mediums[10].T</outputs>
 			</settings>
 		</ExternalModel>
@@ -86,7 +93,8 @@
 			<alias variable="pipe_mediums_5_T" type="output">pipe.mediums[5].T</alias>
 			<alias variable="pipe_mediums_10_T" type="output">pipe.mediums[10].T</alias>
 			<settings>
-				<filename>../fmus/simplePipeCFs.fmu</filename>
+				<filename>C:\Users\greems\Documents\Modelica\ModelicaPy\modelicapy\raven\plugin\tests\fmus\simplePipeCFs.fmu</filename>
+				<!-- <filename>../fmus/simplePipeCFs.fmu</filename> -->
 				<parameters>CFs[1], CFs[5], CFs[10]</parameters>
 				<outputs>pipe.mediums[1].T, pipe.mediums[5].T, pipe.mediums[10].T</outputs>
 			</settings>
@@ -105,7 +113,6 @@
 			<outputs>ans</outputs>
 			<settings>
 				<parameters>gPostProcess</parameters>
-				<weights>1.0,1.0</weights>
 			</settings>
 		</ExternalModel>
 	</Models>
@@ -151,14 +158,6 @@
 	</VariableGroups>
 
 
-	<!-- <Distributions>
-		<Uniform name='bounds'>
-			<lowerBound>0.001</lowerBound>
-			<upperBound>5.0</upperBound>
-		</Uniform>
-	</Distributions> -->
-
-
 	<Samplers>
 		<MonteCarlo name="dummy">
 			<samplerInit>
@@ -190,5 +189,47 @@
 			<source>weight_out</source>
 			<what>Output|ans</what>
 		</Print>
+		<Plot name="historyPlot" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<gridSpace>1 1</gridSpace>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|pipe_mediums_1_T</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>Temperature (K)</ylabel>
+					<kwargs>
+						<label>Simulation</label>
+					</kwargs>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>goldValues|Output|time</x>
+					<y>goldValues|Output|pipe_mediums_1_T</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>Temperature (K)</ylabel>
+					<kwargs>
+						<label>Gold Values</label>
+						</kwargs>
+				</plot>
+				<legend>
+
+				</legend>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
 	</OutStreams>
 </Simulation>

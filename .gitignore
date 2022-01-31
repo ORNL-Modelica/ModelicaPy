@@ -19,3 +19,5 @@ modelicapy/raven/fmpy/fmpy_*
 modelicapy/raven/fmpy/optimize/fmpy_*
 modelicapy/raven/plugin/tests/test_*
 log.txt
+modelicapy/raven/plugin/tests/optimize/
+*.ravenStatus
