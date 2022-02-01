@@ -1,0 +1,173 @@
+<?xml version="1.0" ?>
+<Simulation verbosity="debug">
+	<TestInfo>
+		<name>lotkaVolterraExample</name>
+		<author>Scott Greenwood</author>
+		<created>2022-01-31</created>
+		<classesTested>FMPy-RAVEN interface</classesTested>
+		<description>
+		   Lotka Volterra Model: Sample a pregenerated pickled ROM (must run createROM first).
+		   Extra:
+
+		</description>
+	</TestInfo>
+
+  
+	<RunInfo>
+		<JobName>SampleROM</JobName>
+		<WorkingDir>test_sampleROM</WorkingDir>
+		<Sequence>loadROM, sampleROM, createOutput</Sequence>
+		<batchSize>1</batchSize>
+	</RunInfo>
+
+	<Files>
+		<Input name="pIDW" type="">../test_createROM/pIDW</Input>
+	</Files>
+
+	<Steps>
+		<IOStep name="loadROM">
+			<Input class="Files" type="">pIDW</Input>
+			<Output class="Models" type="ROM">loadIDW</Output>
+		</IOStep>
+
+		<MultiRun name="sampleROM">
+			<Input class="DataObjects" type="PointSet">inputROM</Input>
+			<Model class="Models" type="ROM">loadIDW</Model>
+			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
+			<Output class="DataObjects" type="PointSet">pointValues</Output>
+			<Output class="DataObjects" type="HistorySet">history</Output>
+		</MultiRun>
+
+		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValues</Input>
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="OutStreams" type="Print">pointValues</Output>
+			<Output class="OutStreams" type="Print">history</Output>
+			<Output class="OutStreams" type="Plot">historyPlot</Output>
+			<Output class="OutStreams" type="Plot">sampleSpace</Output>
+		</IOStep>
+	</Steps>
+
+
+	<Models>
+		<ROM name="loadIDW" subType="pickledROM"/>
+	</Models>
+
+
+	<DataObjects>
+		<PointSet name="placeholder"/>
+		<PointSet name="pointValues">
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
+		</PointSet>
+		<HistorySet name="history">
+		  <Input>gInputs</Input>
+		  <Output>gOutputs</Output>
+		</HistorySet>
+		<PointSet name="inputROM">
+			<Input>gInputs</Input>
+			<Output>OutputPlaceHolder</Output>
+		</PointSet>
+	</DataObjects>
+
+	
+	<VariableGroups>
+		<Group name="gInputs" >x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs" >time, x, y</Group>
+		<Group name="gOutputs_notime">gOutputs, -time</Group>
+	</VariableGroups>
+
+
+	<Distributions>
+		<Uniform name="dalpha">
+			<upperBound>2</upperBound>
+			<lowerBound>1</lowerBound>
+		</Uniform>
+		<Uniform name="dbeta">
+			<upperBound>1.5</upperBound>
+			<lowerBound>0.5</lowerBound>
+		</Uniform>
+		<Uniform name="dgamma">
+			<upperBound>3.5</upperBound>
+			<lowerBound>2.5</lowerBound>
+		</Uniform>
+		<Uniform name="ddelta">
+			<upperBound>1.25</upperBound>
+			<lowerBound>0.75</lowerBound>
+		</Uniform>
+	</Distributions>
+
+
+	<Samplers>
+		<MonteCarlo name="monteCarlo">
+			<samplerInit>
+				<limit>9</limit>
+			</samplerInit>
+			<constant name="x_start">10</constant>
+			<constant name="y_start">5</constant>
+
+			<variable name="alpha">
+				<distribution>dalpha</distribution>
+			</variable>
+			<variable name="beta">
+				<distribution>dbeta</distribution>
+			</variable>
+			<variable name="gamma">
+				<distribution>dgamma</distribution>
+			</variable>
+			<variable name="delta">
+				<distribution>ddelta</distribution>
+			</variable>
+		</MonteCarlo>
+	</Samplers>
+
+	
+	<OutStreams>
+		<Print name="pointValues">
+			<type>csv</type>
+			<source>pointValues</source>
+		</Print>
+		<Print name="history">
+			<type>csv</type>
+			<source>history</source>
+		</Print>
+		<Plot name="historyPlot" overwrite="false" verbosity="debug">
+			<plotSettings>
+				<gridSpace>2 1</gridSpace>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|x</y>
+					<gridLocation>
+						<x>0</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>x</ylabel>
+				</plot>
+				<plot>
+					<type>line</type>
+					<x>history|Output|time</x>
+					<y>history|Output|y</y>
+					<gridLocation>
+						<x>1</x>
+						<y>0</y>
+					</gridLocation>
+					<xlabel>time (s)</xlabel>
+					<ylabel>y</ylabel>
+				</plot>
+			</plotSettings>
+			<actions>
+				<how>png</how>
+				<title>
+					<text> </text>
+				</title>
+			</actions>
+		</Plot>
+		
+		<Plot name="sampleSpace" subType="SamplePlot">
+			<source>pointValues</source>
+			<vars>alpha, beta, gamma, delta</vars>
+		</Plot>
+	</OutStreams>
+</Simulation>
