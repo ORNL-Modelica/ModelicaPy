@@ -6,7 +6,7 @@
 		<created>2022-01-31</created>
 		<classesTested>FMPy-RAVEN interface</classesTested>
 		<description>
-		   Lotka Volterra Model: Create a ROM from an FMU and then create comparisons for validation.
+		   Lotka Volterra Model: Sample a pregenerated pickled ROM (must run createROM_V first) and simulate the FMU for comparison.
 		   Extra:
 
 		</description>
@@ -14,14 +14,14 @@
 
   
 	<RunInfo>
-		<JobName>CreateFMU_V</JobName>
-		<WorkingDir>test_createROM_V</WorkingDir>
-		<Sequence>sampleFMU, trainROM, pickleROM, sampleROM, createOutput</Sequence>
+		<JobName>SampleROM_V</JobName>
+		<WorkingDir>test_sampleROM_V</WorkingDir>
+		<Sequence>sampleFMU, loadROM, sampleROM, createOutput</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
 	<Files>
-		<Input name="pIDW" type="">pIDW</Input>
+		<Input name="pIDW" type="">../test_createROM_V/pIDW</Input>
 	</Files>
 
 	<Steps>
@@ -29,44 +29,41 @@
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
 			<Model class="Models" type="ExternalModel">simulateFMU</Model>
 			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
+			<Output class="DataObjects" type="PointSet">pointValuesFMU</Output>
+			<Output class="DataObjects" type="HistorySet">historyFMU</Output>
+		</MultiRun>
+
+		<IOStep name="loadROM">
+			<Input class="Files" type="">pIDW</Input>
+			<Output class="Models" type="ROM">loadIDW</Output>
+		</IOStep>
+
+		<MultiRun name="sampleROM">
+			<Input class="DataObjects" type="PointSet">inputROM</Input>
+			<Model class="Models" type="ROM">loadIDW</Model>
+			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
 			<Output class="DataObjects" type="PointSet">pointValues</Output>
 			<Output class="DataObjects" type="HistorySet">history</Output>
 		</MultiRun>
 
-		<RomTrainer name="trainROM">
-			<Input class="DataObjects" type="HistorySet">history</Input>
-			<Output class="Models" type="ROM">IDW</Output>
-		</RomTrainer>
-
-		<IOStep name="pickleROM">
-			<Input class="Models" type="ROM">IDW</Input>
-			<Output class="Files" type="">pIDW</Output>
-		</IOStep>
-
-		<MultiRun name="sampleROM">
-			<Input class="DataObjects" type="PointSet">placeholder</Input>
-			<Model class="Models" type="ROM">IDW</Model>
-			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
-			<Output class="DataObjects" type="PointSet">pointValuesROM</Output>
-			<Output class="DataObjects" type="HistorySet">historyROM</Output>
-		</MultiRun>
-
 		<IOStep name="createOutput">
+			<Input class="DataObjects" type="PointSet">pointValuesFMU</Input>
+			<Input class="DataObjects" type="HistorySet">historyFMU</Input>
 			<Input class="DataObjects" type="PointSet">pointValues</Input>
 			<Input class="DataObjects" type="HistorySet">history</Input>
-			<Input class="DataObjects" type="PointSet">pointValuesROM</Input>
-			<Input class="DataObjects" type="HistorySet">historyROM</Input>
+			<Output class="OutStreams" type="Print">pointValuesFMU</Output>
+			<Output class="OutStreams" type="Print">historyFMU</Output>
 			<Output class="OutStreams" type="Print">pointValues</Output>
 			<Output class="OutStreams" type="Print">history</Output>
-			<Output class="OutStreams" type="Print">pointValuesROM</Output>
-			<Output class="OutStreams" type="Print">historyROM</Output>		
+			<Output class="OutStreams" type="Plot">sampleSpaceFMU</Output>
 			<Output class="OutStreams" type="Plot">sampleSpace</Output>
-			<Output class="OutStreams" type="Plot">sampleSpaceROM</Output>
 		</IOStep>
 	</Steps>
 
 
 	<Models>
+		<ROM name="loadIDW" subType="pickledROM"/>
+
 		<ExternalModel ModuleToLoad="../../src/simulateFMU" name="simulateFMU" subType="">
 			<inputs>gInputs, output_interval</inputs>
 			<outputs>gOutputs</outputs>
@@ -78,14 +75,8 @@
 				<stop_time>20.0</stop_time>
 			</settings>
 		</ExternalModel>
-
-		<ROM name="IDW" subType="NDinvDistWeight">
-			<Features>x_start, y_start, alpha, beta, gamma, delta</Features>
-			<Target>time, x, y</Target>
-			<p>3</p>
-		</ROM>
 	</Models>
-	
+
 
 	<DataObjects>
 		<PointSet name="placeholder"/>
@@ -97,11 +88,15 @@
 		  <Input>gInputs</Input>
 		  <Output>gOutputs</Output>
 		</HistorySet>
-		<PointSet name="pointValuesROM">
+		<PointSet name="inputROM">
+			<Input>gInputs</Input>
+			<Output>OutputPlaceHolder</Output>
+		</PointSet>
+		<PointSet name="pointValuesFMU">
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
-		<HistorySet name="historyROM">
+		<HistorySet name="historyFMU">
 		  <Input>gInputs</Input>
 		  <Output>gOutputs</Output>
 		</HistorySet>
@@ -139,12 +134,12 @@
 		<MonteCarlo name="monteCarlo">
 			<samplerInit>
 				<limit>9</limit>
-				<initialSeed>42</initialSeed>
+				<initialSeed>1</initialSeed>
 			</samplerInit>
 			<constant name="output_interval">0.01</constant>
 			<constant name="x_start">10</constant>
 			<constant name="y_start">5</constant>
-
+			
 			<variable name="alpha">
 				<distribution>dalpha</distribution>
 			</variable>
@@ -162,6 +157,14 @@
 
 	
 	<OutStreams>
+		<Print name="pointValuesFMU">
+			<type>csv</type>
+			<source>pointValuesFMU</source>
+		</Print>
+		<Print name="historyFMU">
+			<type>csv</type>
+			<source>historyFMU</source>
+		</Print>
 		<Print name="pointValues">
 			<type>csv</type>
 			<source>pointValues</source>
@@ -170,20 +173,12 @@
 			<type>csv</type>
 			<source>history</source>
 		</Print>
-		<Print name="pointValuesROM">
-			<type>csv</type>
-			<source>pointValuesROM</source>
-		</Print>
-		<Print name="historyROM">
-			<type>csv</type>
-			<source>historyROM</source>
-		</Print>
-		<Plot name="sampleSpace" subType="SamplePlot">
-			<source>pointValues</source>
+		<Plot name="sampleSpaceFMU" subType="SamplePlot">
+			<source>pointValuesFMU</source>
 			<vars>alpha, beta, gamma, delta</vars>
 		</Plot>
-		<Plot name="sampleSpaceROM" subType="SamplePlot">
-			<source>pointValuesROM</source>
+		<Plot name="sampleSpace" subType="SamplePlot">
+			<source>pointValues</source>
 			<vars>alpha, beta, gamma, delta</vars>
 		</Plot>
 	</OutStreams>
