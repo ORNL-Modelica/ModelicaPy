@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0"?>
 <Simulation verbosity="debug">
 	<TestInfo>
 		<name>lotkaVolterraExample</name>
@@ -12,16 +12,19 @@
 		</description>
 	</TestInfo>
 
-  
+
 	<RunInfo>
 		<JobName>CreateFMU_V</JobName>
 		<WorkingDir>test_createROM_V</WorkingDir>
-		<Sequence>sampleFMU, trainROM, pickleROM, sampleROM, createOutput</Sequence>
+		<Sequence>sampleFMU, trainROM_IDW, trainROM_DMD, trainROM_SVM, trainROM_DMDho, pickleROM, sampleROM, createOutput</Sequence>
 		<batchSize>1</batchSize>
 	</RunInfo>
 
 	<Files>
 		<Input name="pIDW" type="">pIDW</Input>
+		<Input name="pDMD" type="">pDMD</Input>
+		<Input name="pSVM" type="">pSVM</Input>
+		<Input name="pDMDho" type="">pDMDho</Input>
 	</Files>
 
 	<Steps>
@@ -33,14 +36,35 @@
 			<Output class="DataObjects" type="HistorySet">history</Output>
 		</MultiRun>
 
-		<RomTrainer name="trainROM">
+		<RomTrainer name="trainROM_IDW">
 			<Input class="DataObjects" type="HistorySet">history</Input>
 			<Output class="Models" type="ROM">IDW</Output>
+		</RomTrainer>
+
+		<RomTrainer name="trainROM_DMD">
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="Models" type="ROM">DMD</Output>
+		</RomTrainer>
+
+		<RomTrainer name="trainROM_SVM">
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="Models" type="ROM">SVM</Output>
+		</RomTrainer>
+
+		<RomTrainer name="trainROM_DMDho">
+			<Input class="DataObjects" type="HistorySet">history</Input>
+			<Output class="Models" type="ROM">DMDho</Output>
 		</RomTrainer>
 
 		<IOStep name="pickleROM">
 			<Input class="Models" type="ROM">IDW</Input>
 			<Output class="Files" type="">pIDW</Output>
+			<Input class="Models" type="ROM">DMD</Input>
+			<Output class="Files" type="">pDMD</Output>
+			<Input class="Models" type="ROM">SVM</Input>
+			<Output class="Files" type="">pSVM</Output>
+			<Input class="Models" type="ROM">DMDho</Input>
+			<Output class="Files" type="">pDMDho</Output>
 		</IOStep>
 
 		<MultiRun name="sampleROM">
@@ -59,7 +83,7 @@
 			<Output class="OutStreams" type="Print">pointValues</Output>
 			<Output class="OutStreams" type="Print">history</Output>
 			<Output class="OutStreams" type="Print">pointValuesROM</Output>
-			<Output class="OutStreams" type="Print">historyROM</Output>		
+			<Output class="OutStreams" type="Print">historyROM</Output>
 			<Output class="OutStreams" type="Plot">sampleSpace</Output>
 			<Output class="OutStreams" type="Plot">sampleSpaceROM</Output>
 		</IOStep>
@@ -80,38 +104,62 @@
 		</ExternalModel>
 
 		<ROM name="IDW" subType="NDinvDistWeight">
-			<Features>x_start, y_start, alpha, beta, gamma, delta</Features>
-			<Target>time, x, y</Target>
+			<Features>gInputs</Features>
+			<Target>gOutputs</Target>
 			<p>3</p>
 		</ROM>
+		<ROM name="DMD" subType="DMD">
+			<Features>gInputs</Features>
+			<Target>gOutputs</Target>
+			<rankSVD>4</rankSVD>
+			<exactModes>False</exactModes>
+			<!-- <optimized>True</optimized> -->
+			<!-- <rankTLSQ>7</rankTLSQ> -->
+			<dmdType>dmd</dmdType>
+		</ROM>
+		<ROM name="SVM" subType="SVR">
+			<Features>gInputs</Features>
+			<Target>gOutputs</Target>
+			<kernel>rbf</kernel>
+			<C>50.0</C>
+			<tol>0.000001</tol>
+		</ROM>
+		<ROM name="DMDho" subType="DMD">
+			<Features>gInputs</Features>
+			<Target>gOutputs</Target>
+			<rankSVD>4</rankSVD>
+			<exactModes>False</exactModes>
+			<!-- <optimized>True</optimized> -->
+			<!-- <rankTLSQ>7</rankTLSQ> -->
+			<dmdType>hodmd</dmdType>
+		</ROM>
 	</Models>
-	
+
 
 	<DataObjects>
-		<PointSet name="placeholder"/>
+		<PointSet name="placeholder" />
 		<PointSet name="pointValues">
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
 		<HistorySet name="history">
-		  <Input>gInputs</Input>
-		  <Output>gOutputs</Output>
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
 		</HistorySet>
 		<PointSet name="pointValuesROM">
 			<Input>gInputs</Input>
 			<Output>gOutputs</Output>
 		</PointSet>
 		<HistorySet name="historyROM">
-		  <Input>gInputs</Input>
-		  <Output>gOutputs</Output>
+			<Input>gInputs</Input>
+			<Output>gOutputs</Output>
 		</HistorySet>
 	</DataObjects>
 
-	
+
 	<VariableGroups>
-		<Group name="gInputs" >x_start, y_start, alpha, beta, gamma, delta</Group>
-		<Group name="gOutputs" >time, x, y</Group>
-		<Group name="gOutputs_notime">gOutputs, -time</Group>
+		<Group name="gInputs">x_start, y_start, alpha, beta, gamma, delta</Group>
+		<Group name="gOutputs">time, x, y</Group>
 	</VariableGroups>
 
 
@@ -138,7 +186,7 @@
 	<Samplers>
 		<MonteCarlo name="monteCarlo">
 			<samplerInit>
-				<limit>9</limit>
+				<limit>90</limit>
 				<initialSeed>42</initialSeed>
 			</samplerInit>
 			<constant name="output_interval">0.01</constant>
@@ -160,7 +208,7 @@
 		</MonteCarlo>
 	</Samplers>
 
-	
+
 	<OutStreams>
 		<Print name="pointValues">
 			<type>csv</type>
