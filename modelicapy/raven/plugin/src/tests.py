@@ -7,7 +7,14 @@ Created on Tue Feb  1 12:44:30 2022
 
 import plotRAVEN
 
+summary = {}
 path = '../tests/test_sampleROM_V'
 variables = ['x','y']
-filenames = ['historyFMU','history']
-summary = plotRAVEN.historyComparisonPlot(variables, filenames, path, plotInterval=4,plotPathAdd='IDW')
+
+methods = ['IDW','DMD','SVM','DMDho']
+for method in methods:
+    filenames = ['historyFMU','history{}'.format(method)]
+    summary[method] = plotRAVEN.historyComparisonPlot(variables, filenames, path, plotInterval=4,plotPathAdd=method)
+    
+from beeprint import pp
+pp(summary)
