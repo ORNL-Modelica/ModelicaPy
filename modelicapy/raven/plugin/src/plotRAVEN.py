@@ -99,6 +99,7 @@ def historyPlot(variables, filename, path = '.', filetype = 'csv', showLegend = 
         for i, var in enumerate(variables):
             fig, ax = figList[i]
             ax.legend(bbox_to_anchor=(0.5, 1),loc='lower center',ncol=int(np.ceil(np.sqrt(len(ax.lines)))))
+    plt.close('all')  
     
     
 def sampleSpacePlot(variables, filename, path = '.'):
@@ -114,8 +115,10 @@ def sampleSpacePlot(variables, filename, path = '.'):
         ax[i].set_ylabel(var)
     ax[-1].set_xlabel('RAVEN Sample Number')
     fig.align_ylabels(ax[:])
-    fig.savefig(os.path.join(pathPlot,'sampleSpace.png'))
-
+    fig.savefig(os.path.join(pathPlot,'sampleSpace.png'), bbox_inches='tight')
+    plt.close('all')  
+    
+    
 def historyComparisonPlot(variables, filenames, path = '.', filetype = 'csv', iRef = 0, plotInterval = 0, pivotParameter = 'time', xlabel = 'Time', plotPathAdd=''):
     
     if not len(filenames) == 2:
@@ -159,7 +162,7 @@ def historyComparisonPlot(variables, filenames, path = '.', filetype = 'csv', iR
                 ax1.set_ylabel('Difference (-)')
                 ax.set_xlabel(xlabel)
                 fig.legend()
-                fig.savefig(os.path.join(pathPlot,'comparison_{}_{}.png'.format(iFile,var)))
+                fig.savefig(os.path.join(pathPlot,'comparison_{}_{}.png'.format(iFile,var)), bbox_inches='tight')
                 
                 # Metrics
                 summary[iFile]['RMSE'] = sklm.mean_squared_error(ref,pred,squared=False)
@@ -167,8 +170,9 @@ def historyComparisonPlot(variables, filenames, path = '.', filetype = 'csv', iR
                 # Time warping
                 # path_RP = dta.dtw.warping_path(ref, pred)
                 # dta.dtw_visualisation .plot_warping(ref, pred, path_RP, filename=os.path.join(pathPlot,'warp_{}_{}.png'.format(iFile,var)))
-                summary['distance'] = dta.dtw.distance(ref, pred, use_pruning=True)
+                summary[iFile]['distance'] = dta.dtw.distance(ref, pred, use_pruning=True)
                 
+    plt.close('all')    
     return summary
     
     
