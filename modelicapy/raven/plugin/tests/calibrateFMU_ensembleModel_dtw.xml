@@ -141,7 +141,7 @@
 			</variable>
 			<TargetEvaluation class="DataObjects" type="PointSet">optOut</TargetEvaluation>
 			<samplerInit>
-				<limit>5000</limit>
+				<limit>50</limit>
 				<initialSeed>1234</initialSeed>
 			</samplerInit>
 			<gradient>
