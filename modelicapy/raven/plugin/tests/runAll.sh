@@ -15,8 +15,8 @@ mkdir log
 for (( i=0; i<${nTESTS}; i++ ));
 do
     iTest=$((i+1))
-    echo "${NL}Begin Test (${iTest}/${nTESTS}): ${TESTS[$i]}"
+    echo "${NL}Test (${iTest}/${nTESTS}) Begin: ${TESTS[$i]}"
     $RAVEN ${TESTS[$i]} > "log/${i}_${TESTS[$i]}.log"
     #| tee "log/${i}_${TESTS[$i]}.log"
-    echo "${NL}Completed Test (${iTest}/${nTESTS}): ${TESTS[$i]}"
+    echo "Test (${iTest}/${nTESTS}) Completed: ${TESTS[$i]}${NL}"
 done
