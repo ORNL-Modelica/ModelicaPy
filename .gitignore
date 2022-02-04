@@ -21,3 +21,9 @@ modelicapy/raven/plugin/tests/test_*
 modelicapy/raven/plugin/tests/optimize/
 *.ravenStatus
 modelicapy/raven/plugin/tests/log/
+*.ipynb_checkpoints
+*opt_export.csv
+*opt_export.xml
+*opt_export_0.csv
+*optOut.csv
+*optOut.xml
