@@ -161,7 +161,8 @@ def historyComparisonPlot(variables, filenames, path = '.', filetype = 'csv', iR
                 ax.set_ylabel(var)
                 ax1.set_ylabel('Difference (-)')
                 ax.set_xlabel(xlabel)
-                fig.legend()
+                # fig.legend()
+                fig.legend(bbox_to_anchor=(0.5, 1),loc='lower center',ncol=3)
                 fig.savefig(os.path.join(pathPlot,'comparison_{}_{}.png'.format(iFile,var)), bbox_inches='tight')
                 
                 # Metrics

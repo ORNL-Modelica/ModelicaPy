@@ -19,7 +19,7 @@
 		<JobName>SampleFMU</JobName>
 		<WorkingDir>test_sampleFMU</WorkingDir>
 		<Sequence>sampleFMU, createOutput</Sequence>
-		<batchSize>2</batchSize>
+		<batchSize>4</batchSize>
 	</RunInfo>
 
 
@@ -27,8 +27,8 @@
 		<MultiRun name="sampleFMU">
 			<Input class="DataObjects" type="PointSet">placeholder</Input>
 			<Model class="Models" type="ExternalModel">simulateFMU</Model>
-			<Sampler class="Samplers" type="Grid">simpleGrid</Sampler>
-			<!-- <Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler> -->
+			<!-- <Sampler class="Samplers" type="Grid">simpleGrid</Sampler> -->
+			<Sampler class="Samplers" type="MonteCarlo">monteCarlo</Sampler>
 			<Output class="DataObjects" type="PointSet">pointValues</Output>
 			<Output class="DataObjects" type="HistorySet">history</Output>
 		</MultiRun>
@@ -48,7 +48,7 @@
 			<inputs>gInputs, output_interval</inputs>
 			<outputs>gOutputs</outputs>
 			<settings>
-				<filename>../fmus/lotkaVolterra.fmu</filename>
+				<filename>C:/Users/greems/Documents/Modelica/ModelicaPy/modelicapy/raven/plugin/tests/fmus/lotkaVolterra.fmu</filename>
 				<parameters>gInputs, output_interval</parameters>
 				<outputs>gOutputs</outputs>
 				<start_time>0.0</start_time>
@@ -102,7 +102,7 @@
 	<Samplers>
 		<MonteCarlo name="monteCarlo">
 			<samplerInit>
-				<limit>9</limit>
+				<limit>400</limit>
 			</samplerInit>
 			<constant name="output_interval">0.1</constant>
 			<constant name="x_start">10</constant>

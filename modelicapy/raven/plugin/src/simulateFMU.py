@@ -43,7 +43,6 @@ Example XML Input:
 
 import numpy as np
 from fmpy import simulate_fmu
-import pandas as pd
 from compareGoldValues import _compareResults, _csvToDictionaryArray
 
 reservedNames = ['start_time', 'stop_time', 'output_interval']
