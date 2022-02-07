@@ -59,6 +59,9 @@ def without_keys(d, keys):
 def _readMoreXML(raven,xmlNode):
     '''
     Initialization section. Only run once.
+    
+    ##!!!!!!!!!!!! https://github.com/CATIA-Systems/FMPy/blob/master/fmpy/examples/efficient_loops.py
+    potential approach to avoid loading fmu each time... put is readMoreXML instead... (don't forget to delete unzipped)')
     '''
     settings = {'filename':'',
                 'start_time':None,'stop_time':None,'output_interval':None,
