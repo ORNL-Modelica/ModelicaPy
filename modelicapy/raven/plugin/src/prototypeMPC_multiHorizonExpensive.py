@@ -28,6 +28,13 @@ def _refTrajSine(t, bias = 0.0, amplitude = 1.0, shift = 0.0, period = 10.0, sca
 def _refTrajConstant(t, bias = 0.0):
     return np.ones(len(t))*bias
 
+def _refTrajRamp(t, bias = 0.0, amplitude = 0.0, tChange = 0.0):
+    result = np.ones(len(t))*bias
+    for i, val in enumerate(t):
+        if val >= tChange:
+            result[i] += amplitude
+    return result
+
 def _timeControlPointBased(time_control, nC, nOverlap):
     dt = time_control[1]-time_control[0]
     time_control = np.concatenate((time_control,np.array([time_control[-1]+dt*(i+1) for i in range(nC-nOverlap)])))
@@ -79,7 +86,7 @@ def _objective(u, *args):
 #%%
 if __name__ == '__main__':
 
-    nHorizons = 50
+    nHorizons = 25
     time_horizon = 5.0
     nC = 7
     nOverlap = 4 # point based overlap
@@ -153,7 +160,9 @@ if __name__ == '__main__':
     
     referenceTraj = {}
     # referenceTraj['x'] = _refTrajSine(time_control, bias, amplitude, 0.0, 10.0, -1.0)
-    referenceTraj[varControl] = _refTrajConstant(time_control, bias)
+    # referenceTraj[varControl] = _refTrajConstant(time_control, bias)
+    referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 10.0)
+    
     weights = {key:1.0 for key in referenceTraj}
     args = (filename, start_time, output_interval, start_values, outputs, referenceTraj, dtype, time_control, weights, u_optimized)
     error = _objective(u0, *args)
@@ -174,7 +183,7 @@ if __name__ == '__main__':
     results = {}
 
     for p in range(nHorizons):
-        print('Horizon: {}'.format(p))
+        print('Horizon: {}, Time: {}'.format(p, time_control[-1]))
         
         prototypeMPC.tic()
         solution = scipy.optimize.minimize(_objective,x0=u0,args=args,bounds=bounds)
@@ -202,7 +211,8 @@ if __name__ == '__main__':
     
             # Update reference
             # referenceTraj['x'] = _refTrajSine(time_control, bias, amplitude, 0.0, 10.0, scale=-1.0)
-            referenceTraj[varControl] = _refTrajConstant(time_control, bias)
+            # referenceTraj[varControl] = _refTrajConstant(time_control, bias)
+            referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 10.0)
             
             # Update solution
             u_optimized = np.concatenate((u_optimized,solution.x[:nC-nOverlap]))

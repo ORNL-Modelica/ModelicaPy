@@ -28,3 +28,4 @@ modelicapy/raven/plugin/tests/log/
 *optOut.csv
 *optOut.xml
 modelicapy/raven/plugin/src/temp/
+modelicapy/raven/plugin/src/temp*
