@@ -58,7 +58,7 @@ if __name__ == '__main__':
     # Stop time
     stop_time = time_horizon + start_time
     # Start values
-    start_values = {'x_start':50,'y_start':50,'alpha':0.5,'beta':0.025,'gamma':0.5,'delta':0.005,'der(x)':-37.5,'der(y)':-12.5}
+    start_values = {'x_start':50,'y_start':50,'alpha':0.5,'beta':0.025,'gamma':0.5,'delta':0.005}
     # Outputs
     outputs = ['time','x','y','u']
     # Start/Output mapping

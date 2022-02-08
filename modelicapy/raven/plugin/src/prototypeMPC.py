@@ -95,7 +95,7 @@ def _objective(u, *args):
     return summary['error']
 
 
-def simplePlot(tags, results, time_control, referenceTraj, figTitle = '', showLegend=True):
+def simplePlot(tags, results, time_control, referenceTraj, figTitle = '', showLegend=True, save=False, saveName = 'plot.png'):
     fig, ax = plt.subplots()
     ax.plot(results['time'],results[tags[0]],'k-', label='sim')
     ax.plot(time_control,referenceTraj[tags[0]],'ro--',label='ref')
@@ -108,6 +108,10 @@ def simplePlot(tags, results, time_control, referenceTraj, figTitle = '', showLe
         
     if figTitle != '':
         fig.suptitle(figTitle)
+    
+    if save:
+        fig.savefig(saveName)
+        
     return fig
         
 def simplePlotBeforeAfter(tags, results0, results, time_control, referenceTraj, figTitle = ''):
