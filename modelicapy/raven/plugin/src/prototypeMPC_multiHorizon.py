@@ -52,7 +52,7 @@ if __name__ == '__main__':
     
     #%%
     # Path to FMU
-    filename = '../tests/fmus/lotkaVolterra.fmu'
+    filename = '../tests/fmus/lotkaVolterraWithControl.fmu'
     # Start time
     start_time = 0.0
     # Stop time
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     # Start values
     start_values = {'x_start':50,'y_start':50,'alpha':0.5,'beta':0.025,'gamma':0.5,'delta':0.005}
     # Outputs
-    outputs = ['time','x','y','u']
+    outputs = ['time','x','y','u_x','u_y']
     # Start/Output mapping
     startMap = {'x_start':'x','y_start':'y'}
     # Results output interval
@@ -91,7 +91,7 @@ if __name__ == '__main__':
     #%%
     time_control = np.linspace(start_time,stop_time,nC)
     u0 = np.array([-100,100,-100,100,-100,100,-100])
-    dtype = [('time', np.double), ('u', np.double)]
+    dtype = [('time', np.double), ('u_y', np.double)]
     inputList = [time_control, u0]
     inputs = prototypeMPC._createInputs(inputList,dtype)
         
@@ -115,7 +115,7 @@ if __name__ == '__main__':
                             start_values=start_values,
                             input=inputs,
                             output=outputs)
-    prototypeMPC.simplePlot(['x','u'], results0, time_control, referenceTraj, 'Simulation Test')
+    prototypeMPC.simplePlot(['x','u_y'], results0, time_control, referenceTraj, 'Simulation Test')
     
     #%% Optimization loop
     results = {}
@@ -141,7 +141,7 @@ if __name__ == '__main__':
                                 start_values=start_values,
                                 input=inputs,
                                 output=outputs)
-        prototypeMPC.simplePlot(['x','u'], results[p], time_control, referenceTraj, 'Solution Test')  
+        prototypeMPC.simplePlot(['x','u_y'], results[p], time_control, referenceTraj, 'Solution Test')  
 
 
         

@@ -77,20 +77,35 @@ def _objective(u, *args):
         summary['error'] += summary[key]['MSE']*weights[key]
     return summary['error']
 
+def _compareRefTrajToPlant(results, time_control, referenceTraj, returnDiff=False):
+    referenceTrajModified = {}
+    for key in referenceTraj:
+        _f = interp1d(results['time'],results[key])
+        ref = referenceTraj[key]
+        pred = _f(time_control) 
+        referenceTrajModified[key] = ref - pred
+        if not returnDiff:
+            referenceTrajModified[key] = ref - referenceTrajModified
+    return referenceTrajModified
+     
+def _sliceDict(dic,iSlice):
+    result = {}
+    for key in dic:
+        result[key] = dic[key][:-iSlice]
+    return result
 
-
-    
+       
 #%%
 if __name__ == '__main__':
 
-    nHorizons = 25
+    nHorizons = 15
     time_horizon = 5.0
     nC = 7
     nOverlap = 4 # point based overlap
 
     #%%
     # Path to FMU
-    filename = '../tests/fmus/lotkaVolterra.fmu'
+    filename = '../tests/fmus/lotkaVolterraWithControl.fmu'
     # Start time
     start_time = 0.0
     # Stop time
@@ -98,7 +113,7 @@ if __name__ == '__main__':
     # Start values
     start_values = {'x_start':50,'y_start':50,'alpha':0.5,'beta':0.025,'gamma':0.5,'delta':0.005}
     # Outputs
-    outputs = ['time','x','y','u']
+    outputs = ['time','x','y','u_x','u_y']
     # Results output interval
     output_interval = 0.01
     # Controlled variable
@@ -147,7 +162,7 @@ if __name__ == '__main__':
     u_optimized = []
 
     u0 = np.array([-10,-5,0,5,10,5,0])
-    dtype = [('time', np.double), ('u', np.double)]
+    dtype = [('time', np.double), ('u_y', np.double)]
     inputList = [time_control, np.concatenate((u_optimized, u0))]
     inputs = prototypeMPC._createInputs(inputList,dtype)
         
@@ -158,7 +173,7 @@ if __name__ == '__main__':
     referenceTraj = {}
     # referenceTraj['x'] = _refTrajSine(time_control, bias, amplitude, 0.0, 10.0, -1.0)
     # referenceTraj[varControl] = _refTrajConstant(time_control, bias)
-    referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 10.0)
+    referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 15.0)
     
     weights = {key:1.0 for key in referenceTraj}
     args = (filename, start_time, output_interval, start_values, outputs, referenceTraj, dtype, time_control, weights, u_optimized)
@@ -174,12 +189,30 @@ if __name__ == '__main__':
                             start_values=start_values,
                             input=inputs,
                             output=outputs)
-    prototypeMPC.simplePlot([varControl,'u'], results0, time_control, referenceTraj, 'Simulation Test')
+    prototypeMPC.simplePlot([varControl,'u_y'], results0, time_control, referenceTraj, 'Simulation Test')
     
     
     #%% Plant info
-    filenamePlant = '../tests/fmus/lotkaVolterraWithControl_NoiseDrift.fmu'
+    import copy
+
+    plant = {}
+    plant['filename'] = '../tests/fmus/lotkaVolterraWithControl_NoiseDrift.fmu'
+    plant['start_values'] = copy.deepcopy(start_values)
+    plant['start_values']['drift[1]'] = 5
+    plant['results'] = {}
+    plant['inputs'] = None
+    plant['outputs'] = ['time','x','y', 'u_x', 'u_y']
+    plant['dtype'] = [('time', np.double), ('u_y', np.double)]
     
+    #%% Test plant "input"
+    plant['results'][0] = simulate_fmu(plant['filename'],
+                            start_time=start_time,
+                            stop_time=time_control[-1],
+                            output_interval=output_interval,
+                            start_values=plant['start_values'],
+                            input=plant['inputs'],
+                            output=plant['outputs']) 
+    prototypeMPC.simplePlot([varControl,'u_y'], plant['results'][0], time_control, referenceTraj, 'Plant Test')
     
     #%% Optimization loop
     results = {}
@@ -187,12 +220,16 @@ if __name__ == '__main__':
     for p in range(nHorizons):
         print('Horizon: {}, Time: {}'.format(p, time_control[-1]))
         
-        # Get data from plant for last time horizon
+        
         if p > 0:
+            # Create modified trajectory based on plant feedback
+            referenceTraj_plant = _sliceDict(referenceTraj,nOverlap+(nC-nOverlap))
+            referenceTrajDiff = _compareRefTrajToPlant(plant['results'][p-1], time_control[:-nOverlap-(nC-nOverlap)], referenceTraj_plant, returnDiff=True)
+            referenceTrajModified = {}
+            for key in referenceTraj:
+                referenceTrajModified[key] = referenceTraj[key] + np.average(referenceTrajDiff[key])
+            args = (filename, start_time, output_interval, start_values, outputs, referenceTrajModified, dtype, time_control, weights, u_optimized)
             
-        # Calculate error between result and plant
-        
-        
         # Optimize control
         prototypeMPC.tic()
         solution = scipy.optimize.minimize(_objective,x0=u0,args=args,bounds=bounds)
@@ -211,9 +248,24 @@ if __name__ == '__main__':
                                 input=inputs,
                                 output=outputs)
         prototypeMPC.simplePlot([varControl,'u'], results[p], time_control, referenceTraj,save=True, saveName = 'temp/controlSolution_{}.png'.format(p))  
+                    
+        # Get plant performance based on optimized control
+        inputList_plant = [time_control[:-nOverlap], np.concatenate((u_optimized,solution.x[:nC-nOverlap]))]
+        plant['inputs'] = prototypeMPC._createInputs(inputList_plant,plant['dtype'])
+        plant['results'][p] = simulate_fmu(plant['filename'],
+                                start_time=start_time,
+                                stop_time=time_control[-nOverlap-1],
+                                output_interval=output_interval,
+                                start_values=plant['start_values'],
+                                input=plant['inputs'],
+                                output=plant['outputs']) 
+        # referenceTraj_plant = copy.deepcopy(referenceTraj)
+        referenceTraj_plant = _sliceDict(referenceTraj,nOverlap)
+        # for key in referenceTraj_plant:
+        #     referenceTraj_plant[key] = referenceTraj_plant[key][:-nOverlap]        
+        prototypeMPC.simplePlot([varControl,'u_y'], plant['results'][p], time_control[:-nOverlap], referenceTraj_plant,save=True, saveName = 'temp/plantSolution_{}.png'.format(p)) 
         
-        
-            
+        # Update
         if p < nHorizons-1:
             # Update time
             time_control = _timeControlPointBased(time_control, nC, nOverlap)
@@ -246,24 +298,23 @@ if __name__ == '__main__':
     import os
     import re
     
-    path = 'temp'
-    file_list=os.listdir(path)
-    print (file_list)
-             
-    # Get the list of all files and directories
-    dirList = os.listdir(path)
-    fileREGEX = 'controlSolution_\d*.png'
-
-    # Get only result files and record the simulation order
-    files = []
-    for file in dirList:
-        if re.match(fileREGEX,file):
-            order = int(re.search('\d+', file).group())
-            files.append((os.path.join(path,file),order))
-    # Sort in ascending order
-    files.sort(key=lambda tup: tup[1])
-
-    images = []
-    for file in files:
-        images.append(imageio.imread(file[0]))
-    imageio.mimsave(os.path.join(path,'controlSolution.gif'), images)
+    def _createGIF(plotName = 'controlSolution',path='temp',):
+        # Get the list of all files and directories
+        dirList = os.listdir(path)
+        fileREGEX = plotName + '_\d*.png'
+        # Get only result files and record the simulation order
+        files = []
+        for file in dirList:
+            if re.match(fileREGEX,file):
+                order = int(re.search('\d+', file).group())
+                files.append((os.path.join(path,file),order))
+        # Sort in ascending order
+        files.sort(key=lambda tup: tup[1])
+    
+        images = []
+        for file in files:
+            images.append(imageio.imread(file[0]))
+        imageio.mimsave(os.path.join(path,plotName+'.gif'), images)
+    
+    _createGIF(plotName = 'controlSolution')
+    _createGIF(plotName = 'plantSolution')

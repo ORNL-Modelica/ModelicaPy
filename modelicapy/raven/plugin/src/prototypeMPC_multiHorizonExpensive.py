@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     #%%
     # Path to FMU
-    filename = '../tests/fmus/lotkaVolterra.fmu'
+    filename = '../tests/fmus/lotkaVolterraWithControl.fmu'
     # Start time
     start_time = 0.0
     # Stop time
@@ -101,7 +101,7 @@ if __name__ == '__main__':
     # Start values
     start_values = {'x_start':50,'y_start':50,'alpha':0.5,'beta':0.025,'gamma':0.5,'delta':0.005}
     # Outputs
-    outputs = ['time','x','y','u']
+    outputs = ['time','x','y','u_x','u_y']
     # Results output interval
     output_interval = 0.01
     # Controlled variable
@@ -150,7 +150,7 @@ if __name__ == '__main__':
     u_optimized = []
 
     u0 = np.array([-10,-5,0,5,10,5,0])
-    dtype = [('time', np.double), ('u', np.double)]
+    dtype = [('time', np.double), ('u_y', np.double)]
     inputList = [time_control, np.concatenate((u_optimized, u0))]
     inputs = prototypeMPC._createInputs(inputList,dtype)
         
@@ -177,7 +177,7 @@ if __name__ == '__main__':
                             start_values=start_values,
                             input=inputs,
                             output=outputs)
-    prototypeMPC.simplePlot([varControl,'u'], results0, time_control, referenceTraj, 'Simulation Test')
+    prototypeMPC.simplePlot([varControl,'u_y'], results0, time_control, referenceTraj, 'Simulation Test')
     
     #%% Optimization loop
     results = {}
@@ -201,7 +201,7 @@ if __name__ == '__main__':
                                 start_values=start_values,
                                 input=inputs,
                                 output=outputs)
-        prototypeMPC.simplePlot([varControl,'u'], results[p], time_control, referenceTraj,save=True, saveName = 'temp/controlSolution_{}.png'.format(p))  
+        prototypeMPC.simplePlot([varControl,'u_y'], results[p], time_control, referenceTraj,save=True, saveName = 'temp/controlSolution_{}.png'.format(p))  
         
         
             
@@ -228,7 +228,7 @@ if __name__ == '__main__':
             
     #%% Output Results
     print('Optimized solution:\ntime =\n{}\nu =\n{}'.format(time_control, u_optimized))
-    df = pd.DataFrame({'time':time_control, 'u':u_optimized})
+    df = pd.DataFrame({'time':time_control, 'u_y':u_optimized})
     df.set_index('time',inplace=True)
     df.to_csv('temp/control.csv')
     
