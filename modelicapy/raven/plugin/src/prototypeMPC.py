@@ -62,10 +62,10 @@ def _objective(u, *args):
     '''
     '''
     
-    filename, start_time, stop_time, output_interval, start_values, outputs, referenceTraj, dtype, time_control, weights = args
+    filename, start_time, stop_time, output_interval, start_values, outputs, referenceTraj, dtype, time_control, weights, u1 = args
 
     # Create inputs
-    inputList = [time_control, u]
+    inputList = [time_control, u, u1]
     inputs = _createInputs(inputList,dtype)
     
     # Simulate       
@@ -99,6 +99,7 @@ def simplePlot(tags, results, time_control, referenceTraj, figTitle = '', showLe
     fig, ax = plt.subplots()
     ax.plot(results['time'],results[tags[0]],'k-', label='sim')
     ax.plot(time_control,referenceTraj[tags[0]],'ro--',label='ref')
+       
     ax1 = ax.twinx()
     ax1.plot(results['time'],results[tags[1]],'b:',label='control')
     ax.set_xlabel('Time')
@@ -113,15 +114,25 @@ def simplePlot(tags, results, time_control, referenceTraj, figTitle = '', showLe
         fig.savefig(saveName)
         
     return fig
+  
+def simplePlotExtra(tags, results, time_control, referenceTraj, figTitle = '', showLegend=True, save=False, saveName = 'plot.png', xExtra = None,yExtra = None):
+    fig = simplePlot(tags, results, time_control, referenceTraj, figTitle = figTitle, showLegend=False)
+    ax_list = fig.axes
+    if xExtra == None:
+        xExtra = time_control
+    ax_list[0].plot(xExtra,yExtra[tags[0]],'r*--',label='ref-mod', alpha = 0.25)
+    fig.legend(bbox_to_anchor=(0.7, 0.85),loc='upper left')
+    if save:
+        fig.savefig(saveName)
         
-def simplePlotBeforeAfter(tags, results0, results, time_control, referenceTraj, figTitle = ''):
-    
+def simplePlotBeforeAfter(tags, results0, results, time_control, referenceTraj, figTitle = '', save=False, saveName = 'plot.png'):
     fig = simplePlot(tags, results, time_control, referenceTraj, figTitle = figTitle, showLegend=False)
     ax_list = fig.axes
     ax_list[0].plot(results0['time'],results0[tags[0]],'m-', label='sim0', alpha=0.5)
     ax_list[1].plot(results0['time'],results0[tags[1]],'g:',label='control0', alpha=0.5)
     fig.legend(bbox_to_anchor=(0.7, 0.85),loc='upper left')
-    
+    if save:
+        fig.savefig(saveName)
     
 if __name__ == '__main__':
     
