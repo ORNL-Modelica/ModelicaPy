@@ -50,8 +50,41 @@ def _relativeToLast(lastVal,n,refLast,refTraj, gain = 1.0):
     for i in range(n):
         result.append(lastVal*gain*(1.0+(refTraj[i]-refLast)/refTraj[i]))
     return result
-           
-                
+ 
+def _relativeToLastPoly(lastVals,n,refLast,refTraj, gain = 1.0, order=3):
+    result = []
+    # ts = [0,1,2]
+    ts = np.linspace(0,len(lastVals)-1,len(lastVals))
+
+    fit = np.polyfit(ts, lastVals, order)
+    _f = np.poly1d(fit)    
+    
+    ts_new = ts[-1]
+    for i in range(n):
+        ts_new += i+1
+        result.append(_f(ts_new)*gain*(1.0+(refTraj[i]-refLast)/refTraj[i]))
+    return result       
+
+    
+def fit_sin(tt, yy):
+    '''Fit sin to the input time sequence, and return fitting parameters "amp", "omega", "phase", "offset", "freq", "period" and "fitfunc"'''
+    tt = np.array(tt)
+    yy = np.array(yy)
+    ff = np.fft.fftfreq(len(tt), (tt[1]-tt[0]))   # assume uniform spacing
+    Fyy = abs(np.fft.fft(yy))
+    guess_freq = abs(ff[np.argmax(Fyy[1:])+1])   # excluding the zero frequency "peak", which is related to offset
+    guess_amp = np.std(yy) * 2.**0.5
+    guess_offset = np.mean(yy)
+    guess = np.array([guess_amp, 2.*np.pi*guess_freq, 0., guess_offset])
+
+    def sinfunc(t, A, w, p, c):  return A * np.sin(w*t + p) + c
+    popt, pcov = scipy.optimize.curve_fit(sinfunc, tt, yy, p0=guess)
+    A, w, p, c = popt
+    f = w/(2.*np.pi)
+    fitfunc = lambda t: A * np.sin(w*t + p) + c
+    return {"amp": A, "omega": w, "phase": p, "offset": c, "freq": f, "period": 1./f, "fitfunc": fitfunc, "maxcov": np.max(pcov), "rawres": (guess,popt,pcov)}
+       
+      
 def _objective(u, *args): 
     '''
     '''
@@ -140,7 +173,7 @@ def _fitError(x, y, xnew, order = 1, nDrop = 0, lim = None, limType = 'frac', sc
 #%%
 if __name__ == '__main__':
 
-    nHorizons = 15
+    nHorizons = 25
     time_horizon = 5.0
     nC = 7
     nOverlap = 4 # point based overlap
@@ -346,15 +379,17 @@ if __name__ == '__main__':
                 refLast[key] = referenceTraj[key][-1]
             # referenceTraj['x'] = _refTrajSine(time_control, bias, amplitude, 0.0, 10.0, scale=-1.0)
             # referenceTraj[varControl] = _refTrajConstant(time_control, bias)
-            referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 10.0)
+            referenceTraj[varControl] = _refTrajRamp(time_control, bias, amplitude = bias*0.25, tChange = 15.0)
             
             # Update solution
             u_optimized = np.concatenate((u_optimized,solution.x[:nC-nOverlap]))
             u1 = np.concatenate((u1,np.zeros(nC-nOverlap)))
             # Update guess values
+            # print('last {}'.format(solution.x[-1]))
+            # print(_relativeToLast(solution.x[-1],nC-nOverlap,refLast['y'],referenceTraj['y'][nC-nOverlap:]))
             # u0 = np.concatenate((solution.x[nC-nOverlap:],_relativeToLast(solution.x[-1],nC-nOverlap,refLast['y'],referenceTraj['y'][nC-nOverlap:], gain = 1.0)))
+            # u0 = np.concatenate((solution.x[nC-nOverlap:],_relativeToLastPoly(solution.x,nC-nOverlap,refLast['y'],referenceTraj['y'][nC-nOverlap:], gain = 1.0, order=3)))
             u0 = np.concatenate((solution.x[nC-nOverlap:],_alternatingValue([10,0],nC-nOverlap,0)))
-            
             # Update inputs
             args = (filename, start_time, output_interval, start_values, outputs, referenceTraj, dtype, time_control, weights, u_optimized, u1)
         else:
