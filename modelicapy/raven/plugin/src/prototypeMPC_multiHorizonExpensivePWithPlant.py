@@ -176,7 +176,7 @@ if __name__ == '__main__':
     nHorizons = 25
     time_horizon = 5.0
     nC = 7
-    nOverlap = 4 # point based overlap
+    nOverlap = 6 # point based overlap
 
     # Include plant feedback
     useFeedbackPlant = True

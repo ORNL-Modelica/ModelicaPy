@@ -30,3 +30,4 @@ modelicapy/raven/plugin/tests/log/
 modelicapy/raven/plugin/src/temp/
 modelicapy/raven/plugin/src/temp*
 modelicapy/TCLab/tests/temp/
+modelicapy/TCLab/tests/plots/
