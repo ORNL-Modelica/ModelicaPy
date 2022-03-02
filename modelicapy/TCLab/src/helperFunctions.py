@@ -14,6 +14,7 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+from scipy.interpolate import interp1d
   
 degree_sign = u'\N{DEGREE SIGN}'
 
@@ -56,6 +57,13 @@ def createInputs(inputList,dtype):
         tupleList.append(tuple(tupleItem))
     return np.array(tupleList, dtype)
 
+#%% Data Manipulation
+def resample(x, y, xnew, kind = 'linear'):
+    '''Resample data based on provided data'''
+    _f = interp1d(x, y, kind=kind)
+    ynew = _f(xnew)
+    return ynew
+    
 #%% Miscellaneous
 def createFolder(folderPath, clear = False):
     '''Create path if exists else clear path if enabled'''

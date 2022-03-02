@@ -48,15 +48,7 @@ if __name__ == "__main__":
         ax.set_title(key)
         fig.savefig(os.path.join(plotPath,'{}.png'.format(key)))
         
-    #%% Resample for comparitive analysis  
-    # Resample results to be at exact same time
-    from scipy.interpolate import interp1d
-    
-    def resample(x, y, xnew, kind = 'linear'):
-        _f = interp1d(x, y, kind=kind)
-        ynew = _f(xnew)
-        return ynew
-    
+    #%% Resample for comparitive analysis      
     n = len(results['exp']['time'])
     xnew = np.linspace(results['exp']['time'][0],results['exp']['time'][-1],n)
     
@@ -67,7 +59,7 @@ if __name__ == "__main__":
         x = results[key]['time']
         for v in variables:
             y = results[key][v]
-            results_resampled[key][v] = resample(x,y,xnew)
+            results_resampled[key][v] = hf.resample(x,y,xnew)
             fig, ax = plt.subplots()
             ax.plot(x,y,'k-',label='Original')
             ax.plot(xnew,results_resampled[key][v] ,'ro',label='Resampled')
@@ -79,7 +71,10 @@ if __name__ == "__main__":
             ax.set_xlabel('Time (min)')
             ax.legend()
             fig.savefig(os.path.join(plotPath,'resampled_{}_{}.png'.format(key,v)))
-            
+    
+    pickleName = os.path.join(savePath,'results_resampled.pickle')
+    hf.pickleResults(results_resampled, path=pickleName, read=False) 
+    
     #%% Calculate residuals
     keys = ['fmu','mod']
     variables = ['T1','T2']
@@ -96,18 +91,4 @@ if __name__ == "__main__":
         fig.savefig(os.path.join(plotPath,'residuals_{}.png'.format(key)))
 
     pickleName = os.path.join(savePath,'residuals.pickle')
-    hf.pickleResults(residuals, path=pickleName, read=False)         
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+    hf.pickleResults(residuals, path=pickleName, read=False)
