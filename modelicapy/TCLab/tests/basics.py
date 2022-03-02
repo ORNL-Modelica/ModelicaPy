@@ -32,7 +32,8 @@ if __name__ == "__main__":
     '''
     Example decreases the time between blinks as the temperature approaches the trip temperature.
     '''
-    plotPath = 'test_basics/plots'
+    savePath = 'test_' + os.path.basename(__file__)[:-3]
+    plotPath = os.path.join(savePath,'plots')
     
     tests = [False, True]    
     

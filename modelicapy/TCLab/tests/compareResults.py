@@ -15,7 +15,7 @@ import helperFunctions as hf
 #%% Main
 if __name__ == "__main__":
     
-    savePath = 'test_compareResults'
+    savePath = 'test_' + os.path.basename(__file__)[:-3]
     plotPath = os.path.join(savePath,'plots')
     hf.createFolder(savePath)
     hf.createFolder(plotPath)

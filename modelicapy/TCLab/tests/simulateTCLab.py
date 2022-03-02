@@ -116,7 +116,7 @@ if __name__ == "__main__":
     hf.simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])
     
     #%% Save results
-    savePath = 'test_simulateTCLab'
+    savePath = 'test_' + os.path.basename(__file__)[:-3]
     hf.createFolder(savePath)
     
     if connected:
