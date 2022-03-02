@@ -11,10 +11,13 @@ import time
 import os, shutil
 import imageio
 import re
+import numpy as np
     
 degree_sign = u'\N{DEGREE SIGN}'
 
+#%% TCLab
 def connectLab(connected=False, speedup = 100):
+    '''Connect to the TCLab hardware or emulator. Speedup only impacts the emulator'''
     if connected:
         mlab = tclab.TCLab      # Physical hardware
     else:
@@ -27,7 +30,40 @@ def safeShutdown(lab):
     lab.Q2(0)
     print('Shutting down')
     lab.close()
-    
+        
+def blink(lab,vals=[100,0],dt=5.0):
+    '''Blink LED from [max,min] value holding the max value for dt seconds'''
+    lab.LED(vals[0])
+    time.sleep(dt)
+    lab.LED(vals[1]) 
+
+#%% FMU - FMPy
+def createInputs(inputList,dtype):
+    '''Format the input into FMPY simulate_fmu'''
+    # verify length of arrays in inputList are equal
+    refLength = len(inputList[0])
+    for i in range(len(inputList)-1):
+        if len(inputList[i+1]) != refLength:
+            raise ValueError('Input arrays of inputList must be equal.')
+    # Create formatted input per FMPy requirements
+    tupleList = []
+    for i in range(refLength):
+        tupleItem = []
+        for val in inputList:
+            tupleItem.append(val[i])
+        tupleList.append(tuple(tupleItem))
+    return np.array(tupleList, dtype)
+
+#%% Miscellaneous
+def createFolder(folderPath, clear = False):
+    '''Create path if exists else clear path if enabled'''
+    if not os.path.exists(folderPath):
+        os.makedirs(folderPath)
+    else:
+        if clear:
+            shutil.rmtree(folderPath)
+        
+#%% Plotting
 def updateDisplay(fig, saveFig = False, saveName = ''):
     ''' Clear and update output'''
     display(fig)
@@ -35,19 +71,8 @@ def updateDisplay(fig, saveFig = False, saveName = ''):
         fig.savefig(saveName)
     clear_output(wait = True)
     
-def blink(lab,vals=[100,0],dt=5.0):
-    '''Blink LED from [max,min] value holding the max value for dt seconds'''
-    lab.LED(vals[0])
-    time.sleep(dt)
-    lab.LED(vals[1]) 
-    
-def createFolder(folderPath):
-    if not os.path.exists(folderPath):
-        os.makedirs(folderPath)
-    else:
-        shutil.rmtree(folderPath)
-        
-def _createGIF(plotName = 'controlSolution',path='plots',iStart=0):
+def createGIF(plotName = 'image',path='plots',iStart=0):
+    ''' Create a GIF from images with plotName followed by numbering (e.g., image_0.png, image_1.png, etc.)'''
     # Get the list of all files and directories
     dirList = os.listdir(path)
     fileREGEX = plotName + '_\d*.png'

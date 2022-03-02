@@ -32,7 +32,7 @@ if __name__ == "__main__":
     '''
     Example decreases the time between blinks as the temperature approaches the trip temperature.
     '''
-    plotPath = 'plots/test_basics'
+    plotPath = 'plots/basics'
     
     tests = [False, True]    
     
@@ -91,4 +91,4 @@ if __name__ == "__main__":
                 dt = dtUpdate(lab,speedup=speedup)
                 hf.updateDisplay(fig, saveFig = True, saveName = os.path.join(savePath,'{}_{}.png'.format(test,i)))
                 results[str(test)] = updateResults(results[str(test)], t, lab)
-        hf._createGIF(plotName = str(test),path=savePath)
+        hf.createGIF(plotName = str(test),path=savePath)
