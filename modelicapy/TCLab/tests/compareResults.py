@@ -32,8 +32,9 @@ if __name__ == "__main__":
     results['fmu']['T1'] = results['fmu']['T1']-273.15
     results['fmu']['T2'] = results['fmu']['T2']-273.15
     
-    keys = ['Q1','Q2','T1','T2'] 
-    for key in keys:
+    # Plot results
+    variables = ['Q1','Q2','T1','T2']
+    for key in variables:
         fig, ax = plt.subplots()
         ax.plot(results['fmu']['time']/60, results['fmu'][key], 'k-', label='FMU')
         ax.plot(np.array(results['mod']['time'])/60, results['mod'][key], 'b-.', label='Model')
@@ -46,3 +47,67 @@ if __name__ == "__main__":
         ax.legend()
         ax.set_title(key)
         fig.savefig(os.path.join(plotPath,'{}.png'.format(key)))
+        
+    #%% Resample for comparitive analysis  
+    # Resample results to be at exact same time
+    from scipy.interpolate import interp1d
+    
+    def resample(x, y, xnew, kind = 'linear'):
+        _f = interp1d(x, y, kind=kind)
+        ynew = _f(xnew)
+        return ynew
+    
+    n = len(results['exp']['time'])
+    xnew = np.linspace(results['exp']['time'][0],results['exp']['time'][-1],n)
+    
+    results_resampled = {}
+    for key in results:
+        results_resampled[key] = {}
+        results_resampled[key]['time'] = xnew
+        x = results[key]['time']
+        for v in variables:
+            y = results[key][v]
+            results_resampled[key][v] = resample(x,y,xnew)
+            fig, ax = plt.subplots()
+            ax.plot(x,y,'k-',label='Original')
+            ax.plot(xnew,results_resampled[key][v] ,'ro',label='Resampled')
+            ax.set_title(v)
+            if 'T' in v:
+                ax.set_ylabel('Temperature ({}C)'.format(hf.degree_sign))
+            else:
+                ax.set_ylabel('Heater Power (%)')
+            ax.set_xlabel('Time (min)')
+            ax.legend()
+            fig.savefig(os.path.join(plotPath,'resampled_{}_{}.png'.format(key,v)))
+            
+    #%% Calculate residuals
+    keys = ['fmu','mod']
+    variables = ['T1','T2']
+    residuals = {}
+    for key in keys:
+        residuals[key] = {}
+        fig, ax = plt.subplots()
+        for v in variables:
+            residuals[key][v] = results_resampled['exp'][v] - results_resampled[key][v]
+            ax.plot(results_resampled[key]['time']/60,residuals[key][v],label=v)
+            ax.legend()
+            ax.set_ylabel('Residual Temperature ({}C)'.format(hf.degree_sign))
+            ax.set_xlabel('Time (min)')
+        fig.savefig(os.path.join(plotPath,'residuals_{}.png'.format(key)))
+
+    pickleName = os.path.join(savePath,'residuals.pickle')
+    hf.pickleResults(residuals, path=pickleName, read=False)         
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
