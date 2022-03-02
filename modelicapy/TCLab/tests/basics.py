@@ -27,7 +27,7 @@ def dtUpdate(lab, T_ref = 50.0, T_scale = 10, use_T1 = True, minmax = [0.0,5.0],
         print(dt)
     return dt/speedup 
 
-
+#%% Main
 if __name__ == "__main__":
     '''
     Example decreases the time between blinks as the temperature approaches the trip temperature.

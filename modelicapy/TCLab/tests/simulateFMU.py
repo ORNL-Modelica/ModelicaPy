@@ -129,23 +129,7 @@ def simplePlotInputs(inputs):
         if key != 'time':
             ax.plot(inputs['time'],inputs[key],label=key)
     ax.legend()
-    
-def simplePlotResults(results,keys):
-    fig, ax = plt.subplots()
-    for key in keys:
-        ax.plot(results['time'],results[key], label=key)
-    ax.legend()
-    
-def simplePlotResultsTwinned(results,keys1, keys2):
-    fig, ax = plt.subplots()
-    for key in keys1:
-        ax.plot(results['time'],results[key], label=key)
-    
-    ax2 = ax.twinx()
-    for key in keys2:
-        ax2.plot(results['time'],results[key], '-.', label=key)
-    fig.legend()
-    
+        
 #%% Main
 if __name__ == "__main__":
     
@@ -175,4 +159,4 @@ if __name__ == "__main__":
                         input=inputs,
                         start_values = parameters)
 
-    simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])
+    hf.simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])

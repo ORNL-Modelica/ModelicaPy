@@ -12,7 +12,8 @@ import os, shutil
 import imageio
 import re
 import numpy as np
-    
+import matplotlib.pyplot as plt
+   
 degree_sign = u'\N{DEGREE SIGN}'
 
 #%% TCLab
@@ -89,3 +90,19 @@ def createGIF(plotName = 'image',path='plots',iStart=0):
     for file in files:
         images.append(imageio.imread(file[0]))
     imageio.mimsave(os.path.join(path,plotName+'.gif'), images)
+    
+def simplePlotResults(results,keys):
+    fig, ax = plt.subplots()
+    for key in keys:
+        ax.plot(results['time'],results[key], label=key)
+    ax.legend()
+    
+def simplePlotResultsTwinned(results,keys1, keys2):
+    fig, ax = plt.subplots()
+    for key in keys1:
+        ax.plot(results['time'],results[key], label=key)
+    
+    ax2 = ax.twinx()
+    for key in keys2:
+        ax2.plot(results['time'],results[key], '-.', label=key)
+    fig.legend()
