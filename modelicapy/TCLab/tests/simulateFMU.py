@@ -8,6 +8,7 @@ Created on Wed Mar  2 08:53:11 2022
 from fmpy import simulate_fmu
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 import sys
 sys.path.insert(0, '../src')
@@ -160,3 +161,10 @@ if __name__ == "__main__":
                         start_values = parameters)
 
     hf.simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])
+    
+    #%% Save results
+    savePath = 'test_simulateFMU'
+    hf.createFolder(savePath)
+    
+    pickleName = os.path.join(savePath,'results_fmu.pickle')
+    hf.pickleResults(results, path=pickleName, read=False)

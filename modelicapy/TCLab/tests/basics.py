@@ -32,7 +32,7 @@ if __name__ == "__main__":
     '''
     Example decreases the time between blinks as the temperature approaches the trip temperature.
     '''
-    plotPath = 'plots/basics'
+    plotPath = 'test_basics/plots'
     
     tests = [False, True]    
     

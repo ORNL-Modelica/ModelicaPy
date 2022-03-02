@@ -13,7 +13,8 @@ import imageio
 import re
 import numpy as np
 import matplotlib.pyplot as plt
-   
+import pickle
+  
 degree_sign = u'\N{DEGREE SIGN}'
 
 #%% TCLab
@@ -63,7 +64,16 @@ def createFolder(folderPath, clear = False):
     else:
         if clear:
             shutil.rmtree(folderPath)
-        
+  
+def pickleResults(results = None, path='plots/results.pickle', read=True):
+    '''Write or read pickle of dictionary of results'''
+    if read:
+        with open(path, 'rb') as handle:
+            return pickle.load(handle)
+    else:
+        with open(path, 'wb') as handle:
+            pickle.dump(results, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            
 #%% Plotting
 def updateDisplay(fig, saveFig = False, saveName = ''):
     ''' Clear and update output'''

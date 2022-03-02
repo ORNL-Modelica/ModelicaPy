@@ -31,3 +31,4 @@ modelicapy/raven/plugin/src/temp/
 modelicapy/raven/plugin/src/temp*
 modelicapy/TCLab/tests/temp/
 modelicapy/TCLab/tests/plots/
+modelicapy/TCLab/tests/test_*

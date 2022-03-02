@@ -7,6 +7,7 @@ Created on Wed Mar  2 13:06:05 2022
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+import os
 
 import sys
 sys.path.insert(0, '../src')
@@ -113,3 +114,13 @@ if __name__ == "__main__":
     # Run experiment
     results = simulateExperiment(inputs, time_update, connected=connected, speedup=speedup)
     hf.simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])
+    
+    #%% Save results
+    savePath = 'test_simulateTCLab'
+    hf.createFolder(savePath)
+    
+    if connected:
+        pickleName = os.path.join(savePath,'results_exp.pickle')
+    else:
+        pickleName = os.path.join(savePath,'results_mod.pickle')
+    hf.pickleResults(results, path=pickleName, read=False)
