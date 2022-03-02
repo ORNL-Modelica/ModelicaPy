@@ -90,26 +90,26 @@ def simulateExperiment(inputs, time_update, connected=False, speedup = 100):
         
 #%% Main
 if __name__ == "__main__":
-    
-    
+    ''' Switch between simulating or running the TCLab under the same scneario as simulateFMU'''
     # Input section
     inputs_base = {}
     inputs_base['Q1'] = {'time':[0,20,200,400,600,800,1000],
-                    'u':[0,80,20,70,50,100,0]}
+                          'u':[0,80,20,70,50,100,0]}
     inputs_base['Q2'] = {'time':[0,100,300,500,700,900,1100],
-                    'u':[0,35,95,25,100,45,0]}
+                         'u':[0,35,95,25,100,45,0]}
 
     stop_time = 20*60
     time_update = 2 # time between querying
-    connected = True
+    connected = False
     speedup = 100
-    # End Input
     
+    # Create structured input
     n = int(stop_time/time_update+1)
     time_setpoint = np.linspace(0.0,stop_time,n)
     
     inputs = inputHelper(inputs_base, time_setpoint)
     simplePlotInputs(inputs, time_setpoint)
     
+    # Run experiment
     results = simulateExperiment(inputs, time_update, connected=connected, speedup=speedup)
     hf.simplePlotResultsTwinned(results,['Q1','Q2'], ['T1','T2'])
