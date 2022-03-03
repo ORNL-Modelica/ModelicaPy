@@ -3,6 +3,8 @@
 Created on Wed Mar  2 16:12:14 2022
 
 @author: Scott Greenwood
+
+Trains on the residuals to create a corrected results for further use
 """
 
 from gekko import GEKKO
