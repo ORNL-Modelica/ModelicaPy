@@ -61,7 +61,7 @@ def simulateExperiment(inputs, time_update, connected=False, speedup = 100):
     
     # Run experiment
     try:
-        for i in range(n):
+        for i in range(len(inputs['Q1'])):
             # set heater values
             a.Q1(inputs['Q1'][i])
             a.Q2(inputs['Q2'][i])
