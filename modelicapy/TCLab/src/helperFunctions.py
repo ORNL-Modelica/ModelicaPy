@@ -114,13 +114,21 @@ def simplePlotResults(results,keys):
     for key in keys:
         ax.plot(results['time'],results[key], label=key)
     ax.legend()
-    
-def simplePlotResultsTwinned(results,keys1, keys2):
+    return fig
+
+def simplePlotResultsTwinned(results,keys1, keys2, xscale = 1.0, yscales = [1.0,1.0], xlabel = None, ylabels = None):
     fig, ax = plt.subplots()
     for key in keys1:
-        ax.plot(results['time'],results[key], label=key)
-    
+        ax.plot(np.array(results['time'])*xscale,np.array(results[key])*yscales[0], label=key)
+    ax.legend(loc='upper left')
     ax2 = ax.twinx()
     for key in keys2:
-        ax2.plot(results['time'],results[key], '-.', label=key)
-    fig.legend()
+        ax2.plot(np.array(results['time'])*xscale,np.array(results[key])*yscales[1], '-.', label=key)
+    ax2.legend(loc='upper right')
+    
+    if xlabel != None:
+        ax.set_xlabel(xlabel)
+    if ylabels != None:
+        ax.set_ylabel(ylabels[0]) 
+        ax2.set_ylabel(ylabels[1]) 
+    return fig
