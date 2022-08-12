@@ -103,7 +103,7 @@ while it < itMax:
     it += 1    
     
 #%%
-dot.render('FileName.ong', view=True)
+dot.render('temp/graph', view=False)
 
 # #%% Condense information to one master file
 # list_of_files = glob.glob(resultFolder+'/*.txt')
