@@ -32,3 +32,7 @@ modelicapy/raven/plugin/src/temp*
 modelicapy/TCLab/tests/temp/
 modelicapy/TCLab/tests/plots/
 modelicapy/TCLab/tests/test_*
+modelicapy/Graphviz/allMOFiles.txt
+*.gv
+modelicapy/**/DepMaster.png
+modelicapy/Graphviz/SingleComponent/dependencies/

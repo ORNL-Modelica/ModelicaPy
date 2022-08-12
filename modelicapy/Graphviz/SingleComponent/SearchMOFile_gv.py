@@ -30,10 +30,12 @@ Created on Mon Apr 25 15:10:36 2016
 #        => Modelica.Fluids.Component
 
 import re
+import os
 
-
-def searchFile(fullFile=None, useDIRName=False, DIRName=None, usePeriod=False):
+def searchFile(dot,attributes_edge, attributes_node,fullFile=None, useDIRName=False, DIRName=None, usePeriod=False, resultFolder='dependencies'):
     # === 1. ===
+    fullFile = fullFile.replace('\\\\','/')
+    fullFile = fullFile.replace('\\','/')
     # Extract file name based on if full path or just filename with extension
     indexMO = fullFile.find('.mo')
     isFullPath = fullFile.find('C:/')
@@ -47,12 +49,12 @@ def searchFile(fullFile=None, useDIRName=False, DIRName=None, usePeriod=False):
     sourceName = fileName
 
     if useDIRName:
-        # Extract full source file name starting with TRANSFORM
+        # Extract full source file name
         indexMO = fullFile.find('.mo')
-        isFullPath = fullFile.find(DIRName)
+        isFullPath = fullFile.rfind(DIRName)
         if isFullPath != -1:
             indexStart = isFullPath
-            sourceNameSlash = fullFile[indexStart+1:indexMO]
+            sourceNameSlash = fullFile[indexStart:indexMO]
             sourceName = sourceNameSlash.replace('/', '.')
         else:
             sourceName = fileName
@@ -106,11 +108,19 @@ def searchFile(fullFile=None, useDIRName=False, DIRName=None, usePeriod=False):
         resultName = result_space
 
     # === 5. ===
+    resultFile = '{}/{}.txt'.format(resultFolder,sourceName)#.replace('.',''))
+    # if os.path.exists(resultFile):
+    #     raise ValueError('{} already exists'.format(resultFile))
+        
     # Generate output file
-    with open('Dependencies/Dep{}.txt'.format(fileName), 'w') as outputFile:
+    with open(resultFile, 'w') as outputFile:
         for i in range(0, len(resultName)):
             outputFile.write('"{}" -> "{}";'.format(sourceName, resultName[i]))
-
+            outputFile.write('\n')
+            dot.edge('{}'.format(sourceName),'{}'.format(resultName[i]), **attributes_edge)
+            dot.node(sourceName, **attributes_node)
+    return resultName, dot
+    
 if __name__ == '__main__':
     fullFile = 'C:/Users/vmg/Documents/Modelica/TRANSFORM-Library/TRANSFORM/Fluid/Pipes/StraightDynamicPipe.mo'
     searchFile(fullFile)
