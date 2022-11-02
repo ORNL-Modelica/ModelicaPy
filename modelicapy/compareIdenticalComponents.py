@@ -16,9 +16,9 @@ resultPath = r'C:\PATHTOMATFILE'
 experiment = 'EXPERIMENTNAME'
 iControlName = 0 # index of control component name
 componentNames = ['pipe','pipe_multiSurface','pipe_geometry']
-controlName = componentNames[iControlName]
 
 #%% Define control variable at get all variables with the same name
+controlName = componentNames[iControlName]
 resultName = '{}.mat'.format(experiment)
 result = os.path.join(resultPath,resultName)
 r = Reader(result,'dymola')
@@ -33,7 +33,10 @@ results['order'] = [controlName] + componentNames[:iControlName] + componentName
 varsRemoved = []
 for var in variables:
     varName = var[var.find('.')+1:]
-    time, tempControl = r.values(var)
+    tempTime, tempControl = r.values(var)
+    if len(tempTime) > 2:
+        time = tempTime
+        
     vals = {}
     vals[0]=tempControl
 
@@ -111,7 +114,7 @@ for key, item in summary[errorType].items():
             if val > limits[0] and val > limits[1]:
                 if key not in keys:
                     keys.append(key)
-print(keys)
+print('\nList of keys which exceed limits at any point in time\n{}'.format(keys))
 
 
 #%% Index
@@ -122,12 +125,10 @@ for key, item in summary[errorType].items():
         if item[i][index] > limits[0] and item[i][index] > limits[1]:
             if key not in keys:
                 keys.append(key)
-print(keys)
+print('\nList of keys which exceed limits for index = {} (or time = {:.2f} s)\n{}'.format(index, time[index], keys))
 
-#%%
-# import re
-# pat = re.compile(r'^((?!--).)*$')
-# filtered = [i for i in keys if pat.match(i)]
+#%% Filter out variables which containspecific strings
+
 filtered = []
 ignoreString = ['sat','der','Q_s','.h']
 for key in keys:
@@ -137,10 +138,10 @@ for key in keys:
             found = True
     if not found:
         filtered.append(key)
-print(filtered)
+print('\nRemaining strings after filtering\n{}\n'.format(filtered))
 
 #%% Plot variable
-varPlot = 'drhodx[2]'
+varPlot = 'portB.p'
 
 style = ['k','r--','b-.']
 fig, ax = plt.subplots()
