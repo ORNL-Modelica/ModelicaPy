@@ -25,7 +25,7 @@ def line_search(lines, nLSearch, LS):
     '''
 
     res = {}
-    for x in xrange(len(lines)):
+    for x in range(len(lines)):
         lin = lines[len(lines) - 1 - x]
         if LS['SIMSTART'] in lin:
             # Record if simulation started properly
@@ -51,7 +51,7 @@ def line_search(lines, nLSearch, LS):
             else:
                 res['solver'] = temp.rpartition("\n")[0]
 
-    for x in xrange(nLSearch):
+    for x in range(nLSearch):
         lin = lines[len(lines) - 1 - x]
 
         if LS['SIMPASS'] in lin:
@@ -193,7 +193,7 @@ def get_log_statistics(log_file='dslog.txt', simulator='dymola', writeToFile=Fal
 
     # If SIMPASS is not found the simulation failed and function exits
     temp = False
-    for x in xrange(20):
+    for x in range(20):
         lin = lines[len(lines) - 1 - x]
         if LS['SIMPASS'] in lin:
             temp = True
