@@ -192,15 +192,16 @@ def get_log_statistics(log_file='dslog.txt', simulator='dymola', writeToFile=Fal
     LS['MAXINTOR'] = "Maximum integration order"
 
     # If SIMPASS is not found the simulation failed and function exits
+    nLSearch = 30
     temp = False
-    for x in range(20):
+    for x in range(nLSearch):
         lin = lines[len(lines) - 1 - x]
         if LS['SIMPASS'] in lin:
             temp = True
 
     if temp is False:
         # Simulation failed
-        res = line_search(lines, 20, LS)
+        res = line_search(lines, nLSearch, LS)
         res['simFailed'] = True
         if writeToFile:
             write_dslogstats(res, fileName, mode)
@@ -212,7 +213,7 @@ def get_log_statistics(log_file='dslog.txt', simulator='dymola', writeToFile=Fal
         return res
 
     # Search for information from the last line up to last expected value
-    res = line_search(lines, 20, LS)
+    res = line_search(lines, nLSearch, LS)
 
     if writeToFile:
         write_dslogstats(res, fileName, mode)
