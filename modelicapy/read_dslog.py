@@ -28,119 +28,122 @@ def line_search(lines, nLSearch, LS):
     for x in range(len(lines)):
         lin = lines[len(lines) - 1 - x]
         if LS['SIMSTART'] in lin:
-            # Record if simulation started properly
-            res['simStarted'] = True
+            des = '=True if the simulation started properly'
+            res['simStarted'] = (True, des)
 
             # Record initial time simulation started
             temp = lin.rpartition("at ")[2]
             try:
-                res['t_start'] = float(temp.rpartition(" using")[0])
+                res['t_start'] = (float(temp.rpartition(" using")[0]), des)
             except:
                 temp = lin.rpartition("= ")[2]
-                res['t_start'] = float(temp.rpartition(" using")[0])
+                res['t_start'] = (float(temp.rpartition(" using")[0]), des)
 
             # Record solver used in simulation
             # - Solvers with multiple methods have different notation than
             # those with a single option
             # (e.g., DASSL vs RK-method: esdirk34a)
             temp = lin.rpartition("method ")[2]
+            des = 'Selected solver'
             if ':' in temp:
                 templin = lines[len(lines) - x]
-                res['solver'] = templin.rpartition("\n")[0]
+                res['solver'] = (templin.rpartition("\n")[0], des)
 
             else:
-                res['solver'] = temp.rpartition("\n")[0]
+                res['solver'] = (temp.rpartition("\n")[0], des)
 
     for x in range(nLSearch):
         lin = lines[len(lines) - 1 - x]
 
         if LS['SIMPASS'] in lin:
+            des = '=True if simulation completed successfully)'
             # Record if simulation was successful or not
             if 'unsuccesfully' in lin:
-                res['simPassed'] = False
+                res['simPassed'] = (False, des)
             elif 'successfully' in lin:
-                res['simPassed'] = True
+                res['simPassed'] = (True, des)
             else:
-                res['simPassed'] = False
+                res['simPassed'] = (False, des)
 
             # Record time simulation ended/failed
+            des = 'Time simulation ended/failed'
             temp = lin.rpartition("= ")[2]
-            res['t_final'] = float(temp.rpartition("\n")[0])
+            res['t_final'] = (float(temp.rpartition("\n")[0]), des)
 
         if LS['TSIM'] in lin:
-            # Record CPU-time for integration
+            des = 'CPU-time for integration'
             temp = lin.rpartition(": ")[2]
-            res['t_sim'] = float(temp.rpartition(" seconds")[0])
+            res['t_sim'] = (float(temp.rpartition(" seconds")[0]), des)
 
         if LS['TGRID'] in lin:
-            # Record CPU-time for one GRID interval
+            des = 'CPU-time for one GRID interval'
             temp = lin.rpartition(": ")[2]
-            res['t_grid'] = float(temp.rpartition(" milli-seconds")[0])
+            res['t_grid'] = (float(temp.rpartition(" milli-seconds")[0]), des)
 
         if LS['NRESP'] in lin:
-            # Record number of result points
+            des = 'Number of result points'
             temp = lin.rpartition(": ")[2]
-            res['n_result'] = int(temp.rpartition("\n")[0])
+            res['n_result'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NGRIDP'] in lin:
-            # Record number of GRID points
+            des = 'Number of GRID points'
             temp = lin.rpartition(": ")[2]
-            res['n_grid'] = int(temp.rpartition("\n")[0])
+            res['n_grid'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NSP'] in lin:
-            # Record number of (successful) steps
+            des = 'Number of (successful) steps'
             temp = lin.rpartition(": ")[2]
-            res['n_steps'] = int(temp.rpartition("\n")[0])
+            res['n_steps'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NFEVAL'] in lin:
-            # Record number of F-evaluations
+            des = 'Number of F-evaluations'
             temp = lin.rpartition(": ")[2]
-            res['n_Fevals'] = int(temp.rpartition("\n")[0])
+            res['n_Fevals'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NHEVAL'] in lin:
-            # Record number of H-evaluations
+            des = 'Number of H-evaluations'
             temp = lin.rpartition(": ")[2]
-            res['n_Hevals'] = int(temp.rpartition("\n")[0])
+            res['n_Hevals'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NCEVAL'] in lin:
-            # Record number of crossing function evaluations
+            des = 'Number of crossing function evaluations'
             temp = lin.rpartition(": ")[2]
-            res['n_Cevals'] = int(temp.rpartition("\n")[0])
+            res['n_Cevals'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NJEVAL'] in lin:
-            # Record number of Jacobian-evaluations
+            des = 'Number of Jacobian-evaluations'
             temp = lin.rpartition(": ")[2]
-            res['n_Jevals'] = int(temp.rpartition("\n")[0])
+            res['n_Jevals'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NTMEVENT'] in lin:
-            # Record number of time events
+            des = 'Number of time events'
             temp = lin.rpartition(": ")[2]
-            res['n_timeEvents'] = int(temp.rpartition("\n")[0])
+            res['n_timeEvents'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NSTEVENT'] in lin:
-            # Record number of state events
+            des = 'Number of state events'
             temp = lin.rpartition(": ")[2]
-            res['n_stateEvents'] = int(temp.rpartition("\n")[0])
+            res['n_stateEvents'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['NSPEVENT'] in lin:
-            # Record number of step events
+            des = 'Number of step events'
             temp = lin.rpartition(": ")[2]
-            res['n_stepEvents'] = int(temp.rpartition("\n")[0])
+            res['n_stepEvents'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS['MININTSP'] in lin:
-            # Record minimimum integration stepsize
+            des = 'Minimimum integration stepsize'
             temp = lin.rpartition(": ")[2]
-            res['min_intStepSize'] = float(temp.rpartition("\n")[0])
+            res['min_intStepSize'] = (float(temp.rpartition("\n")[0]), des)
 
         if LS['MAXINTSP'] in lin:
-            # Record maximum integration stepsize
+            des = 'Maximum integration stepsize'
             temp = lin.rpartition(": ")[2]
-            res['max_intStepSize'] = float(temp.rpartition("\n")[0])
+            res['max_intStepSize'] = (float(temp.rpartition("\n")[0]), des)
 
         if LS['MAXINTOR'] in lin:
-            # Record maximum integration order
+            des = 'Maximum integration order'
             temp = lin.rpartition(": ")[2]
-            res['max_intOrder'] = int(temp.rpartition("\n")[0])
+            res['max_intOrder'] = (int(temp.rpartition("\n")[0]), des)
 
     return res
 
