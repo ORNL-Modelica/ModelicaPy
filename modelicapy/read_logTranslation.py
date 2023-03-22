@@ -63,97 +63,123 @@ def line_search(lines, LS):
     for lin in lines[iORIGINAL:iTRANSLATED]:
         currentSection = 'ORIGINAL'
         if LS[currentSection]['NCOMPONENTS'] in lin:
+            des = LS[currentSection]['NCOMPONENTS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NCOMPONENTS'] = int(temp.rpartition("\n")[0])
+            res[currentSection]['NCOMPONENTS'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS[currentSection]['VARS'] in lin:
+            des = LS[currentSection]['VARS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['VARS'] = int(temp.rpartition("\n")[0])
+            res[currentSection]['VARS'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS[currentSection]['CONST'] in lin:
+            des = LS[currentSection]['CONST']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['CONST'] = int(temp.rpartition(" (")[0])
+            res[currentSection]['CONST'] = (int(temp.rpartition(" (")[0]), des)
 
         if LS[currentSection]['PARAMS'] in lin:
+            des = LS[currentSection]['PARAMS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['PARAMS'] = int(temp.rpartition(" (")[0])
+            res[currentSection]['PARAMS'] = (int(temp.rpartition(" (")[0]), des)
 
         if LS[currentSection]['UNKNOWN'] in lin:
+            des = LS[currentSection]['UNKNOWN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['UNKNOWN'] = int(temp.rpartition(" (")[0])
+            res[currentSection]['UNKNOWN'] = (int(temp.rpartition(" (")[0]), des)
 
         if LS[currentSection]['DIFFVAR'] in lin:
+            des = LS[currentSection]['DIFFVAR']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['DIFFVAR'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['DIFFVAR'] = (int(temp.rpartition(" scalars")[0]), des)
 
         if LS[currentSection]['EQNS'] in lin:
+            des = LS[currentSection]['EQNS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['EQNS'] = int(temp.rpartition("\n")[0])
+            res[currentSection]['EQNS'] = (int(temp.rpartition("\n")[0]), des)
 
         if LS[currentSection]['NONTRIV'] in lin:
+            des = LS[currentSection]['NONTRIV']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NONTRIV'] = int(temp.rpartition("\n")[0])
+            res[currentSection]['NONTRIV'] = (int(temp.rpartition("\n")[0]), des)
 
     for lin in lines[iTRANSLATED:iINITIAL]:
         currentSection = 'TRANSLATED'
       
         if LS[currentSection]['CONST'] in lin:
+            des = LS[currentSection]['CONST']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['CONST'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['CONST'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['FPARAMS'] in lin:
+            des = LS[currentSection]['FPARAMS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['FPARAMS'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['FPARAMS'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['PARAMS'] in lin:
+            des = LS[currentSection]['PARAMS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['PARAMS'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['PARAMS'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['OUTPUT'] in lin:
+            des = LS[currentSection]['OUTPUT']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['OUTPUT'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['OUTPUT'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['CSTATE'] in lin:
+            des = LS[currentSection]['CSTATE']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['CSTATE'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['CSTATE'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['TVARS'] in lin:
+            des = LS[currentSection]['TVARS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['TVARS'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['TVARS'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['ALIAS'] in lin:
+            des = LS[currentSection]['ALIAS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['ALIAS'] = int(temp.rpartition(" scalars")[0])
+            res[currentSection]['ALIAS'] = (int(temp.rpartition(" scalars")[0]), des)
         if LS[currentSection]['NSYS'] in lin:
+            des = LS[currentSection]['NSYS']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NSYS'] = int(temp.rpartition("\n")[0])
+            res[currentSection]['NSYS'] = (int(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['LIN'] in lin:
+            des = LS[currentSection]['LIN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['LIN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['LIN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['LINMAN'] in lin:
+            des = LS[currentSection]['LINMAN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['LINMAN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['LINMAN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NONLIN'] in lin:
+            des = LS[currentSection]['NONLIN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NONLIN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NONLIN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NONLINMAN'] in lin:
+            des = LS[currentSection]['NONLINMAN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NONLINMAN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NONLINMAN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NJAC'] in lin:
+            des = LS[currentSection]['NJAC']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NJAC'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NJAC'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
             
     for lin in lines[iINITIAL:iVARSNONLIN]:
         currentSection = 'INITIAL'
         if LS[currentSection]['LIN'] in lin:
+            des = LS[currentSection]['LIN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['LIN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['LIN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['LINMAN'] in lin:
+            des = LS[currentSection]['LINMAN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['LINMAN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['LINMAN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NONLIN'] in lin:
+            des = LS[currentSection]['NONLIN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NONLIN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NONLIN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NONLINMAN'] in lin:
+            des = LS[currentSection]['NONLINMAN']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NONLINMAN'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NONLINMAN'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
         if LS[currentSection]['NJAC'] in lin:
+            des = LS[currentSection]['NJAC']
             temp = lin.rpartition(": ")[2]
-            res[currentSection]['NJAC'] = stringArrayToList(temp.rpartition("\n")[0])
+            res[currentSection]['NJAC'] = (stringArrayToList(temp.rpartition("\n")[0]), des)
             
     return res
 
