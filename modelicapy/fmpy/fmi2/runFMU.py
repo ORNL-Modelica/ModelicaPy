@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ## User Input
-fmu_filename = 'FMUNAME.fmu'
-outputs=['VARIABLENAME(s)']
+fmu_filename = '../fmus/simulator_2.fmu'
+outputs=['gain.y']
 
 ##
 fmpy.dump(fmu_filename)

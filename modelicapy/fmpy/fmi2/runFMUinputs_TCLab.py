@@ -14,7 +14,7 @@ def Merge(dict1, dict2):
     return res 
 
 # define the model name and simulation parameters
-fmu_filename = 'FMUNAME.fmu'
+fmu_filename = '../../TCLab/tests/fmus/TCLab.fmu'
 start_time = 0.0
 stop_time = 8640
 nSteps = 864
@@ -47,7 +47,7 @@ fmu.enterInitializationMode()
 fmu.exitInitializationMode()
 
 # %% - Example of how to get some other potential parameters
-nC = fmu.getInteger([vrs['VARNAMEOFCHOICE']])[0]
+#nC = fmu.getInteger([vrs['VARNAMEOFCHOICE']])[0]
 
 # %% - Simulation loop
 
@@ -61,8 +61,10 @@ while time < stop_time:
     # NOTE: the FMU.get*() and FMU.set*() functions take lists of
     # value references as arguments and return lists of values
         
+    k = 0
     for v in inputs:
-        fmu.setReal([v.valueReference], [0.0 if time < stop_time/2 else 1.0 ])
+        k += 1
+        fmu.setReal([v.valueReference], [0.0 if time < stop_time/2 else 1.0*k ])
         fmu.setRealInputDerivatives([v.valueReference],[1],[0.0 if time < stop_time/2 else 0.0])
     # perform one step
     fmu.doStep(currentCommunicationPoint=time, communicationStepSize=step_size)
@@ -97,4 +99,10 @@ shutil.rmtree(unzipdir, ignore_errors=True)
 result = pd.DataFrame(rows)
 
 # plot the results
-plt.plot(result['time'],result['VARNAMTOPLOT'])
+fig, ax = plt.subplots()
+ax.plot(result['time'],result['T1'],'--',label='T1')
+ax.plot(result['time'],result['T2'],'--',label='T2')
+ax1 = ax.twinx()
+ax1.plot(result['time'],result['Q1'],'-.',label='Q1')
+ax1.plot(result['time'],result['Q2'],'-.',label='Q2')
+fig.legend()
