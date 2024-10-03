@@ -38,7 +38,8 @@ or
 11. optimize folder - a demonstration. auto-simulate multiple heat transfer models, select the best one based on gold values, and then optimize CFs to match the gold values
 12. FMPy folder - a couple simple templates for using fmpy
 13. coolTSplots - a reference (may not simulate) for putting Modelica simulation results onto a TS diagram
-    
+14. createUnitTestScript_runAll.py - Quickly generate a .mos for simulating all tests in a library. Tested on Dymola and OMEdt but is extensible to other IDEs.
+
 ## To Contribute...
 You may report any issues with using the Issues button.
 
