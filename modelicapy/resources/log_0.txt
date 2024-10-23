@@ -1,0 +1,22 @@
+RunScript("c:/program files/dymola 2024x refresh 1/insert/dymola.mos", true);
+ = true
+Successfully loaded settings file /AppData/Roaming/DassaultSystemes/Dymola/2024x Refresh 1/setup.dymx
+RunScript("runAll_dymola.mos", false)
+simulateModel("TRANSFORM.Examples.CIET_Facility.Examples.CIET_initial",stopTime=10000,numberOfIntervals=1000,resultFile="CIET_initial");
+ = false
+simulateModel("TRANSFORM.Examples.CIET_Facility.Examples.CIET_nureth",stopTime=10000,numberOfIntervals=1000,method="Esdirk45a",resultFile="CIET_nureth");
+ = false
+simulateModel("TRANSFORM.Examples.CIET_Facility.Examples.Properties_DOWTHERM_A_Test",resultFile="Properties_DOWTHERM_A_Test");
+ = true
+simulateModel("TRANSFORM.Examples.Demonstrations.Examples.BatemanEquations_Test",resultFile="BatemanEquations_Test");
+ = true
+simulateModel("TRANSFORM.Examples.Demonstrations.Examples.LorenzSystem_LinA_Test",stopTime=100,numberOfIntervals=10000,resultFile="LorenzSystem_LinA_Test");
+ = false
+simulateModel("TRANSFORM.Examples.Demonstrations.Examples.LorenzSystem_Test",stopTime=100,numberOfIntervals=10000,resultFile="LorenzSystem_Test");
+ = true
+simulateModel("TRANSFORM.Examples.Demonstrations.Examples.NeutronActivation",stopTime=12096000,numberOfIntervals=12096,resultFile="NeutronActivation");
+ = true
+simulateModel("TRANSFORM.Examples.Demonstrations.Examples.SimpleDelay",stopTime=100,numberOfIntervals=1000,method="Dassl",resultFile="SimpleDelay");
+ = true
+
+ = true

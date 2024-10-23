@@ -222,10 +222,107 @@ class RegressionTestScriptGenerator:
         test_list = self.generate_test_list()
         self.generate_mos_script(test_list, output_path)
         
+def find_failed_tests(filename, sim_env='dymola'):
+    '''
+    Function that takes the location of the simulation output from running runAll_*.mos 
+    and returns a list of the models which failed the "simulateModel" command.
+    
+    filename - copy and past the contents of the simulation command log (or save to a file)
+    '''
+    if sim_env == 'dymola':
+        def extract_between_quotes(input_string):
+            match = re.search(r'"(.*?)"', input_string)
+            if match:
+                return match.group(1)
+            return None
+        
+        with open(filename, 'r') as fil:
+            lines = fil.readlines()
+            
+        result = []
+        for i, line in enumerate(lines):
+            if 'simulateModel(' in line:
+                model = extract_between_quotes(line)
+                temp = lines[i+1]
+                temp = temp.replace(' ','').replace('=','').strip()
+                temp = True if temp == 'true' else False
+                result.append((model, temp))
+
+    failed = []
+    for tup in result:
+        if not tup[1]:
+            failed.append(tup[0])
+    return failed
+   
+class RunAllLogProcessor:
+    '''
+    Class that takes the location of the simulation output from running runAll_*.mos 
+    and returns a list of the models which failed the "simulateModel" command.
+    
+    filenames - list of copy and paste the contents of the simulation command log to a text file (or save to a file)
+    '''
+    
+    def __init__(self, filenames):
+        self.filenames = filenames
+        self.results = []
+        self.failed_models = []
+        self.sim_env = 'dymola'
+        
+    def extract_between_quotes(self, input_string):
+        match = re.search(r'"(.*?)"', input_string)
+        if match:
+            return match.group(1)
+        return None
+
+    def get_result(self, lines):
+        result = []
+        if self.sim_env == 'dymola':
+            for i, line in enumerate(lines):
+                if 'simulateModel(' in line:
+                    model = self.extract_between_quotes(line)
+                    temp = lines[i + 1].replace(' ', '').replace('=', '').strip()
+                    temp = True if temp == 'true' else False
+                    result.append((model, temp))
+            return result
+        else:
+            raise ValueError('Unsupported sim_env')
+            
+    def get_failed(self, result):
+        return [model for model, passed in result if not passed]
+
+    def process_file(self, filename):
+        with open(filename, 'r') as fil:
+            lines = fil.readlines()
+        result = self.get_result(lines)
+        self.results.append(result)
+        failed = self.get_failed(result)
+        self.failed_models.append(failed)
+
+    def process_all_files(self):
+        for filename in self.filenames:
+            self.process_file(filename)
+
+    def unique_failed_items(self):
+        if len(self.failed_models) < 2:
+            return [], []  # Not enough data for comparison
+        set1, set2 = set(self.failed_models[0]), set(self.failed_models[1])
+        return list(set1 - set2), list(set2 - set1)
+    
 if __name__ == "__main__":
     # Path to the Modelica library.
-    library_path = r'C:\Users\fig\Downloads\Modelica-GNU_ScientificLibrary-master\GNU_ScientificLibrary'
+    library_path = r'E:\Modelica\TRANSFORM-Library\TRANSFORM'
 
     # Initialize the generator and execute the script generation process.
     generator = RegressionTestScriptGenerator(library_path)
     generator.run()
+
+
+    #%% Runall (only works if you have valid filenames)
+    filenames = [r'resources/log_0.txt', r'resources/log_1.txt']
+    processor = RunAllLogProcessor(filenames)
+    processor.process_all_files()
+
+    unique_1, unique_2 = processor.unique_failed_items()
+    print("Unique to file 1:", unique_1)
+    print("Unique to file 2:", unique_2)
+    
